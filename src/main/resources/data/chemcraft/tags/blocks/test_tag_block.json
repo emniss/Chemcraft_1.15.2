@@ -1,0 +1,7 @@
+{
+	"replace": false,
+	"values": [
+		"chemcraft:test_block",
+		"minecraft:stone"
+	]
+}

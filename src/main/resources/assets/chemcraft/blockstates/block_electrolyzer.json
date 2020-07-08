@@ -1,0 +1,12 @@
+{
+	"variants": {
+		"facing=north,powered=false": { "model": "chemcraft:block/block_electrolyzer" },
+		"facing=south,powered=false": { "model": "chemcraft:block/block_electrolyzer", "y": 180 },
+		"facing=west,powered=false": { "model": "chemcraft:block/block_electrolyzer", "y": 270 },
+		"facing=east,powered=false": { "model": "chemcraft:block/block_electrolyzer", "y": 90 },
+		"facing=north,powered=true": { "model": "chemcraft:block/block_electrolyzer_on" },
+		"facing=south,powered=true": { "model": "chemcraft:block/block_electrolyzer_on", "y": 180 },
+		"facing=west,powered=true": { "model": "chemcraft:block/block_electrolyzer_on", "y": 270 },
+		"facing=east,powered=true": { "model": "chemcraft:block/block_electrolyzer_on", "y": 90 }
+	}
+}

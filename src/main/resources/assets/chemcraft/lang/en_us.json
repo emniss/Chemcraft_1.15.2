@@ -1,0 +1,156 @@
+{
+	
+	"itemGroup.chemcraftgroup": "Chemcraft",
+	"itemGroup.chemcraftmaterialsgroup": "Chemcraft: Materials",
+	"itemGroup.chemcraftelementsgroup": "Chemcraft: Elements",
+	
+	
+	
+	"item.chemcraft.test_tube_empty": "Empty Test Tube",
+
+	"item.chemcraft.test_tube_hydrogen": "Hydrogen (Test tube)",
+	"item.chemcraft.test_tube_oxygen": "Oxygen (Test tube)",
+	"item.chemcraft.test_tube_chlorine": "Chlorine (Test tube)",
+	
+	"item.chemcraft.test_tube_water": "Water (Test tube)",
+	"item.chemcraft.test_tube_hydrogen_chloride": "Hydrogen Chloride (Test tube)",
+	"item.chemcraft.test_tube_carbondioxide": "Carbondioxide (Test tube)",
+
+	"item.chemcraft.test_tube_methane": "Methane (Test tube)",
+	"item.chemcraft.test_tube_ethane": "Ethane (Test tube)",
+	"item.chemcraft.test_tube_propane": "Propane (Test tube)",
+	"item.chemcraft.test_tube_butane": "Butane (Test tube)",
+	"item.chemcraft.test_tube_pentane": "Pentane (Test tube)",
+	"item.chemcraft.test_tube_hexane": "Hexane (Test tube)",
+	"item.chemcraft.test_tube_heptane": "Heptane (Test tube)",
+	"item.chemcraft.test_tube_octane": "Octane (Test tube)",
+	"item.chemcraft.test_tube_nonane": "Nonane (Test tube)",
+	"item.chemcraft.test_tube_decane": "Decane (Test tube)",
+
+	"item.chemcraft.test_tube_aluminium_oxide": "Aluminium Oxide (Test tube)",
+	"item.chemcraft.test_tube_aluminium_hydroxide": "Aluminium Hydroxide (Test tube)",
+	"item.chemcraft.test_tube_boron_trioxide": "Boron Trioxide (Test tube)",
+	"item.chemcraft.test_tube_sodium_carbonate": "Sodium Carbonate (Test tube)",
+
+	"item.chemcraft.test_tube_sulfuric_acid": "Sulfuric Acid (Test tube)",
+
+	"item.chemcraft.test_tube_sodium_hydroxide": "Sodium Hydroxide (Test tube)",
+	"item.chemcraft.test_tube_sodium_sulfate": "Sodium Sulfate (Test tube)",
+
+	"item.chemcraft.test_tube_anode_mud": "Anode Mud (Test tube)",
+	"item.chemcraft.test_tube_bauxite_slag": "Bauxite Slag (Test tube)",
+	"item.chemcraft.test_tube_borax_slag": "Borax Slag (Test tube)",
+	"item.chemcraft.test_tube_oxyhydrogen": "Oxyhydrogen (Test tube)",
+	"item.chemcraft.test_tube_red_mud": "Red Mud (Test tube)",
+	"item.chemcraft.test_tube_concentrated_brine": "Concentrated Brine (Test tube)",
+
+
+
+	"item.chemcraft.crucible": "Crucible",
+	"item.chemcraft.crucible_unfired": "Crucible (Unfired)",
+	"item.chemcraft.crucible_lithium_carbonate_solid": "Solid Lithium Carbonate (Crucible)",
+	"item.chemcraft.crucible_lithium_carbonate_molten": "Molten Lithium Carbonate (Crucible)",
+	"item.chemcraft.crucible_boron_trichloride_solid": "Solid Boron Trichloride (Crucible)",
+	"item.chemcraft.crucible_boron_trichloride_molten": "Molten Boron Trichloride (Crucible)",
+
+
+	"item.chemcraft.powder_boron_trichloride": "Boron Trichloride Powder",
+	"item.chemcraft.powder_lithium_carbonate": "Lithium Carbonate Powder",
+
+	"item.chemcraft.powder_bauxite": "Bauxite Powder",
+	"item.chemcraft.powder_borax": "Borax Powder",
+	"item.chemcraft.powder_chalcopyrite": "Chalcopyrite Powder",
+	"item.chemcraft.powder_charcoal": "Charcoal Powder",
+
+	"item.chemcraft.powder_aluminium": "Aluminium Powder",
+	"item.chemcraft.powder_boron": "Boron Powder",
+	"item.chemcraft.powder_copper": "Copper Powder",
+	"item.chemcraft.powder_cobalt": "Cobalt Powder",
+	"item.chemcraft.powder_gold": "Gold Powder",
+	"item.chemcraft.powder_lithium": "Lithium Powder",
+	"item.chemcraft.powder_nickel": "Nickel Powder",
+	"item.chemcraft.powder_platinum": "Platinum Powder",
+	"item.chemcraft.powder_silver": "Silver Powder",
+
+
+
+	"item.chemcraft.tiny_powder_aluminium": "Aluminium Tiny Powder",
+	"item.chemcraft.tiny_powder_boron": "Boron Tiny Powder",
+	"item.chemcraft.tiny_powder_copper": "Copper Tiny Powder",
+	"item.chemcraft.tiny_powder_cobalt": "Cobalt Tiny Powder",
+	"item.chemcraft.tiny_powder_gold": "Gold Tiny Powder",
+	"item.chemcraft.tiny_powder_nickel": "Nickel Tiny Powder",
+	"item.chemcraft.tiny_powder_platinum": "Platinum Tiny Powder",
+	"item.chemcraft.tiny_powder_silver": "Silver Tiny Powder",
+
+
+
+	"item.chemcraft.nugget_aluminium": "Aluminium Nugget",
+	"item.chemcraft.nugget_copper": "Copper Nugget",
+	"item.chemcraft.nugget_cobalt": "Cobalt Nugget",
+	"item.chemcraft.nugget_nickel": "Nickel Nugget",
+	"item.chemcraft.nugget_platinum": "Platinum Nugget",
+	"item.chemcraft.nugget_silver": "Silver Nugget",
+
+
+
+	"item.chemcraft.ingot_aluminium": "Aluminium Ingot",
+	"item.chemcraft.ingot_copper": "Copper Ingot",
+	"item.chemcraft.ingot_cobalt": "Cobalt Ingot",
+	"item.chemcraft.ingot_nickel": "Nickel Ingot",
+	"item.chemcraft.ingot_lithium": "Lithium Ingot",
+	"item.chemcraft.ingot_platinum": "Platinum Ingot",
+	"item.chemcraft.ingot_silver": "Silver Ingot",
+
+
+
+	"item.chemcraft.igniter": "Igniter",
+	"item.chemcraft.uvlight": "UV-Light",
+	"item.chemcraft.filter_paper": "Filter Paper",
+
+	"item.chemcraft.cathode_copper": "Copper Cathode",
+	"item.chemcraft.cathode_platinum": "Platinum Cathode",
+
+	"item.chemcraft.control_circuit": "Control Circuit",
+
+
+
+	"tile.chemcraft.block_bauxite": "Bauxite",
+	"tile.chemcraft.block_borax": "Borax",
+	"tile.chemcraft.block_chalcopyrite": "Chalcopyrite",
+
+
+
+	"tile.chemcraft.block_test": "Test Block",
+	"tile.chemcraft.block_hydrogen_generator": "Hydrogen Generator",
+	"tile.chemcraft.block_combustion_generator": "Combustion Generator",
+	"tile.chemcraft.block_electrolyzer": "Electrolyzer",
+	"tile.chemcraft.block_rock_grinder": "Rock Grinder",
+	"tile.chemcraft.block_heater": "Heater",
+	"tile.chemcraft.block_centrifuge": "Centrifuge",
+	"tile.chemcraft.block_evaporator": "Evaporator",
+
+
+	
+	"container.chemcraft.hydrogen_generator": "Hydrogen Generator",
+	"container.chemcraft.combustion_generator": "Combustion Generator",
+	"container.chemcraft.electrolyzer": "Electrolyzer",
+	"container.chemcraft.rock_grinder": "Rock Grinder",
+	"container.chemcraft.heater": "Heater",
+	"container.chemcraft.centrifuge": "Centrifuge",
+	"container.chemcraft.evaporator": "Evaporator",
+
+
+
+	"fluid.chemcraft.fluid_brine": "Brine",
+	"tile.chemcraft.fluid_brine": "Brine",
+	
+	
+	
+	"block.chemcraft.test_block": "Test Block",
+	"block.chemcraft.example_chest": "Example Chest",
+	
+	"container.chemcraft.example_chest": "Example Chest"
+	
+	
+}

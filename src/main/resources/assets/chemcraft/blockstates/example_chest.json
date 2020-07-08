@@ -1,0 +1,5 @@
+{
+	"variants": {
+		"": { "model": "chemcraft:block/example_chest"}
+	}
+}
