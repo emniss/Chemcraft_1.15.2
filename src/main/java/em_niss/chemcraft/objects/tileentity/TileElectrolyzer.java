@@ -49,6 +49,7 @@ public class TileElectrolyzer extends TileEntity implements ITickableTileEntity,
 	@Override
 	public void tick() 
 	{
+		
 		if (world.isRemote) { return; }
 		
 		if (counter > 0)
