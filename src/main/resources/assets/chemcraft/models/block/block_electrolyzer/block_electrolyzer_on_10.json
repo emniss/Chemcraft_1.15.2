@@ -1,0 +1,12 @@
+{
+	"parent": "block/cube",
+	"textures": {
+		"particle": "chemcraft:blocks/electrolyzer/electrolyzer_side",
+		"north": "chemcraft:blocks/electrolyzer/electrolyzer_front_on_10",
+		"south": "chemcraft:blocks/electrolyzer/electrolyzer_side",
+		"east": "chemcraft:blocks/electrolyzer/electrolyzer_side",
+		"west": "chemcraft:blocks/electrolyzer/electrolyzer_side",
+		"up": "chemcraft:blocks/electrolyzer/electrolyzer_up",
+		"down": "chemcraft:blocks/electrolyzer/electrolyzer_down"
+	}
+}
