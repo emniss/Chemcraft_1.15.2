@@ -7,8 +7,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
@@ -24,7 +22,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.items.CapabilityItemHandler;
 
 public abstract class BlockMachineBase extends Block
@@ -53,21 +50,11 @@ public abstract class BlockMachineBase extends Block
 	public abstract TileEntity createTileEntity(BlockState state, IBlockReader world);
 	
 	//GUI
+	@SuppressWarnings("deprecation")
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
-		if (world.isRemote)
-		{
-			return ActionResultType.SUCCESS;
-		}
-		else
-		{
-			TileEntity tileEntity = world.getTileEntity(pos);
-			if (tileEntity instanceof INamedContainerProvider)
-			{
-				NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) tileEntity, tileEntity.getPos());
-			}
-			return ActionResultType.SUCCESS;
-		}
+	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result)
+	{
+		return super.onBlockActivated(state, world, pos, player, hand, result);
 	}
 	
 	public BlockState getStateForPlacement(BlockItemUseContext context)

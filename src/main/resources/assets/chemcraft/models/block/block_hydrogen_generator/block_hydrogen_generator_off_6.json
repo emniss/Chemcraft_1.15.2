@@ -1,0 +1,12 @@
+{
+	"parent": "block/cube",
+	"textures": {
+		"particle": "chemcraft:blocks/hydrogen_generator/hydrogen_generator_side",
+		"north": "chemcraft:blocks/hydrogen_generator/hydrogen_generator_front_off_6",
+		"south": "chemcraft:blocks/hydrogen_generator/hydrogen_generator_side",
+		"east": "chemcraft:blocks/hydrogen_generator/hydrogen_generator_side",
+		"west": "chemcraft:blocks/hydrogen_generator/hydrogen_generator_side",
+		"up": "chemcraft:blocks/hydrogen_generator/hydrogen_generator_up",
+		"down": "chemcraft:blocks/hydrogen_generator/hydrogen_generator_down"
+	}
+}

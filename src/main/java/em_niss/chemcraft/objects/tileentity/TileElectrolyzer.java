@@ -1,73 +1,135 @@
 package em_niss.chemcraft.objects.tileentity;
 
-import javax.annotation.Nullable;
-
 import em_niss.chemcraft.Config;
-import em_niss.chemcraft.energy.CustomEnergyStorage;
 import em_niss.chemcraft.init.ModTileEntityTypes;
-import em_niss.chemcraft.objects.containers.ContainerElectrolyzer;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
+import em_niss.chemcraft.recipes.lists.ElectrolyzerRecipes;
+import em_niss.chemcraft.recipes.types.ElectrolyzerRecipe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.math.MathHelper;
 
-public class TileElectrolyzer extends TileGeneratorBase implements ITickableTileEntity, INamedContainerProvider
+public class TileElectrolyzer extends TileGeneratorBase implements ITickableTileEntity
 {
-	private static final int inventorySize = 4;
-	private static final int frontEnergyBarHeight = 10;
-	private static final int maxEnergyStored = Config.ELECTROLYZER_MAXPOWER.get();
-	private static final int cookTimeTotal = Config.ELECTROLYZER_TICKS.get();
-	private static final TileEntityType<TileElectrolyzer> tileEntityType = ModTileEntityTypes.TILE_ELECTROLYZER.get();
+	private static final int inSlot1 = 0;
+	private static final int inSlot2 = 1;
+	
+	private static final int outSlot1 = 2;
+	private static final int outSlot2 = 3;
+	
+	private ItemStack ingredient1;
+	private ItemStack ingredient2;
+	private ItemStack result1;
+	private ItemStack result2;
 	
 	
 	public TileElectrolyzer()
 	{
-		super(tileEntityType, inventorySize, maxEnergyStored, frontEnergyBarHeight, cookTimeTotal);
+		super(ModTileEntityTypes.TILE_ELECTROLYZER.get(), 4, Config.ELECTROLYZER_MAXPOWER.get(), 10);
 	}
 	
-	@Override
-	public void tick() 
+	
+	protected void doCooking()
 	{
-		
-		if (world.isRemote) { return; }
-		
-		if (cookTime > 0)
+		int energyAfter = this.energyStorage.getEnergyStored() - energyConsumption;
+		if (cookTime > 0 && energyAfter >= 0 && recipeStillValid())
 		{
-			this.cookTime = MathHelper.clamp(this.cookTime - 1, 0, super.cookTimeTotal);
-			if (cookTime <= 0)
+			this.energyStorage.setEnergy(energyAfter);
+			cookTime--;
+		}
+		else if (cookTime == 0) //Finished cooking
+		{
+			boolean hasOutput = false;
+			if (itemHandler.getStackInSlot(outSlot1).isEmpty() && itemHandler.getStackInSlot(outSlot2).isEmpty())
 			{
-				energy.ifPresent(e -> ((CustomEnergyStorage)e).addEnergy(Config.ELECTROLYZER_GENERATE.get()));
-				markDirty();
+				//Both slots empty
+				itemHandler.setStackInSlot(outSlot1, result1);
+				if (!result2.isEmpty()) { itemHandler.setStackInSlot(outSlot2, result2); }
+				isCooking = false;
+			}
+			else
+			{		
+				//Both slots not empty
+				if (itemHandler.insertItem(outSlot1, result1, true).isEmpty() && itemHandler.insertItem(outSlot2, result2, true).isEmpty())
+				{
+					itemHandler.insertItem(outSlot1, result1, false);
+					itemHandler.insertItem(outSlot2, result2, false);
+					isCooking = false;
+				}
+				else if (itemHandler.insertItem(outSlot1, result2, true).isEmpty() && itemHandler.insertItem(outSlot2, result1, true).isEmpty())
+				{
+					itemHandler.insertItem(outSlot1, result2, false);
+					itemHandler.insertItem(outSlot2, result1, false);
+					isCooking = false;
+				}
+			}
+			if (hasOutput)
+			{
+				itemHandler.extractItem(inSlot1, ingredient1.getCount(), false);
+				itemHandler.extractItem(inSlot2, ingredient2.getCount(), false);
 			}
 		}
-		
-		if (cookTime <= 0) 
+	}
+
+	
+	protected void doRefueling()
+	{
+		ItemStack input1 = itemHandler.getStackInSlot(inSlot1);
+		ItemStack input2 = itemHandler.getStackInSlot(inSlot2);
+		if (!input1.isEmpty() && !input2.isEmpty() && isItemsIngredients(input1, input2))
 		{
-			handler.ifPresent(h -> {
-				ItemStack stack = h.getStackInSlot(0);
-				if (stack.getItem() == Items.DIAMOND)
-				{
-					h.extractItem(0, 1, false);
-					cookTime = super.cookTimeTotal;
-					markDirty();
-				}
-			});
+			ElectrolyzerRecipe recipe = ElectrolyzerRecipes.getRecipe(input1.getItem(), input2.getItem());
+			if (input1.getCount() >= recipe.getInput1().getCount() && input2.getCount() >= recipe.getInput2().getCount()) 
+			{
+				setRecipe(recipe);
+			}
 		}
-		
-		super.tick();
+		else if (!input1.isEmpty() && isItemIngredient(input1))
+		{
+			ElectrolyzerRecipe recipe = ElectrolyzerRecipes.getRecipe(input1.getItem());
+			if (input1.getCount() >= recipe.getInput1().getCount())
+			{
+				setRecipe(recipe);
+			}
+		}
+		else if (!input1.isEmpty() && isItemIngredient(input2))
+		{
+			ElectrolyzerRecipe recipe = ElectrolyzerRecipes.getRecipe(input2.getItem());
+			if (input2.getCount() >= recipe.getInput1().getCount())
+			{
+				setRecipe(recipe);
+			}
+		}
 	}
 	
-	
-	//Other
-	@Nullable
-	@Override
-	public Container createMenu(int windowId, PlayerInventory playerInventory, PlayerEntity playerEntity) 
+	private void setRecipe(ElectrolyzerRecipe recipe)
 	{
-		return new ContainerElectrolyzer(windowId, world, pos, playerInventory, playerEntity, this.machineData);
+		cookTime = recipe.getBurnTime();
+		cookTimeTotal = recipe.getBurnTime();
+		energyConsumption = recipe.getEnergyConsumption();
+		
+		ingredient1 = new ItemStack(recipe.getInput1().getItem(), recipe.getInput1().getCount());
+		ingredient2 = new ItemStack(recipe.getInput2().getItem(), recipe.getInput2().getCount());
+		result1 = new ItemStack(recipe.getOutput1().getItem(), recipe.getOutput1().getCount());
+		result2 = new ItemStack(recipe.getOutput2().getItem(), recipe.getOutput2().getCount());
+
+		isCooking = true;
+	}
+	
+	private boolean isItemsIngredients(ItemStack stack1, ItemStack stack2) 
+	{
+		return ElectrolyzerRecipes.getRecipe(stack1.getItem(), stack2.getItem()) != null;
+	}
+	
+	private boolean isItemIngredient(ItemStack stack)
+	{
+		return ElectrolyzerRecipes.getRecipe(stack.getItem()) != null;
+	}
+	
+	private boolean recipeStillValid()
+	{
+		ItemStack input1 = itemHandler.getStackInSlot(inSlot1);
+		ItemStack input2 = itemHandler.getStackInSlot(inSlot2);
+		
+		return (input1.getItem().equals(ingredient1.getItem()) && input2.getItem().equals(ingredient2.getItem())
+				&& input1.getCount() >= ingredient1.getCount() && input2.getCount() >= ingredient1.getCount());
 	}
 }

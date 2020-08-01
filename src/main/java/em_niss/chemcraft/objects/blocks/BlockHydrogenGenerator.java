@@ -1,7 +1,7 @@
 package em_niss.chemcraft.objects.blocks;
 
-import em_niss.chemcraft.objects.containers.ContainerElectrolyzer;
-import em_niss.chemcraft.objects.tileentity.TileElectrolyzer;
+import em_niss.chemcraft.objects.containers.ContainerHydrogenGenerator;
+import em_niss.chemcraft.objects.tileentity.TileHydrogenGenerator;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -19,9 +19,9 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class BlockElectrolyzer extends BlockMachineBase
+public class BlockHydrogenGenerator extends BlockMachineBase
 {
-	public BlockElectrolyzer()
+	public BlockHydrogenGenerator()
 	{
 		super();
 	}
@@ -30,7 +30,7 @@ public class BlockElectrolyzer extends BlockMachineBase
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) 
 	{
-		return new TileElectrolyzer();
+		return new TileHydrogenGenerator();
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -39,19 +39,19 @@ public class BlockElectrolyzer extends BlockMachineBase
 		if (!world.isRemote)
 		{
 			TileEntity tileEntity = world.getTileEntity(pos);
-			if (tileEntity instanceof TileElectrolyzer)
+			if (tileEntity instanceof TileHydrogenGenerator)
 			{
 				INamedContainerProvider containerProvider = new INamedContainerProvider() {
 					@Override
 					public ITextComponent getDisplayName()
 					{
-						return new TranslationTextComponent("screen.chemcraft.electrolyzer");
+						return new TranslationTextComponent("screen.chemcraft.hydrogen_generator");
 					}
 					
 					@Override
 					public Container createMenu(int i, PlayerInventory playerInventory, PlayerEntity playerEntity)
 					{
-						return new ContainerElectrolyzer(i, world, pos, playerInventory, playerEntity);
+						return new ContainerHydrogenGenerator(i, world, pos, playerInventory, playerEntity);
 					}
 				};
 				NetworkHooks.openGui((ServerPlayerEntity) player, containerProvider, tileEntity.getPos());

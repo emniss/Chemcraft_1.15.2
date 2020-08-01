@@ -7,10 +7,6 @@ import com.google.common.util.concurrent.AtomicDouble;
 
 import em_niss.chemcraft.energy.CustomEnergyStorage;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.ITickableTileEntity;
@@ -18,10 +14,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IIntArray;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
@@ -29,17 +23,22 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public abstract class TileMachineBase extends TileEntity implements ITickableTileEntity, INamedContainerProvider
+public abstract class TileMachineBase extends TileEntity implements ITickableTileEntity
 {
-	private int inventorySize;
+	private final int inventorySize;
 	private int frontEnergyBarHeight;
 	private int maxEnergyStored;
 	
-	protected LazyOptional<IItemHandler> handler = LazyOptional.of(this::createHandler);
-	protected LazyOptional<IEnergyStorage> energy = LazyOptional.of(this::createEnergy);
+	protected ItemStackHandler itemHandler;
+	protected CustomEnergyStorage energyStorage = createEnergy();
 	
-	protected int cookTime;
-	protected int cookTimeTotal;
+	protected LazyOptional<IItemHandler> handler;
+	protected LazyOptional<IEnergyStorage> energy = LazyOptional.of(() -> energyStorage);;
+	
+	protected int cookTime = 0;
+	protected int cookTimeTotal = 0;
+	protected boolean isCooking = false;
+	protected int energyConsumption;
 	
 	protected IIntArray machineData = new IIntArray() {
 		public int get(int index) {
@@ -67,31 +66,41 @@ public abstract class TileMachineBase extends TileEntity implements ITickableTil
 		}
 	};
 	
+
 	
-	
-	public TileMachineBase(TileEntityType<?> tileEntityType, int inventorySize, int maxEnergyStored, int frontEnergyBarHeight, int cookTimeTotal)
+	public TileMachineBase(TileEntityType<?> tileEntityType, int inventorySize, int maxEnergyStored, int frontEnergyBarHeight)
 	{
 		super(tileEntityType);
 		this.inventorySize = inventorySize;
 		this.maxEnergyStored = maxEnergyStored;
 		this.frontEnergyBarHeight = frontEnergyBarHeight;
-		this.cookTimeTotal = cookTimeTotal;
+		
+		itemHandler = createHandler();
+		//energyStorage = 
+		
+		handler = LazyOptional.of(() -> itemHandler);
+		//energy 
 	}
 	
 	@Override
 	public void tick()
 	{
+		if (isCooking) { doCooking(); }
+		if (!isCooking) { doRefueling(); }
+		
 		updateBlockState();
 	}
 	
+	protected abstract void doCooking();
+	protected abstract void doRefueling();
 	
-	protected void updateBlockState()
+	private void updateBlockState()
 	{		
 		//Indicator on front
 		BlockState blockState = world.getBlockState(pos);
 		if (blockState.get(BlockStateProperties.POWERED) != cookTime > 0)
 		{
-			world.setBlockState(pos, blockState.with(BlockStateProperties.POWERED, cookTime > 0), 3);
+			world.setBlockState(pos, blockState.with(BlockStateProperties.POWERED, cookTime > 0), Constants.BlockFlags.NOTIFY_NEIGHBORS + Constants.BlockFlags.BLOCK_UPDATE);
 		}
 		
 		//Energy display on front
@@ -107,37 +116,27 @@ public abstract class TileMachineBase extends TileEntity implements ITickableTil
 	}
 		
 		
-	@SuppressWarnings("unchecked")
 	@Override
 	public void read(CompoundNBT tag)
 	{
-		CompoundNBT invTag = tag.getCompound("inv");
-		handler.ifPresent(h -> ((INBTSerializable<CompoundNBT>)h).deserializeNBT(invTag));
-		CompoundNBT energyTag = tag.getCompound("energy");
-		energy.ifPresent(h -> ((INBTSerializable<CompoundNBT>)h).deserializeNBT(energyTag));
+		itemHandler.deserializeNBT(tag.getCompound("inv"));
+		energyStorage.deserializeNBT(tag.getCompound("energy"));
 		super.read(tag);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public CompoundNBT write(CompoundNBT tag) 
 	{
-		handler.ifPresent(h -> {;
-			CompoundNBT compound = ((INBTSerializable<CompoundNBT>)h).serializeNBT();
-			tag.put("inv", compound);
-		});
-		energy.ifPresent(h -> {;
-			CompoundNBT compound = ((INBTSerializable<CompoundNBT>)h).serializeNBT();
-			tag.put("energy", compound);
-		});
+		tag.put("inv", itemHandler.serializeNBT());
+		tag.put("enegry", energyStorage.serializeNBT());
 		return super.write(tag);
 	}
 	
 	
 	//Items
-	private IItemHandler createHandler() 
+	private ItemStackHandler createHandler() 
 	{	
-		return new ItemStackHandler(inventorySize) 
+		return new ItemStackHandler(inventorySize)
 		{
 			@Override
 			protected void onContentsChanged(int slot) { markDirty(); }
@@ -146,32 +145,26 @@ public abstract class TileMachineBase extends TileEntity implements ITickableTil
 	
 	
 	//Energy
-	private IEnergyStorage createEnergy()
+	private CustomEnergyStorage createEnergy()
 	{
-		return new CustomEnergyStorage(maxEnergyStored, 0);
+		return new CustomEnergyStorage(100000, 0) {
+		//return new CustomEnergyStorage(maxEnergyStored, 0) {
+			@Override
+			protected void onEnergyChanged() { markDirty(); }
+		};
 	}
 	
 	
-	//Other
-	@Nullable
-	@Override
-	public abstract Container createMenu(int windowId, PlayerInventory playerInventory, PlayerEntity playerEntity);
-
-	@Override
-	public ITextComponent getDisplayName() 
-	{
-		return new StringTextComponent(getType().getRegistryName().getPath());
-	}
 		
 	@Nonnull
 	@Override
 	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side)
 	{
-		if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+		if (cap.equals(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY))
 		{
 			return handler.cast();
 		}	
-		if (cap == CapabilityEnergy.ENERGY)
+		if (cap.equals(CapabilityEnergy.ENERGY))
 		{
 			return energy.cast();
 		}

@@ -16,6 +16,7 @@ public class Config
 	public static final String CATEGORY_GENERAL = "general";
 	public static final String CATEGORY_POWER = "power";
 	public static final String SUB_CATEGORY_ELECTROLYZER = "electrolyzer";
+	public static final String SUB_CATEGORY_HYDROGEN_GENERATOR = "hydrogen_generator";
 	
 	private static final ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
 	private static final ForgeConfigSpec.Builder CLIENT_BUILDER = new ForgeConfigSpec.Builder();
@@ -25,9 +26,9 @@ public class Config
 	
 	
 	public static ForgeConfigSpec.IntValue ELECTROLYZER_MAXPOWER;
-	public static ForgeConfigSpec.IntValue ELECTROLYZER_GENERATE;
-	public static ForgeConfigSpec.IntValue ELECTROLYZER_SEND;
-	public static ForgeConfigSpec.IntValue ELECTROLYZER_TICKS;
+	
+	public static ForgeConfigSpec.IntValue HYDROGEN_GENERATOR_MAXPOWER;
+	public static ForgeConfigSpec.IntValue HYDROGEN_GENERATOR_SEND;
 	
 	
 	static {
@@ -37,6 +38,7 @@ public class Config
 		COMMON_BUILDER.comment("Power settings").push(CATEGORY_POWER);
 		
 		setupElectrolyzerConfig();
+		setupHydrogenGeneratorConfig();
 		
 		COMMON_BUILDER.pop();
 		
@@ -53,13 +55,17 @@ public class Config
 	{
 		COMMON_BUILDER.comment("Electrolyzer settings").push(SUB_CATEGORY_ELECTROLYZER);
 		
-		ELECTROLYZER_MAXPOWER = COMMON_BUILDER.comment("Maximum power for the electrolyzer").defineInRange("maxpower", 100000, 0, Integer.MAX_VALUE);
-		ELECTROLYZER_GENERATE = COMMON_BUILDER.comment("Power generation per diamond").defineInRange("generate", 1000, 0, Integer.MAX_VALUE);
-		ELECTROLYZER_SEND = COMMON_BUILDER.comment("Power generation to send per tick").defineInRange("send", 100, 0, Integer.MAX_VALUE);
-		ELECTROLYZER_TICKS = COMMON_BUILDER.comment("Ticks per diamond").defineInRange("ticks", 20, 0, Integer.MAX_VALUE);
-		
+		ELECTROLYZER_MAXPOWER = COMMON_BUILDER.comment("Maximum power for the electrolyzer").defineInRange("maxpower", 100000, 0, Integer.MAX_VALUE);		
 		
 		COMMON_BUILDER.pop();
+	}
+	
+	private static void setupHydrogenGeneratorConfig()
+	{
+		COMMON_BUILDER.comment("Hydrogen Genrator settings").push(SUB_CATEGORY_HYDROGEN_GENERATOR);
+		
+		HYDROGEN_GENERATOR_MAXPOWER = COMMON_BUILDER.comment("Maximum power for the hydrogen generator").defineInRange("maxpower", 100000, 0, Integer.MAX_VALUE);
+		HYDROGEN_GENERATOR_SEND = COMMON_BUILDER.comment("Power generation to send per tick").defineInRange("send", 100, 0, Integer.MAX_VALUE);
 	}
 	
 	

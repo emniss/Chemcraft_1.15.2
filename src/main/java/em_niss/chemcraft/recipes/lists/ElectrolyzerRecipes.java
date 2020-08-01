@@ -26,12 +26,10 @@ public class ElectrolyzerRecipes
 		for (int i = 0; i < electrolyzerRecipes.length; i++)
 		{
 			if (electrolyzerRecipes[i].getInput1().getItem().equals(input1) && electrolyzerRecipes[i].getInput2().getItem().equals(input2))
-			//if (electrolyzerRecipes[i].getCode().equals(input1.getRegistryName() + ";" + input2.getRegistryName()))
 			{
 				return electrolyzerRecipes[i];
 			}
 			else if (electrolyzerRecipes[i].getInput1().getItem().equals(input2) && electrolyzerRecipes[i].getInput2().getItem().equals(input1))
-			//else if (electrolyzerRecipes[i].getCode().equals(input2.getRegistryName() + ";" + input1.getRegistryName()))
 			{
 				ElectrolyzerRecipe recipe = electrolyzerRecipes[i];
 				return new ElectrolyzerRecipe(recipe.getInput2(), recipe.getInput1(), recipe.getOutput1(), recipe.getOutput2(), recipe.getEnergyRequiered());

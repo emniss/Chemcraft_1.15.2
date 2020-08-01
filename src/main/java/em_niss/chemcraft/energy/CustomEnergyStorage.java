@@ -11,10 +11,12 @@ public class CustomEnergyStorage extends EnergyStorage implements INBTSerializab
 		super(capacity, maxTransfer);
 	}
 	
+	protected void onEnergyChanged() {};
 	
 	public void setEnergy(int energy)
 	{
 		this.energy = energy;
+		onEnergyChanged();
 	}
 	
 	public void addEnergy(int energy)
@@ -24,15 +26,17 @@ public class CustomEnergyStorage extends EnergyStorage implements INBTSerializab
 		{
 			this.energy = getEnergyStored();
 		}
+		onEnergyChanged();
 	}
 	
 	public void consumeEnergy(int energy)
 	{
 		this.energy -= energy;
-		if (this.energy < getMaxEnergyStored()) 
+		if (this.energy < 0) 
 		{
 			this.energy = 0;
 		}
+		onEnergyChanged();
 	}
 	
 	public int getMaxExtract()
