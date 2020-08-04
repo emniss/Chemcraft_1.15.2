@@ -7,7 +7,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import em_niss.chemcraft.Config;
 import em_niss.chemcraft.energy.CustomEnergyStorage;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
@@ -144,7 +143,7 @@ public class FirstBlockTile extends TileEntity implements ITickableTileEntity {
     }
 
     private CustomEnergyStorage createEnergy() {
-        return new CustomEnergyStorage(100000, 0) {
+        return new CustomEnergyStorage(100000, 1000, 1000) {
             @Override
             protected void onEnergyChanged() {
                 markDirty();

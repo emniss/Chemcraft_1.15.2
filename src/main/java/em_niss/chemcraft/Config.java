@@ -17,6 +17,7 @@ public class Config
 	public static final String CATEGORY_POWER = "power";
 	public static final String SUB_CATEGORY_ELECTROLYZER = "electrolyzer";
 	public static final String SUB_CATEGORY_HYDROGEN_GENERATOR = "hydrogen_generator";
+	public static final String SUB_CATEGORY_GENERAL_ENERGY = "general_energy";
 	
 	private static final ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
 	private static final ForgeConfigSpec.Builder CLIENT_BUILDER = new ForgeConfigSpec.Builder();
@@ -28,7 +29,9 @@ public class Config
 	public static ForgeConfigSpec.IntValue ELECTROLYZER_MAXPOWER;
 	
 	public static ForgeConfigSpec.IntValue HYDROGEN_GENERATOR_MAXPOWER;
-	public static ForgeConfigSpec.IntValue HYDROGEN_GENERATOR_SEND;
+	
+	public static ForgeConfigSpec.IntValue GENERATOR_SEND;
+	public static ForgeConfigSpec.IntValue MACHINE_RECEIVE;
 	
 	
 	static {
@@ -36,7 +39,7 @@ public class Config
 		COMMON_BUILDER.pop();	
 		
 		COMMON_BUILDER.comment("Power settings").push(CATEGORY_POWER);
-		
+		setupGeneralEnergyConfig();
 		setupElectrolyzerConfig();
 		setupHydrogenGeneratorConfig();
 		
@@ -50,6 +53,16 @@ public class Config
 	
 	
 	//Types
+	
+	private static void setupGeneralEnergyConfig()
+	{
+		COMMON_BUILDER.comment("General energy settings").push(SUB_CATEGORY_GENERAL_ENERGY);
+		
+		GENERATOR_SEND = COMMON_BUILDER.comment("Power to send per tick").defineInRange("send", 1000, 0, Integer.MAX_VALUE);
+		MACHINE_RECEIVE = COMMON_BUILDER.comment("Power to receive per tick").defineInRange("receive", 1000, 0, Integer.MAX_VALUE);
+		
+		COMMON_BUILDER.pop();
+	}
 	
 	private static void setupElectrolyzerConfig()
 	{
@@ -65,7 +78,8 @@ public class Config
 		COMMON_BUILDER.comment("Hydrogen Genrator settings").push(SUB_CATEGORY_HYDROGEN_GENERATOR);
 		
 		HYDROGEN_GENERATOR_MAXPOWER = COMMON_BUILDER.comment("Maximum power for the hydrogen generator").defineInRange("maxpower", 100000, 0, Integer.MAX_VALUE);
-		HYDROGEN_GENERATOR_SEND = COMMON_BUILDER.comment("Power generation to send per tick").defineInRange("send", 100, 0, Integer.MAX_VALUE);
+		
+		COMMON_BUILDER.pop();
 	}
 	
 	

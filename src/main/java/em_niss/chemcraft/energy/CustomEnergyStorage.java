@@ -6,9 +6,9 @@ import net.minecraftforge.energy.EnergyStorage;
 
 public class CustomEnergyStorage extends EnergyStorage implements INBTSerializable<CompoundNBT>
 {
-	public CustomEnergyStorage(int capacity, int maxTransfer)
+	public CustomEnergyStorage(int capacity, int maxReceive, int maxExtract)
 	{
-		super(capacity, maxTransfer);
+		super(capacity, maxReceive, maxExtract);
 	}
 	
 	protected void onEnergyChanged() {};

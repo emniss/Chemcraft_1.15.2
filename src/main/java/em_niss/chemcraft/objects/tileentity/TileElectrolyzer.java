@@ -1,13 +1,13 @@
 package em_niss.chemcraft.objects.tileentity;
 
 import em_niss.chemcraft.Config;
+import em_niss.chemcraft.energy.CustomEnergyStorage;
 import em_niss.chemcraft.init.ModTileEntityTypes;
 import em_niss.chemcraft.recipes.lists.ElectrolyzerRecipes;
 import em_niss.chemcraft.recipes.types.ElectrolyzerRecipe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.ITickableTileEntity;
 
-public class TileElectrolyzer extends TileGeneratorBase implements ITickableTileEntity
+public class TileElectrolyzer extends TileMachineBase
 {
 	private static final int inSlot1 = 0;
 	private static final int inSlot2 = 1;
@@ -23,7 +23,17 @@ public class TileElectrolyzer extends TileGeneratorBase implements ITickableTile
 	
 	public TileElectrolyzer()
 	{
-		super(ModTileEntityTypes.TILE_ELECTROLYZER.get(), 4, Config.ELECTROLYZER_MAXPOWER.get(), 10);
+		super(ModTileEntityTypes.TILE_ELECTROLYZER.get(), 4, Config.ELECTROLYZER_MAXPOWER.get(), 0, Config.MACHINE_RECEIVE.get(), 10);
+	}
+	
+	
+	protected CustomEnergyStorage createEnergy()
+	{
+		return new CustomEnergyStorage(100000, 1000, 0) {
+		//return new CustomEnergyStorage(maxEnergyStored, 0) {
+			@Override
+			protected void onEnergyChanged() { markDirty(); }
+		};
 	}
 	
 	

@@ -1,13 +1,13 @@
 package em_niss.chemcraft.objects.tileentity;
 
 import em_niss.chemcraft.Config;
+import em_niss.chemcraft.energy.CustomEnergyStorage;
 import em_niss.chemcraft.init.ModTileEntityTypes;
 import em_niss.chemcraft.recipes.lists.HydrogenGeneratorRecipes;
 import em_niss.chemcraft.recipes.types.HydrogenGeneratorRecipe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.ITickableTileEntity;
 
-public class TileHydrogenGenerator extends TileGeneratorBase implements ITickableTileEntity
+public class TileHydrogenGenerator extends TileGeneratorBase
 {
 	private static final int inSlot1 = 0;
 	private static final int inSlot2 = 1;
@@ -45,6 +45,16 @@ public class TileHydrogenGenerator extends TileGeneratorBase implements ITickabl
 		}
 	}
 
+	
+	protected CustomEnergyStorage createEnergy()
+	{
+		return new CustomEnergyStorage(100000, 0, 1000) {
+		//return new CustomEnergyStorage(maxEnergyStored, 0) {
+			@Override
+			protected void onEnergyChanged() { markDirty(); }
+		};
+	}
+	
 	protected void doRefueling()
 	{
 		ItemStack input1 = itemHandler.getStackInSlot(inSlot1);

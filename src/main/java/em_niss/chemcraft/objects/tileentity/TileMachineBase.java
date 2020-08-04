@@ -28,12 +28,14 @@ public abstract class TileMachineBase extends TileEntity implements ITickableTil
 	private final int inventorySize;
 	private int frontEnergyBarHeight;
 	private int maxEnergyStored;
+	private int maxEnergyReceive;
+	private int maxEnergyExtract;
 	
 	protected ItemStackHandler itemHandler;
-	protected CustomEnergyStorage energyStorage = createEnergy();
+	protected CustomEnergyStorage energyStorage;
 	
 	protected LazyOptional<IItemHandler> handler;
-	protected LazyOptional<IEnergyStorage> energy = LazyOptional.of(() -> energyStorage);;
+	protected LazyOptional<IEnergyStorage> energy;
 	
 	protected int cookTime = 0;
 	protected int cookTimeTotal = 0;
@@ -68,18 +70,20 @@ public abstract class TileMachineBase extends TileEntity implements ITickableTil
 	
 
 	
-	public TileMachineBase(TileEntityType<?> tileEntityType, int inventorySize, int maxEnergyStored, int frontEnergyBarHeight)
+	public TileMachineBase(TileEntityType<?> tileEntityType, int inventorySize, int maxEnergyStored, int maxEnergyReceive, int maxEnergyExtract, int frontEnergyBarHeight)
 	{
 		super(tileEntityType);
 		this.inventorySize = inventorySize;
 		this.maxEnergyStored = maxEnergyStored;
+		this.maxEnergyReceive = maxEnergyReceive;
+		this.maxEnergyExtract = maxEnergyExtract;
 		this.frontEnergyBarHeight = frontEnergyBarHeight;
 		
 		itemHandler = createHandler();
-		//energyStorage = 
+		energyStorage = createEnergy(); 
 		
 		handler = LazyOptional.of(() -> itemHandler);
-		//energy 
+		energy  = LazyOptional.of(() -> energyStorage);
 	}
 	
 	@Override
@@ -145,10 +149,9 @@ public abstract class TileMachineBase extends TileEntity implements ITickableTil
 	
 	
 	//Energy
-	private CustomEnergyStorage createEnergy()
+	protected CustomEnergyStorage createEnergy()
 	{
-		return new CustomEnergyStorage(100000, 0) {
-		//return new CustomEnergyStorage(maxEnergyStored, 0) {
+		return new CustomEnergyStorage(maxEnergyStored, maxEnergyReceive, maxEnergyExtract) {
 			@Override
 			protected void onEnergyChanged() { markDirty(); }
 		};
@@ -166,7 +169,8 @@ public abstract class TileMachineBase extends TileEntity implements ITickableTil
 		}	
 		if (cap.equals(CapabilityEnergy.ENERGY))
 		{
-			return energy.cast();
+			LazyOptional<T> cast = energy.cast();
+			return cast;
 		}
 		return super.getCapability(cap, side);
 	}

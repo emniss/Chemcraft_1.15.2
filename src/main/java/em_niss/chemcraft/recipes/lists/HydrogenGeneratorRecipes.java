@@ -35,7 +35,6 @@ public class HydrogenGeneratorRecipes
 	
 	public static HydrogenGeneratorRecipe getRecipe(Item input)
 	{
-		//return getRecipe(input, ItemStack.EMPTY.getItem());
 		for (int i = 0; i < hydrogenGeneratorRecipes.length; i++)
 		{
 			if (hydrogenGeneratorRecipes[i].getInput1().getItem().equals(input) && hydrogenGeneratorRecipes[i].getInput2().getItem().equals(ItemStack.EMPTY.getItem()))
