@@ -20,7 +20,7 @@ import net.minecraftforge.fml.loading.FMLPaths;
 @Mod("chemcraft")
 public class Chemcraft
 {
-    public static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger(Chemcraft.MODID);
     public static final String MODID = "chemcraft";
     public static Chemcraft instance;
     

@@ -3,8 +3,11 @@ package em_niss.chemcraft.objects.tileentity;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import org.apache.logging.log4j.LogManager;
+
 import com.google.common.util.concurrent.AtomicDouble;
 
+import em_niss.chemcraft.Chemcraft;
 import em_niss.chemcraft.energy.CustomEnergyStorage;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
@@ -102,9 +105,9 @@ public abstract class TileMachineBase extends TileEntity implements ITickableTil
 	{		
 		//Indicator on front
 		BlockState blockState = world.getBlockState(pos);
-		if (blockState.get(BlockStateProperties.POWERED) != cookTime > 0)
+		if (blockState.get(BlockStateProperties.POWERED) == (cookTime == 0) )
 		{
-			world.setBlockState(pos, blockState.with(BlockStateProperties.POWERED, cookTime > 0), Constants.BlockFlags.NOTIFY_NEIGHBORS + Constants.BlockFlags.BLOCK_UPDATE);
+			world.setBlockState(pos, blockState.with(BlockStateProperties.POWERED, cookTime != 0), Constants.BlockFlags.NOTIFY_NEIGHBORS + Constants.BlockFlags.BLOCK_UPDATE);
 		}
 		
 		//Energy display on front

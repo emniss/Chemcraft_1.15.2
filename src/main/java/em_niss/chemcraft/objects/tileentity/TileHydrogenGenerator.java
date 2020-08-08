@@ -25,10 +25,22 @@ public class TileHydrogenGenerator extends TileGeneratorBase
 	
 	protected void doCooking()
 	{
-		if (cookTime > 0 && energyStorage.getEnergyStored() + energyGeneration <= energyStorage.getMaxEnergyStored() && recipeStillValid())
+		if (cookTime > 0)
 		{
-			energyStorage.addEnergy(energyGeneration);
-			cookTime--;
+			if (recipeStillValid())
+			{
+				if (energyStorage.getEnergyStored() + energyGeneration <= energyStorage.getMaxEnergyStored())
+				{
+					energyStorage.addEnergy(energyGeneration);
+					cookTime--;
+				}
+			}
+			else
+			{
+				isCooking = false;
+				cookTime = 0;
+			}
+			
 		}
 		else if (cookTime == 0) //Finished cooking
 		{
@@ -59,7 +71,7 @@ public class TileHydrogenGenerator extends TileGeneratorBase
 	{
 		ItemStack input1 = itemHandler.getStackInSlot(inSlot1);
 		ItemStack input2 = itemHandler.getStackInSlot(inSlot2);
-		if (!input1.isEmpty() && !input2.isEmpty() && isItemsIngredients(input1, input2))
+		if ( (!input1.isEmpty() || !input2.isEmpty()) && isItemsIngredients(input1, input2))
 		{
 			HydrogenGeneratorRecipe recipe = HydrogenGeneratorRecipes.getRecipe(input1.getItem(), input2.getItem());
 			if (input1.getCount() >= recipe.getInput1().getCount() && input2.getCount() >= recipe.getInput2().getCount()) 
@@ -67,7 +79,7 @@ public class TileHydrogenGenerator extends TileGeneratorBase
 				setRecipe(recipe);
 			}
 		}
-		else if (!input1.isEmpty() && isItemIngredient(input1))
+		/*else if (!input1.isEmpty() && isItemsIngredients(input1, input2))
 		{
 			HydrogenGeneratorRecipe recipe = HydrogenGeneratorRecipes.getRecipe(input1.getItem());
 			if (input1.getCount() >= recipe.getInput1().getCount())
@@ -75,14 +87,14 @@ public class TileHydrogenGenerator extends TileGeneratorBase
 				setRecipe(recipe);
 			}
 		}
-		else if (!input1.isEmpty() && isItemIngredient(input2))
+		else if (!input2.isEmpty() && isItemsIngredients(input1, input2))
 		{
 			HydrogenGeneratorRecipe recipe = HydrogenGeneratorRecipes.getRecipe(input2.getItem());
 			if (input2.getCount() >= recipe.getInput1().getCount())
 			{
 				setRecipe(recipe);
 			}
-		}
+		}*/
 	}
 	
 	private void setRecipe(HydrogenGeneratorRecipe recipe)
@@ -103,10 +115,10 @@ public class TileHydrogenGenerator extends TileGeneratorBase
 		return HydrogenGeneratorRecipes.getRecipe(stack1.getItem(), stack2.getItem()) != null;
 	}
 	
-	private boolean isItemIngredient(ItemStack stack)
+	/*private boolean isItemIngredient(ItemStack stack)
 	{
 		return HydrogenGeneratorRecipes.getRecipe(stack.getItem()) != null;
-	}
+	}*/
 	
 	private boolean recipeStillValid()
 	{
@@ -114,6 +126,6 @@ public class TileHydrogenGenerator extends TileGeneratorBase
 		ItemStack input2 = itemHandler.getStackInSlot(inSlot2);
 		
 		return (input1.getItem().equals(ingredient1.getItem()) && input2.getItem().equals(ingredient2.getItem())
-				&& input1.getCount() >= ingredient1.getCount() && input2.getCount() >= ingredient1.getCount());
+				&& input1.getCount() >= ingredient1.getCount() && input2.getCount() >= ingredient2.getCount());
 	}
 }
