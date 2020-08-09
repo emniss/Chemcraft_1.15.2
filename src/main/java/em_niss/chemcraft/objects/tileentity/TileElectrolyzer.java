@@ -3,8 +3,8 @@ package em_niss.chemcraft.objects.tileentity;
 import em_niss.chemcraft.Config;
 import em_niss.chemcraft.energy.CustomEnergyStorage;
 import em_niss.chemcraft.init.ModTileEntityTypes;
-import em_niss.chemcraft.recipes.lists.ElectrolyzerRecipes;
-import em_niss.chemcraft.recipes.types.ElectrolyzerRecipe;
+import em_niss.chemcraft.recipes.electrolyzer.ElectrolyzerRecipe;
+import em_niss.chemcraft.recipes.electrolyzer.ElectrolyzerRecipes;
 import net.minecraft.item.ItemStack;
 
 public class TileElectrolyzer extends TileMachineBase

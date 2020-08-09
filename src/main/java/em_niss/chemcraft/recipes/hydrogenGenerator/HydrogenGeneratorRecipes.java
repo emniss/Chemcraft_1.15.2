@@ -1,7 +1,6 @@
-package em_niss.chemcraft.recipes.lists;
+package em_niss.chemcraft.recipes.hydrogenGenerator;
 
 import em_niss.chemcraft.init.ItemInit;
-import em_niss.chemcraft.recipes.types.HydrogenGeneratorRecipe;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 

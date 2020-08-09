@@ -1,4 +1,4 @@
-package em_niss.chemcraft.recipes.types;
+package em_niss.chemcraft.recipes.electrolyzer;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

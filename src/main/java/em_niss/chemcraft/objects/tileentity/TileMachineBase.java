@@ -135,7 +135,7 @@ public abstract class TileMachineBase extends TileEntity implements ITickableTil
 	public CompoundNBT write(CompoundNBT tag) 
 	{
 		tag.put("inv", itemHandler.serializeNBT());
-		tag.put("enegry", energyStorage.serializeNBT());
+		tag.put("energy", energyStorage.serializeNBT());
 		return super.write(tag);
 	}
 	

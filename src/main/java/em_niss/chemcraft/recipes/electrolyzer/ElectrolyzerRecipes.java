@@ -1,7 +1,6 @@
-package em_niss.chemcraft.recipes.lists;
+package em_niss.chemcraft.recipes.electrolyzer;
 
 import em_niss.chemcraft.init.ItemInit;
-import em_niss.chemcraft.recipes.types.ElectrolyzerRecipe;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -21,7 +20,7 @@ public class ElectrolyzerRecipes
 	
 	public static ElectrolyzerRecipe getRecipe(Item input1, Item input2)
 	{
-		if (input1 == input2) return getRecipe(input1);
+		//if (input1 == input2) return getRecipe(input1);
 		
 		for (int i = 0; i < electrolyzerRecipes.length; i++)
 		{
