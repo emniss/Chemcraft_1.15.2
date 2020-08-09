@@ -19,20 +19,40 @@ public class CustomEnergyStorage extends EnergyStorage implements INBTSerializab
 		onEnergyChanged();
 	}
 	
-	public void addEnergy(int energy)
+	public int addEnergy(int energy)
 	{
-		this.energy += energy;
-		if (this.energy > getMaxEnergyStored()) 
+		int returnEnergy = 0;
+		
+		if (this.energy + energy <= getMaxEnergyStored())
 		{
-			this.energy = getEnergyStored();
+			this.energy += energy;
+		}
+		else
+		{
+			returnEnergy = this.energy + energy - getMaxEnergyStored();
+			this.energy = getMaxEnergyStored();
 		}
 		onEnergyChanged();
+		
+		return returnEnergy;
 	}
 	
-	public void consumeEnergy(int energy)
+	public boolean consumeEnergy(int energy)
+	{
+		if (this.energy - energy >= 0) 
+		{
+			this.energy -= energy;
+			onEnergyChanged();
+			return true;
+		}
+		return false;	
+	}
+	
+	//Used for sendOutPower() in TileGeneratorBase
+	public void removeEnergy(int energy)
 	{
 		this.energy -= energy;
-		if (this.energy < 0) 
+		if (this.energy < 0)
 		{
 			this.energy = 0;
 		}

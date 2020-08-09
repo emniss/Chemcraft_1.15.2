@@ -26,7 +26,6 @@ public class TileElectrolyzer extends TileMachineBase
 		super(ModTileEntityTypes.TILE_ELECTROLYZER.get(), 4, Config.ELECTROLYZER_MAXPOWER.get(), 0, Config.MACHINE_RECEIVE.get(), 10);
 	}
 	
-	
 	protected CustomEnergyStorage createEnergy()
 	{
 		return new CustomEnergyStorage(100000, 1000, 0) {
@@ -36,45 +35,62 @@ public class TileElectrolyzer extends TileMachineBase
 		};
 	}
 	
-	
 	protected void doCooking()
 	{
-		int energyAfter = this.energyStorage.getEnergyStored() - energyConsumption;
-		if (cookTime > 0 && energyAfter >= 0 && recipeStillValid())
+		if (recipeStillValid())
 		{
-			this.energyStorage.setEnergy(energyAfter);
-			cookTime--;
-		}
-		else if (cookTime == 0) //Finished cooking
-		{
-			boolean hasOutput = false;
-			if (itemHandler.getStackInSlot(outSlot1).isEmpty() && itemHandler.getStackInSlot(outSlot2).isEmpty())
+			if (cookTime > 0)
 			{
-				//Both slots empty
-				itemHandler.setStackInSlot(outSlot1, result1);
-				if (!result2.isEmpty()) { itemHandler.setStackInSlot(outSlot2, result2); }
-				isCooking = false;
+				if (this.energyStorage.consumeEnergy(energyConsumption))
+				{
+					cookTime--;
+				}
 			}
-			else
-			{		
-				//Both slots not empty
+			
+			if (cookTime == 0) //Finished cooking
+			{
+				//boolean hasOutput = false;
 				if (itemHandler.insertItem(outSlot1, result1, true).isEmpty() && itemHandler.insertItem(outSlot2, result2, true).isEmpty())
 				{
-					itemHandler.insertItem(outSlot1, result1, false);
-					itemHandler.insertItem(outSlot2, result2, false);
+					//itemHandler.insertItem(outSlot1, result1, false);
+					//itemHandler.insertItem(outSlot2, result2, false);
+									
+					itemHandler.setStackInSlot(outSlot1, new ItemStack(result1.getItem(), result1.getCount() + itemHandler.getStackInSlot(outSlot1).getCount()));
+					itemHandler.setStackInSlot(outSlot2, new ItemStack(result2.getItem(), result2.getCount() + itemHandler.getStackInSlot(outSlot2).getCount()));
+					
 					isCooking = false;
 				}
 				else if (itemHandler.insertItem(outSlot1, result2, true).isEmpty() && itemHandler.insertItem(outSlot2, result1, true).isEmpty())
 				{
-					itemHandler.insertItem(outSlot1, result2, false);
-					itemHandler.insertItem(outSlot2, result1, false);
+					//itemHandler.insertItem(outSlot1, result2, false);
+					//itemHandler.insertItem(outSlot2, result1, false);
+					
+					itemHandler.setStackInSlot(outSlot1, new ItemStack(result2.getItem(), result2.getCount() + itemHandler.getStackInSlot(outSlot1).getCount()));
+					itemHandler.setStackInSlot(outSlot2, new ItemStack(result1.getItem(), result1.getCount() + itemHandler.getStackInSlot(outSlot2).getCount()));
+					
 					isCooking = false;
 				}
-			}
-			if (hasOutput)
-			{
-				itemHandler.extractItem(inSlot1, ingredient1.getCount(), false);
-				itemHandler.extractItem(inSlot2, ingredient2.getCount(), false);
+				/*else
+				{		
+					//Both slots not empty
+					if (itemHandler.insertItem(outSlot1, result1, true).isEmpty() && itemHandler.insertItem(outSlot2, result2, true).isEmpty())
+					{
+						itemHandler.insertItem(outSlot1, result1, false);
+						itemHandler.insertItem(outSlot2, result2, false);
+						isCooking = false;
+					}
+					else if (itemHandler.insertItem(outSlot1, result2, true).isEmpty() && itemHandler.insertItem(outSlot2, result1, true).isEmpty())
+					{
+						itemHandler.insertItem(outSlot1, result2, false);
+						itemHandler.insertItem(outSlot2, result1, false);
+						isCooking = false;
+					}
+				}
+				if (hasOutput)
+				{
+					itemHandler.extractItem(inSlot1, ingredient1.getCount(), false);
+					itemHandler.extractItem(inSlot2, ingredient2.getCount(), false);
+				}*/
 			}
 		}
 	}
@@ -84,7 +100,8 @@ public class TileElectrolyzer extends TileMachineBase
 	{
 		ItemStack input1 = itemHandler.getStackInSlot(inSlot1);
 		ItemStack input2 = itemHandler.getStackInSlot(inSlot2);
-		if (!input1.isEmpty() && !input2.isEmpty() && isItemsIngredients(input1, input2))
+		
+		if ( (!input1.isEmpty() || !input2.isEmpty()) && isItemsIngredients(input1, input2))
 		{
 			ElectrolyzerRecipe recipe = ElectrolyzerRecipes.getRecipe(input1.getItem(), input2.getItem());
 			if (input1.getCount() >= recipe.getInput1().getCount() && input2.getCount() >= recipe.getInput2().getCount()) 
@@ -92,9 +109,9 @@ public class TileElectrolyzer extends TileMachineBase
 				setRecipe(recipe);
 			}
 		}
-		else if (!input1.isEmpty() && isItemIngredient(input1))
+		/*else if (!input1.isEmpty() && isItemIngredient(input1))
 		{
-			ElectrolyzerRecipe recipe = ElectrolyzerRecipes.getRecipe(input1.getItem());
+			ElectrolyzerRecipe recipe = ElectrolyzerRecipes.getRecipe(input1.getItem(), ItemStack.EMPTY.getItem());
 			if (input1.getCount() >= recipe.getInput1().getCount())
 			{
 				setRecipe(recipe);
@@ -102,12 +119,12 @@ public class TileElectrolyzer extends TileMachineBase
 		}
 		else if (!input1.isEmpty() && isItemIngredient(input2))
 		{
-			ElectrolyzerRecipe recipe = ElectrolyzerRecipes.getRecipe(input2.getItem());
+			ElectrolyzerRecipe recipe = ElectrolyzerRecipes.getRecipe(input2.getItem(), ItemStack.EMPTY.getItem());
 			if (input2.getCount() >= recipe.getInput1().getCount())
 			{
 				setRecipe(recipe);
 			}
-		}
+		}*/
 	}
 	
 	private void setRecipe(ElectrolyzerRecipe recipe)
@@ -129,17 +146,24 @@ public class TileElectrolyzer extends TileMachineBase
 		return ElectrolyzerRecipes.getRecipe(stack1.getItem(), stack2.getItem()) != null;
 	}
 	
-	private boolean isItemIngredient(ItemStack stack)
-	{
-		return ElectrolyzerRecipes.getRecipe(stack.getItem()) != null;
-	}
-	
 	private boolean recipeStillValid()
 	{
 		ItemStack input1 = itemHandler.getStackInSlot(inSlot1);
 		ItemStack input2 = itemHandler.getStackInSlot(inSlot2);
 		
-		return (input1.getItem().equals(ingredient1.getItem()) && input2.getItem().equals(ingredient2.getItem())
-				&& input1.getCount() >= ingredient1.getCount() && input2.getCount() >= ingredient1.getCount());
+		boolean flagInput1 = false;
+		boolean flagInput2 = false;
+		
+		if (input1.getItem().equals(ingredient1.getItem())) 
+		{
+			flagInput1 = input1.getCount() >= ingredient1.getCount();
+		}
+		
+		if (input2.getItem().equals(ingredient2.getItem()))
+		{
+			flagInput2 = input2.getCount() >= ingredient2.getCount();
+		}
+		
+		return flagInput1 && flagInput2;
 	}
 }

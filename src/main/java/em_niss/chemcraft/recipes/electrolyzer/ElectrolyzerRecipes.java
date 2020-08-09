@@ -20,7 +20,7 @@ public class ElectrolyzerRecipes
 	
 	public static ElectrolyzerRecipe getRecipe(Item input1, Item input2)
 	{
-		//if (input1 == input2) return getRecipe(input1);
+		if (input1.equals(input2)) return getRecipe(input1, ItemStack.EMPTY.getItem());
 		
 		for (int i = 0; i < electrolyzerRecipes.length; i++)
 		{
@@ -37,7 +37,7 @@ public class ElectrolyzerRecipes
 		return null;
 	}
 	
-	public static ElectrolyzerRecipe getRecipe(Item input)
+	/*public static ElectrolyzerRecipe getRecipe(Item input)
 	{
 		return getRecipe(input, ItemStack.EMPTY.getItem());
 		/*ElectrolyzerRecipe[] electrolyzerRecipes = ElectrolyzerRecipes.electrolyzerRecipes;
@@ -49,8 +49,8 @@ public class ElectrolyzerRecipes
 				return electrolyzerRecipes[i];
 			}
 		}
-		return null;*/
-	}
+		return null;
+	}*/
 	
 	/*public static ElectrolyzerRecipe getRecipe(Item input1, Item input2)
 	{

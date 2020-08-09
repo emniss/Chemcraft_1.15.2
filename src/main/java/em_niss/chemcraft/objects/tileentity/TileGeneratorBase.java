@@ -36,7 +36,7 @@ public abstract class TileGeneratorBase extends TileMachineBase
                                 if (handler.canReceive()) {
                                     int received = handler.receiveEnergy(Math.min(capacity.get(), 100), false);
                                     capacity.addAndGet(-received);
-                                    energyStorage.consumeEnergy(received);
+                                    energyStorage.removeEnergy(received);
                                     markDirty();
                                     return capacity.get() > 0;
                                 } else {

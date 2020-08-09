@@ -56,6 +56,7 @@ public class TileHydrogenGenerator extends TileGeneratorBase
 	{
 		ItemStack input1 = itemHandler.getStackInSlot(inSlot1);
 		ItemStack input2 = itemHandler.getStackInSlot(inSlot2);
+		
 		if ( (!input1.isEmpty() || !input2.isEmpty()) && isItemsIngredients(input1, input2))
 		{
 			HydrogenGeneratorRecipe recipe = HydrogenGeneratorRecipes.getRecipe(input1.getItem(), input2.getItem());
