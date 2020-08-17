@@ -31,16 +31,4 @@ public class HydrogenGeneratorRecipes
 		}
 		return null;
 	}
-	
-	/*public static HydrogenGeneratorRecipe getRecipe(Item input)
-	{
-		for (int i = 0; i < hydrogenGeneratorRecipes.length; i++)
-		{
-			if (hydrogenGeneratorRecipes[i].getInput1().getItem().equals(input) && hydrogenGeneratorRecipes[i].getInput2().getItem().equals(ItemStack.EMPTY.getItem()))
-			{
-				return hydrogenGeneratorRecipes[i];
-			}
-		}
-		return null;
-	}*/
 }

@@ -37,52 +37,7 @@ public class ElectrolyzerRecipes
 		return null;
 	}
 	
-	/*public static ElectrolyzerRecipe getRecipe(Item input)
-	{
-		return getRecipe(input, ItemStack.EMPTY.getItem());
-		/*ElectrolyzerRecipe[] electrolyzerRecipes = ElectrolyzerRecipes.electrolyzerRecipes;
-		
-		for (int i = 0; i < electrolyzerRecipes.length; i++)
-		{
-			if (electrolyzerRecipes[i].getInput1().getItem().equals(ItemStack.EMPTY.getItem()));
-			{
-				return electrolyzerRecipes[i];
-			}
-		}
-		return null;
-	}*/
-	
-	/*public static ElectrolyzerRecipe getRecipe(Item input1, Item input2)
-	{
-		if (input1 == input2) return getRecipe(input1);
-		
-		for (int i = 0; i < electrolyzerRecipes.length; i++)
-		{
-			if (electrolyzerRecipes[i].getCode().equals(input1.getRegistryName() + ";" + input2.getRegistryName()))
-			{
-				return electrolyzerRecipes[i];
-			}
-			else if (electrolyzerRecipes[i].getCode().equals(input2.getRegistryName() + ";" + input1.getRegistryName()))
-			{
-				ElectrolyzerRecipe recipe = electrolyzerRecipes[i];
-				return new ElectrolyzerRecipe(recipe.getInput2(), recipe.getInput1(), recipe.getOutput1(), recipe.getOutput2(), recipe.getEnergyRequiered());
-			}
-		}
-		return null;
-	}
-	
-	public static ElectrolyzerRecipe getRecipe(Item input)
-	{
-		for (int i = 0; i < electrolyzerRecipes.length; i++)
-		{
-			if (electrolyzerRecipes[i].getCode().equals(input.getRegistryName() + ";" + ItemStack.EMPTY.getRe()));
-			{
-				return electrolyzerRecipes[i];
-			}
-		}
-		return null;
-	}
-	*/
+
 	public static ElectrolyzerRecipe[] getRecipes()
 	{
 		return electrolyzerRecipes;

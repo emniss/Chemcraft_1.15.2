@@ -40,48 +40,20 @@ public class TileElectrolyzer extends TileMachineBase
 			
 			if (cookTime == 0) //Finished cooking
 			{
-				//boolean hasOutput = false;
 				if (itemHandler.insertItem(outSlot1, result1, true).isEmpty() && itemHandler.insertItem(outSlot2, result2, true).isEmpty())
-				{
-					//itemHandler.insertItem(outSlot1, result1, false);
-					//itemHandler.insertItem(outSlot2, result2, false);
-									
+				{								
 					itemHandler.setStackInSlot(outSlot1, new ItemStack(result1.getItem(), result1.getCount() + itemHandler.getStackInSlot(outSlot1).getCount()));
 					itemHandler.setStackInSlot(outSlot2, new ItemStack(result2.getItem(), result2.getCount() + itemHandler.getStackInSlot(outSlot2).getCount()));
 					
 					isCooking = false;
 				}
 				else if (itemHandler.insertItem(outSlot1, result2, true).isEmpty() && itemHandler.insertItem(outSlot2, result1, true).isEmpty())
-				{
-					//itemHandler.insertItem(outSlot1, result2, false);
-					//itemHandler.insertItem(outSlot2, result1, false);
-					
+				{					
 					itemHandler.setStackInSlot(outSlot1, new ItemStack(result2.getItem(), result2.getCount() + itemHandler.getStackInSlot(outSlot1).getCount()));
 					itemHandler.setStackInSlot(outSlot2, new ItemStack(result1.getItem(), result1.getCount() + itemHandler.getStackInSlot(outSlot2).getCount()));
 					
 					isCooking = false;
 				}
-				/*else
-				{		
-					//Both slots not empty
-					if (itemHandler.insertItem(outSlot1, result1, true).isEmpty() && itemHandler.insertItem(outSlot2, result2, true).isEmpty())
-					{
-						itemHandler.insertItem(outSlot1, result1, false);
-						itemHandler.insertItem(outSlot2, result2, false);
-						isCooking = false;
-					}
-					else if (itemHandler.insertItem(outSlot1, result2, true).isEmpty() && itemHandler.insertItem(outSlot2, result1, true).isEmpty())
-					{
-						itemHandler.insertItem(outSlot1, result2, false);
-						itemHandler.insertItem(outSlot2, result1, false);
-						isCooking = false;
-					}
-				}
-				if (hasOutput)
-				{
-					itemHandler.extractItem(inSlot1, ingredient1.getCount(), false);
-					itemHandler.extractItem(inSlot2, ingredient2.getCount(), false);
-				}*/
 			}
 		}
 		else
@@ -104,22 +76,6 @@ public class TileElectrolyzer extends TileMachineBase
 				setRecipe(recipe);
 			}
 		}
-		/*else if (!input1.isEmpty() && isItemIngredient(input1))
-		{
-			ElectrolyzerRecipe recipe = ElectrolyzerRecipes.getRecipe(input1.getItem(), ItemStack.EMPTY.getItem());
-			if (input1.getCount() >= recipe.getInput1().getCount())
-			{
-				setRecipe(recipe);
-			}
-		}
-		else if (!input1.isEmpty() && isItemIngredient(input2))
-		{
-			ElectrolyzerRecipe recipe = ElectrolyzerRecipes.getRecipe(input2.getItem(), ItemStack.EMPTY.getItem());
-			if (input2.getCount() >= recipe.getInput1().getCount())
-			{
-				setRecipe(recipe);
-			}
-		}*/
 	}
 	
 	private void setRecipe(ElectrolyzerRecipe recipe)

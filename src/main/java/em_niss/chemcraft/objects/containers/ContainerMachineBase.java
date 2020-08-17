@@ -97,17 +97,7 @@ public abstract class ContainerMachineBase extends Container
 	{
 		return ((TileMachineBase)tileEntity).getTotalCookTime();
 	}
-	
-	
-	/*//Cooking	
-	@OnlyIn(Dist.CLIENT)
-	public double getCookTimePercent()
-	{
-		double cookTime = this.machineData.get(0);
-		double cookTimeTotal = this.machineData.get(1);
-		return cookTimeTotal != 0 && cookTime != 0 ? cookTime / cookTimeTotal : 1;
-	}*/
-	
+
 	
 	//Machine Slots
 	protected abstract void addMachineSlots(IItemHandler handler);
