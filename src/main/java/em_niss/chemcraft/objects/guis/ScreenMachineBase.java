@@ -50,8 +50,8 @@ public abstract class ScreenMachineBase<C extends ContainerMachineBase> extends 
 		this.blit(relX, relY, 0, 0, this.xSize, this.ySize);
 		
 		//Animation
-		double cookTimeLeft = this.container.getCookTimePercent();
-		this.blit(this.guiLeft + positions[2], this.guiTop + positions[3], positions[4], positions[5], (int)((1 - cookTimeLeft) * positions[6]) + 1, positions[7]);
+		int cookTimeArrowWidthScaled = getCookTimeArrowWidthScaled(positions[6]);
+		this.blit(this.guiLeft + positions[2], this.guiTop + positions[3], positions[4], positions[5], cookTimeArrowWidthScaled /*(int)((1 - cookTimeLeft) * positions[6]) + 1*/, positions[7]);
 		
 		int energyHeightScaled = this.getEnergyScaled(positions[13]);
 		this.blit(this.guiLeft + positions[8], this.guiTop + positions[9] - energyHeightScaled, positions[10], positions[11], positions[12], energyHeightScaled);
@@ -62,6 +62,14 @@ public abstract class ScreenMachineBase<C extends ContainerMachineBase> extends 
 		int energyStored = this.container.getEnergy();
 		int maxEnergyStored = this.container.getMaxEnergy();
 		
-		return energyStored != 0 && maxEnergyStored != 0 ? energyStored * pixels / maxEnergyStored : 0;
+		return (maxEnergyStored != 0) ?  (int)(pixels * energyStored / (double)maxEnergyStored) : 0;
+	}
+	
+	private int getCookTimeArrowWidthScaled(int pixels)
+	{
+		int cookTime = this.container.getCookTime();
+		int totalCookTime = this.container.getTotalCookTime();
+		
+		return (totalCookTime != 0) ? (int)((pixels - 1) * (1 - cookTime / (double)totalCookTime)) + 1 : 0;
 	}
 }

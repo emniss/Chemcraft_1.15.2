@@ -1,6 +1,7 @@
 package em_niss.chemcraft.objects.containers;
 
 import em_niss.chemcraft.energy.CustomEnergyStorage;
+import em_niss.chemcraft.objects.tileentity.TileMachineBase;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -15,8 +16,6 @@ import net.minecraft.util.IntArray;
 import net.minecraft.util.IntReferenceHolder;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -30,7 +29,7 @@ public abstract class ContainerMachineBase extends Container
 	private IItemHandler playerInventory;
 	
 	private Block machineBlock;
-	private IIntArray machineData;
+	public IIntArray machineData;
 	
 	public ContainerMachineBase(ContainerType<?> containerType, int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity playerEntity, Block machineBlock) 
 	{
@@ -58,9 +57,24 @@ public abstract class ContainerMachineBase extends Container
 			@Override
 			public void set(int value) { tileEntity.getCapability(CapabilityEnergy.ENERGY).ifPresent(h -> ((CustomEnergyStorage)h).setEnergy(value)); }
 		});
-		
+	
 		//Progress
-		trackIntArray(machineData);
+		//trackIntArray(machineData);
+		trackInt(new IntReferenceHolder() {
+			@Override
+			public int get() { return getCookTime(); }
+
+			@Override
+			public void set(int value) {  }
+		});
+		
+		trackInt(new IntReferenceHolder() {
+			@Override
+			public int get() { return getTotalCookTime(); }
+
+			@Override
+			public void set(int value) {  }
+		});
 	}
 	
 	//Energy
@@ -74,14 +88,25 @@ public abstract class ContainerMachineBase extends Container
 		return tileEntity.getCapability(CapabilityEnergy.ENERGY).map(h -> h.getMaxEnergyStored()).orElse(0);
 	}
 	
-	//Cooking	
+	public int getCookTime()
+	{
+		return ((TileMachineBase)tileEntity).getCookTime();
+	}
+	
+	public int getTotalCookTime()
+	{
+		return ((TileMachineBase)tileEntity).getTotalCookTime();
+	}
+	
+	
+	/*//Cooking	
 	@OnlyIn(Dist.CLIENT)
 	public double getCookTimePercent()
 	{
 		double cookTime = this.machineData.get(0);
 		double cookTimeTotal = this.machineData.get(1);
-		return cookTimeTotal != 0 && cookTime != 0 ? cookTime / cookTimeTotal : 0;
-	}
+		return cookTimeTotal != 0 && cookTime != 0 ? cookTime / cookTimeTotal : 1;
+	}*/
 	
 	
 	//Machine Slots

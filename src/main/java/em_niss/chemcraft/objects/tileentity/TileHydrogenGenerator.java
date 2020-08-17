@@ -1,7 +1,6 @@
 package em_niss.chemcraft.objects.tileentity;
 
 import em_niss.chemcraft.Config;
-import em_niss.chemcraft.energy.CustomEnergyStorage;
 import em_niss.chemcraft.init.ModTileEntityTypes;
 import em_niss.chemcraft.recipes.hydrogenGenerator.HydrogenGeneratorRecipe;
 import em_niss.chemcraft.recipes.hydrogenGenerator.HydrogenGeneratorRecipes;
@@ -38,19 +37,11 @@ public class TileHydrogenGenerator extends TileGeneratorBase
 				itemHandler.insertItem(outSlot, result, false);
 				
 				isCooking = false;
+				cookTimeTotal = 0;
 			}
 		}
 	}
 
-	
-	protected CustomEnergyStorage createEnergy()
-	{
-		return new CustomEnergyStorage(100000, 0, 1000) {
-		//return new CustomEnergyStorage(maxEnergyStored, 0) {
-			@Override
-			protected void onEnergyChanged() { markDirty(); }
-		};
-	}
 	
 	protected void doRefueling()
 	{
@@ -80,6 +71,8 @@ public class TileHydrogenGenerator extends TileGeneratorBase
 
 		isCooking = true;
 	}
+	
+	
 	
 	private boolean isItemsIngredients(ItemStack stack1, ItemStack stack2) 
 	{

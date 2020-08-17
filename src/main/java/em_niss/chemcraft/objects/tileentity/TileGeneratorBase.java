@@ -14,7 +14,7 @@ public abstract class TileGeneratorBase extends TileMachineBase
 	
 	public TileGeneratorBase(TileEntityType<?> tileEntityType, int inventorySize, int maxEnergyStored, int frontEnergyBarHeight)
 	{
-		super(tileEntityType, inventorySize, maxEnergyStored, Config.GENERATOR_SEND.get(), 0, frontEnergyBarHeight);
+		super(tileEntityType, inventorySize, maxEnergyStored, 0, Config.GENERATOR_SEND.get(), frontEnergyBarHeight);
 	}
 	
 
@@ -34,7 +34,7 @@ public abstract class TileGeneratorBase extends TileMachineBase
                 if (te != null) {
                 	boolean doContinue = te.getCapability(CapabilityEnergy.ENERGY, direction.getOpposite()).map(handler -> {
                                 if (handler.canReceive()) {
-                                    int received = handler.receiveEnergy(Math.min(capacity.get(), 100), false);
+                                    int received = handler.receiveEnergy(Math.min(capacity.get(), Config.MACHINE_RECEIVE.get()), false);
                                     capacity.addAndGet(-received);
                                     energyStorage.removeEnergy(received);
                                     markDirty();

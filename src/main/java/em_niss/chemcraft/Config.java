@@ -13,11 +13,11 @@ import net.minecraftforge.fml.config.ModConfig;
 @Mod.EventBusSubscriber
 public class Config
 {
-	public static final String CATEGORY_GENERAL = "general";
-	public static final String CATEGORY_POWER = "power";
-	public static final String SUB_CATEGORY_ELECTROLYZER = "electrolyzer";
-	public static final String SUB_CATEGORY_HYDROGEN_GENERATOR = "hydrogen_generator";
-	public static final String SUB_CATEGORY_GENERAL_ENERGY = "general_energy";
+	private static final String CATEGORY_GENERAL = "general";
+	private static final String CATEGORY_POWER = "power";
+	private static final String SUB_CATEGORY_ELECTROLYZER = "electrolyzer";
+	private static final String SUB_CATEGORY_HYDROGEN_GENERATOR = "hydrogen_generator";
+	private static final String SUB_CATEGORY_GENERAL_ENERGY = "general_energy";
 	
 	private static final ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
 	private static final ForgeConfigSpec.Builder CLIENT_BUILDER = new ForgeConfigSpec.Builder();

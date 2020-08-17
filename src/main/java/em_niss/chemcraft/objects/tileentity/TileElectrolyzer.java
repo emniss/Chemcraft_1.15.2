@@ -1,7 +1,6 @@
 package em_niss.chemcraft.objects.tileentity;
 
 import em_niss.chemcraft.Config;
-import em_niss.chemcraft.energy.CustomEnergyStorage;
 import em_niss.chemcraft.init.ModTileEntityTypes;
 import em_niss.chemcraft.recipes.electrolyzer.ElectrolyzerRecipe;
 import em_niss.chemcraft.recipes.electrolyzer.ElectrolyzerRecipes;
@@ -23,17 +22,9 @@ public class TileElectrolyzer extends TileMachineBase
 	
 	public TileElectrolyzer()
 	{
-		super(ModTileEntityTypes.TILE_ELECTROLYZER.get(), 4, Config.ELECTROLYZER_MAXPOWER.get(), 0, Config.MACHINE_RECEIVE.get(), 10);
+		super(ModTileEntityTypes.TILE_ELECTROLYZER.get(), 4, Config.ELECTROLYZER_MAXPOWER.get(), Config.MACHINE_RECEIVE.get(), 0, 10);
 	}
 	
-	protected CustomEnergyStorage createEnergy()
-	{
-		return new CustomEnergyStorage(100000, 1000, 0) {
-		//return new CustomEnergyStorage(maxEnergyStored, 0) {
-			@Override
-			protected void onEnergyChanged() { markDirty(); }
-		};
-	}
 	
 	protected void doCooking()
 	{
@@ -93,6 +84,10 @@ public class TileElectrolyzer extends TileMachineBase
 				}*/
 			}
 		}
+		else
+		{
+			clearRecipe();
+		}
 	}
 
 	
@@ -139,6 +134,17 @@ public class TileElectrolyzer extends TileMachineBase
 		result2 = new ItemStack(recipe.getOutput2().getItem(), recipe.getOutput2().getCount());
 
 		isCooking = true;
+	}
+	
+	private void clearRecipe()
+	{
+		cookTime = 0;
+		cookTimeTotal = 0;
+		
+		ingredient1 = ItemStack.EMPTY;
+		ingredient2 = ItemStack.EMPTY;
+		result1 = ItemStack.EMPTY;
+		result2 = ItemStack.EMPTY;
 	}
 	
 	private boolean isItemsIngredients(ItemStack stack1, ItemStack stack2) 

@@ -17,17 +17,17 @@ public class ScreenElectrolyzer extends ScreenMachineBase<ContainerElectrolyzer>
 			115,	//xEnergyText
 			72,		//yEnergyText
 			
-			67,		//xArrowPos
+			68,		//xArrowPos
 			35,		//yArrowPos
 			176,	//xArrowTexture
-			14,		//yArrowTesxture
-			24,		//arrowWidth
-			17,		//arrowHeight
+			0,		//yArrowTesxture
+			23,		//arrowWidth
+			16,		//arrowHeight
 			
 			152,	//xEnergyPos
 			80,		//yEnergyPos
 			176,	//xEnergyTexture
-			31,		//yEnergyTexture
+			16,		//yEnergyTexture
 			16,		//energyWidth
 			73		//energyHeight
 	};

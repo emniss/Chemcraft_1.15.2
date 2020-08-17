@@ -17,17 +17,17 @@ public class ScreenHydrogenGenerator extends ScreenMachineBase<ContainerHydrogen
 			115,	//xEnergyText
 			72,		//yEnergyText
 			
-			67,		//xArrowPos
+			68,		//xArrowPos
 			35,		//yArrowPos
 			176,	//xArrowTexture
 			0,		//yArrowTexture
-			24,		//arrowWidth
-			17,		//arrowHeight
+			23,		//arrowWidth
+			16,		//arrowHeight
 			
 			152,	//xEnergyPos
 			80,		//yEnergyPos
 			176,	//xEnergyTexture
-			17,		//yEnergyTexture
+			16,		//yEnergyTexture
 			16,		//energyWidth
 			73		//energyHeight
 	};
