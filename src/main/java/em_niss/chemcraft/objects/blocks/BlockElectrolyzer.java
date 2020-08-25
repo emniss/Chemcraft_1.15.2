@@ -9,10 +9,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
@@ -33,35 +30,29 @@ public class BlockElectrolyzer extends BlockMachineBase
 		return new TileElectrolyzer();
 	}
 	
-	@SuppressWarnings("deprecation")
-	@Override
-	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
-		if (!world.isRemote)
+	protected void interactWith(World world, BlockPos pos, PlayerEntity player)
+	{
+		TileEntity tileEntity = world.getTileEntity(pos);
+		if (tileEntity instanceof TileElectrolyzer)
 		{
-			TileEntity tileEntity = world.getTileEntity(pos);
-			if (tileEntity instanceof TileElectrolyzer)
-			{
-				INamedContainerProvider containerProvider = new INamedContainerProvider() {
-					@Override
-					public ITextComponent getDisplayName()
-					{
-						return new TranslationTextComponent("screen.chemcraft.electrolyzer");
-					}
-					
-					@Override
-					public Container createMenu(int i, PlayerInventory playerInventory, PlayerEntity playerEntity)
-					{
-						return new ContainerElectrolyzer(i, world, pos, playerInventory, playerEntity);
-					}
-				};
-				NetworkHooks.openGui((ServerPlayerEntity) player, containerProvider, tileEntity.getPos());
-			}
-			else
-			{
-				throw new IllegalStateException("Our named containerProvider is missing!");
-			}
-			return ActionResultType.SUCCESS;
+			INamedContainerProvider containerProvider = new INamedContainerProvider() {
+				@Override
+				public ITextComponent getDisplayName()
+				{
+					return new TranslationTextComponent("screen.chemcraft.electrolyzer");
+				}
+				
+				@Override
+				public Container createMenu(int i, PlayerInventory playerInventory, PlayerEntity playerEntity)
+				{
+					return new ContainerElectrolyzer(i, world, pos, playerInventory, playerEntity);
+				}
+			};
+			NetworkHooks.openGui((ServerPlayerEntity) player, containerProvider, tileEntity.getPos());
 		}
-		return super.onBlockActivated(state, world, pos, player, hand, result);
+		else
+		{
+			throw new IllegalStateException("Our named containerProvider is missing!");
+		}
 	}
 }

@@ -115,31 +115,24 @@
 
 
 
-	"tile.chemcraft.block_bauxite": "Bauxite",
-	"tile.chemcraft.block_borax": "Borax",
-	"tile.chemcraft.block_chalcopyrite": "Chalcopyrite",
+	"block.chemcraft.block_bauxite": "Bauxite",
+	"block.chemcraft.block_borax": "Borax",
+	"block.chemcraft.block_chalcopyrite": "Chalcopyrite",
 
 
 
-	"tile.chemcraft.block_test": "Test Block",
-	"tile.chemcraft.block_hydrogen_generator": "Hydrogen Generator",
-	"tile.chemcraft.block_combustion_generator": "Combustion Generator",
-	"tile.chemcraft.block_electrolyzer": "Electrolyzer",
-	"tile.chemcraft.block_rock_grinder": "Rock Grinder",
-	"tile.chemcraft.block_heater": "Heater",
-	"tile.chemcraft.block_centrifuge": "Centrifuge",
-	"tile.chemcraft.block_evaporator": "Evaporator",
+	"block.chemcraft.block_test": "Test Block",
+	"block.chemcraft.block_hydrogen_generator": "Hydrogen Generator",
+	"block.chemcraft.block_combustion_generator": "Combustion Generator",
+	"block.chemcraft.block_electrolyzer": "Electrolyzer",
+	"block.chemcraft.block_rock_grinder": "Rock Grinder",
+	"block.chemcraft.block_heater": "Heater",
+	"block.chemcraft.block_centrifuge": "Centrifuge",
+	"block.chemcraft.block_evaporator": "Evaporator",
 
 
-	
-	"container.chemcraft.hydrogen_generator": "Hydrogen Generator",
-	"container.chemcraft.combustion_generator": "Combustion Generator",
-	"container.chemcraft.electrolyzer": "Electrolyzer",
-	"container.chemcraft.rock_grinder": "Rock Grinder",
-	"container.chemcraft.heater": "Heater",
-	"container.chemcraft.centrifuge": "Centrifuge",
-	"container.chemcraft.evaporator": "Evaporator",
-
+	"screen.chemcraft.electrolyzer": "Electrolyzer",
+	"screen.chemcraft.hydrogen_generator": "Hydrogen Generator",
 
 
 	"fluid.chemcraft.fluid_brine": "Brine",
@@ -147,10 +140,5 @@
 	
 	
 	
-	"block.chemcraft.test_block": "Test Block",
-	"block.chemcraft.example_chest": "Example Chest",
-	
-	"container.chemcraft.example_chest": "Example Chest"
-	
-	
+	"block.chemcraft.test_block": "Test Block"
 }

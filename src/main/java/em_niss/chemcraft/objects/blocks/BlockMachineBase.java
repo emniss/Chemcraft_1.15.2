@@ -1,14 +1,10 @@
 package em_niss.chemcraft.objects.blocks;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.IntegerProperty;
@@ -49,13 +45,23 @@ public abstract class BlockMachineBase extends Block
 	@Override
 	public abstract TileEntity createTileEntity(BlockState state, IBlockReader world);
 	
-	//GUI
-	@SuppressWarnings("deprecation")
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result)
 	{
-		return super.onBlockActivated(state, world, pos, player, hand, result);
+		if (world.isRemote)
+		{
+			return ActionResultType.SUCCESS;
+		}
+		else
+		{
+			this.interactWith(world, pos, player);
+			return ActionResultType.SUCCESS;
+		}
+		
+		//return super.onBlockActivated(state, world, pos, player, hand, result);
 	}
+	
+	protected abstract void interactWith(World world, BlockPos pos, PlayerEntity player);
 	
 	public BlockState getStateForPlacement(BlockItemUseContext context)
 	{
@@ -63,14 +69,14 @@ public abstract class BlockMachineBase extends Block
 	}
 	
 	//Direction
-	@Override
+	/*@Override
 	public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack stack)
 	{
 		if (entity != null) 
 		{ 
 			
 		}
-	}
+	}*/
 
 	@Override
 	protected void fillStateContainer(Builder<Block, BlockState> builder)
