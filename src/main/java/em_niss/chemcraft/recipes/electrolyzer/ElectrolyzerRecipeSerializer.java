@@ -2,15 +2,14 @@ package em_niss.chemcraft.recipes.electrolyzer;
 
 import com.google.gson.JsonObject;
 
-import em_niss.chemcraft.objects.tileentity.TileElectrolyzer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
+
 
 public class ElectrolyzerRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<ElectrolyzerRecipe>
 {
