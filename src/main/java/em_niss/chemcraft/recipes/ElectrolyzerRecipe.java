@@ -13,13 +13,13 @@ import net.minecraftforge.items.wrapper.RecipeWrapper;
 public class ElectrolyzerRecipe implements IElectrolyzerRecipe
 {
 	private final ResourceLocation id;
-	private Ingredient input1;
-	private Ingredient input2;
+	private final ItemStack input1;
+	private final ItemStack input2;
 	private final ItemStack output1;
 	private final ItemStack output2;
 	private final int requiredEnergy;
 	
-	public ElectrolyzerRecipe(ResourceLocation id, Ingredient input1, Ingredient input2, ItemStack output1, ItemStack output2, int requiredEnergy)
+	public ElectrolyzerRecipe(ResourceLocation id, ItemStack input1, ItemStack input2, ItemStack output1, ItemStack output2, int requiredEnergy)
 	{
 		this.id = id;
 		this.input1 = input1;
@@ -33,10 +33,25 @@ public class ElectrolyzerRecipe implements IElectrolyzerRecipe
 	@Override
 	public boolean matches(RecipeWrapper inv, World worldIn)
 	{
-		if( (this.input1.test(inv.getStackInSlot(TileElectrolyzer.inSlot1)) && this.input2.test(inv.getStackInSlot(TileElectrolyzer.inSlot2)))
+		/*if( (this.input1.test(inv.getStackInSlot(TileElectrolyzer.inSlot1)) && this.input2.test(inv.getStackInSlot(TileElectrolyzer.inSlot2)))
 				|| (this.input1.test(inv.getStackInSlot(TileElectrolyzer.inSlot2)) && this.input2.test(inv.getStackInSlot(TileElectrolyzer.inSlot1))) )
 		{
 			return true;
+		}*/
+		
+		if (this.input1.getItem().equals(inv.getStackInSlot(TileElectrolyzer.inSlot1).getItem()) && this.input2.getItem().equals(inv.getStackInSlot(TileElectrolyzer.inSlot2).getItem()))
+		{
+			if (this.input1.getCount() <= inv.getStackInSlot(TileElectrolyzer.inSlot1).getCount() && this.input2.getCount() <= inv.getStackInSlot(TileElectrolyzer.inSlot2).getCount())
+			{
+				return true;
+			}
+		}
+		else if (this.input1.getItem().equals(inv.getStackInSlot(TileElectrolyzer.inSlot2).getItem()) && this.input2.getItem().equals(inv.getStackInSlot(TileElectrolyzer.inSlot1).getItem()))
+		{
+			if (this.input1.getCount() <= inv.getStackInSlot(TileElectrolyzer.inSlot2).getCount() && this.input2.getCount() <= inv.getStackInSlot(TileElectrolyzer.inSlot1).getCount())
+			{
+				return true;
+			}
 		}
 		return false;
 	}
@@ -59,8 +74,8 @@ public class ElectrolyzerRecipe implements IElectrolyzerRecipe
 		return RecipeSerializerInit.ELECTROLYZER_SERIALIZER.get();
 	}
 
-	public Ingredient getInput1() { return this.input1; }
-	public Ingredient getInput2() { return this.input2; }
+	public ItemStack getInput1() { return this.input1; }
+	public ItemStack getInput2() { return this.input2; }
 	
 	public ItemStack getOutput1() { return this.output1; }
 	public ItemStack getOutput2() { return this.output2; }
@@ -70,7 +85,7 @@ public class ElectrolyzerRecipe implements IElectrolyzerRecipe
 	@Override
 	public NonNullList<Ingredient> getIngredients()
 	{
-		return NonNullList.from(null, this.input1, this.input2);
+		return NonNullList.from(null);
 	}
 
 

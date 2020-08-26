@@ -37,9 +37,7 @@ public abstract class TileMachineBase extends TileEntity implements ITickableTil
 	protected LazyOptional<IItemHandler> handler;
 	protected LazyOptional<IEnergyStorage> energy;
 	
-	//protected int cookTime = 0;
 	protected int requiredEnergyLeft = 0;
-	//protected int cookTimeTotal = 0;
 	protected int requiredEnergyTotal = 0;
 	protected boolean isCooking = false;
 	protected int energyConsumption;
@@ -96,10 +94,7 @@ public abstract class TileMachineBase extends TileEntity implements ITickableTil
 			if (isCooking) { doCooking(); }
 			else { doRefueling(); }
 		}
-		
-		/*if (isCooking) { doCooking(); }
-		if (!isCooking) { doRefueling(); }
-		*/
+
 		updateBlockState();
 	}
 	
@@ -184,5 +179,7 @@ public abstract class TileMachineBase extends TileEntity implements ITickableTil
 	
 	
 	public int getRequiredEnergyLeft() { return this.requiredEnergyLeft; }
+	public void setRequiredEnergyLeft(int value) { this.requiredEnergyLeft = value; }
 	public int getRequiredEnergyTotal() { return this.requiredEnergyTotal; }
+	public void setRequiredEnergyTotal(int value) { this.requiredEnergyTotal = value; }
 }

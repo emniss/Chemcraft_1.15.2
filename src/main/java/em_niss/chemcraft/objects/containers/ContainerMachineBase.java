@@ -16,6 +16,8 @@ import net.minecraft.util.IntArray;
 import net.minecraft.util.IntReferenceHolder;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -24,9 +26,12 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 
 public abstract class ContainerMachineBase extends Container 
 {
-	private TileEntity tileEntity;
+	private TileMachineBase tileEntity;
 	private PlayerEntity playerEntity;
 	private IItemHandler playerInventory;
+	
+	private IntReferenceHolder requiredEnergyLeft;
+	private IntReferenceHolder requiredEnergyTotal;
 	
 	private Block machineBlock;
 	public IIntArray machineData;
@@ -39,7 +44,7 @@ public abstract class ContainerMachineBase extends Container
 	public ContainerMachineBase(ContainerType<?> containerType, int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity playerEntity, IIntArray machineData, Block machineBlock)
 	{
 		super(containerType, windowId);
-		tileEntity = world.getTileEntity(pos);
+		tileEntity = (TileMachineBase) world.getTileEntity(pos);
 		this.playerEntity = playerEntity;
 		this.playerInventory = new InvWrapper(playerInventory);
 		this.machineData = machineData;
@@ -60,20 +65,20 @@ public abstract class ContainerMachineBase extends Container
 	
 		//Progress
 		//trackIntArray(machineData);
-		trackInt(new IntReferenceHolder() {
+		trackInt(requiredEnergyLeft = new IntReferenceHolder() {
 			@Override
-			public int get() { return getRequiredEnergyLeft(); }
+			public int get() { return tileEntity.getRequiredEnergyLeft(); }
 
 			@Override
-			public void set(int value) {  }
+			public void set(int value) { tileEntity.setRequiredEnergyLeft(value); }
 		});
 		
-		trackInt(new IntReferenceHolder() {
+		trackInt(requiredEnergyTotal = new IntReferenceHolder() {
 			@Override
-			public int get() { return getRequiredEnergyTotal(); }
+			public int get() { return tileEntity.getRequiredEnergyTotal(); }
 
 			@Override
-			public void set(int value) {  }
+			public void set(int value) { tileEntity.setRequiredEnergyTotal(value); }
 		});
 	}
 	
@@ -98,6 +103,15 @@ public abstract class ContainerMachineBase extends Container
 		return ((TileMachineBase)tileEntity).getRequiredEnergyTotal();
 	}
 
+	
+	@OnlyIn(Dist.CLIENT)
+	public int getProgressScaled(int pixels)
+	{
+		int requiredEnergyLeft = this.requiredEnergyLeft.get();
+		int requiredEnergyTotal = this.requiredEnergyTotal.get();
+		
+		return (requiredEnergyTotal != 0) ? (int)((pixels - 1) * (1 - requiredEnergyLeft / (double)requiredEnergyTotal)) + 1: 0;
+	}
 	
 	//Machine Slots
 	protected abstract void addMachineSlots(IItemHandler handler);

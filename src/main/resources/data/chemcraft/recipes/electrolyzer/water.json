@@ -3,12 +3,12 @@
 	
 	"input1": {
 		"item": "chemcraft:test_tube_water",
-		"count": 1
+		"count": 2
 	},
 	
 	"input2": {
-		"item": "chemcraft:test_tube_water",
-		"count": 1
+		"item": "minecraft:air",
+		"count": 0
 	},
 	
 	"output1": {
@@ -21,8 +21,7 @@
 		"count": 1
 	},
 	
-	"energy": {
-		"value": 24200
+	"energy": 1000
 	}
 }
 		

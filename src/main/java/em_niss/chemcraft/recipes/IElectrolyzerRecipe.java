@@ -3,9 +3,9 @@ package em_niss.chemcraft.recipes;
 import javax.annotation.Nonnull;
 
 import em_niss.chemcraft.Chemcraft;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
@@ -27,7 +27,7 @@ public interface IElectrolyzerRecipe extends IRecipe<RecipeWrapper>
 		return false;
 	}
 	
-	Ingredient getInput1();
+	ItemStack getInput1();
 	
-	Ingredient getInput2();
+	ItemStack getInput2();
 }

@@ -22,11 +22,13 @@ public class Config
 	private static final ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
 	private static final ForgeConfigSpec.Builder CLIENT_BUILDER = new ForgeConfigSpec.Builder();
 	
+	
 	public static ForgeConfigSpec COMMON_CONFIG;
 	public static ForgeConfigSpec CLIENT_CONFIG;
 	
 	
 	public static ForgeConfigSpec.IntValue ELECTROLYZER_MAXPOWER;
+	public static ForgeConfigSpec.IntValue ELECTROLYZER_ENERGY_CONSUMPTION;
 	
 	public static ForgeConfigSpec.IntValue HYDROGEN_GENERATOR_MAXPOWER;
 	
@@ -68,7 +70,8 @@ public class Config
 	{
 		COMMON_BUILDER.comment("Electrolyzer settings").push(SUB_CATEGORY_ELECTROLYZER);
 		
-		ELECTROLYZER_MAXPOWER = COMMON_BUILDER.comment("Maximum power for the electrolyzer").defineInRange("maxpower", 100000, 0, Integer.MAX_VALUE);		
+		ELECTROLYZER_MAXPOWER = COMMON_BUILDER.comment("Maximum power for the electrolyzer").defineInRange("maxpower", 100000, 0, Integer.MAX_VALUE);
+		ELECTROLYZER_ENERGY_CONSUMPTION = COMMON_BUILDER.comment("Maximum power consumed per tick for the electrolyzer. Higher value gives  faster processing.").defineInRange("maxconsumption", 10, 0, Integer.MAX_VALUE);
 		
 		COMMON_BUILDER.pop();
 	}
