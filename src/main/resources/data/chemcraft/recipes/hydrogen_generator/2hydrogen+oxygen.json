@@ -1,0 +1,22 @@
+{
+	"type": "chemcraft:hydrogen_generator",
+	
+	"input1": {
+		"item": "chemcraft:test_tube_hydrogen",
+		"count": 2
+	},
+	
+	"input2": {
+		"item": "chemcraft:test_tube_oxygen",
+		"count": 1
+	},
+	
+	"output": {
+		"item": "chemcraft:test_tube_water",
+		"count": 2
+	},
+	
+	"energy": 24200,
+	"energyPerTick": 1210
+}
+		

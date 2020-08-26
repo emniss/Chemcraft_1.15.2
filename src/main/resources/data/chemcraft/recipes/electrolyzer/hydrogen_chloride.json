@@ -2,7 +2,7 @@
 	"type": "chemcraft:electrolyzer",
 	
 	"input1": {
-		"item": "chemcraft:test_tube_water",
+		"item": "chemcraft:test_tube_hydrogen_chloride",
 		"count": 2
 	},
 	
@@ -13,14 +13,14 @@
 	
 	"output1": {
 		"item": "chemcraft:test_tube_hydrogen",
-		"count": 2
-	},
-	
-	"output2": {
-		"item": "chemcraft:test_tube_oxygen",
 		"count": 1
 	},
 	
-	"energy": 48400
+	"output2": {
+		"item": "chemcraft:test_tube_chlorine",
+		"count": 1
+	},
+	
+	"energy": 18500
 }
 		

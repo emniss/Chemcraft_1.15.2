@@ -2,8 +2,8 @@
 	"type": "chemcraft:electrolyzer",
 	
 	"input1": {
-		"item": "chemcraft:test_tube_water",
-		"count": 2
+		"item": "chemcraft:test_tube_aluminium_oxide",
+		"count": 1
 	},
 	
 	"input2": {
@@ -12,15 +12,15 @@
 	},
 	
 	"output1": {
-		"item": "chemcraft:test_tube_hydrogen",
+		"item": "chemcraft:powder_aluminium",
 		"count": 2
 	},
 	
 	"output2": {
-		"item": "chemcraft:test_tube_oxygen",
-		"count": 1
+		"item": "minecraft:air",
+		"count": 0
 	},
 	
-	"energy": 48400
+	"energy": 168000
 }
 		

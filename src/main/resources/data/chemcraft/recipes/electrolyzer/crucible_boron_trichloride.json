@@ -2,8 +2,8 @@
 	"type": "chemcraft:electrolyzer",
 	
 	"input1": {
-		"item": "chemcraft:test_tube_water",
-		"count": 2
+		"item": "chemcraft:crucible_boron_trichloride_molten",
+		"count": 1
 	},
 	
 	"input2": {
@@ -12,15 +12,15 @@
 	},
 	
 	"output1": {
-		"item": "chemcraft:test_tube_hydrogen",
-		"count": 2
-	},
-	
-	"output2": {
-		"item": "chemcraft:test_tube_oxygen",
+		"item": "chemcraft:powder_boron",
 		"count": 1
 	},
 	
-	"energy": 48400
+	"output2": {
+		"item": "chemcraft:crucible",
+		"count": 1
+	},
+	
+	"energy": 10000
 }
 		

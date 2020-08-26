@@ -1,0 +1,26 @@
+{
+	"type": "chemcraft:electrolyzer",
+	
+	"input1": {
+		"item": "chemcraft:powder_chalcopyrite",
+		"count": 1
+	},
+	
+	"input2": {
+		"item": "chemcraft:test_tube_sulfuric_acid",
+		"count": 1
+	},
+	
+	"output1": {
+		"item": "chemcraft:powder_copper",
+		"count": 2
+	},
+	
+	"output2": {
+		"item": "chemcraft:test_tube_anode_mud",
+		"count": 1
+	},
+	
+	"energy": 149000
+}
+		

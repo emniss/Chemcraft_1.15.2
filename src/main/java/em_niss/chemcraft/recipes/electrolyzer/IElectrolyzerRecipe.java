@@ -1,4 +1,4 @@
-package em_niss.chemcraft.recipes;
+package em_niss.chemcraft.recipes.electrolyzer;
 
 import javax.annotation.Nonnull;
 
