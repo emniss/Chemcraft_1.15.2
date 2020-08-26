@@ -10,7 +10,7 @@ import net.minecraftforge.energy.CapabilityEnergy;
 
 public abstract class TileGeneratorBase extends TileMachineBase
 {
-	protected int energyGeneration;
+	protected int energyGenerationPerTick;
 	
 	public TileGeneratorBase(TileEntityType<?> tileEntityType, int inventorySize, int maxEnergyStored, int frontEnergyBarHeight)
 	{
@@ -50,5 +50,12 @@ public abstract class TileGeneratorBase extends TileMachineBase
                 }
             }
         }
+	}
+	
+	@Override
+	protected void clearRecipe() 
+	{
+		super.clearRecipe();
+		energyGenerationPerTick = 0;
 	}
 }

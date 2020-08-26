@@ -1,72 +1,97 @@
 package em_niss.chemcraft.recipes.electrolyzer;
 
-import net.minecraft.item.Item;
+import em_niss.chemcraft.init.RecipeSerializerInit;
+import em_niss.chemcraft.objects.tileentity.TileElectrolyzer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 
-public class ElectrolyzerRecipe
+public class ElectrolyzerRecipe implements IElectrolyzerRecipe
 {
-	private ItemStack input1;
-	private ItemStack input2;
-	private ItemStack output1;
-	private ItemStack output2;
-	private int energyConsumption = 20;
-	private int requieredEnergy;
-
-	public ElectrolyzerRecipe(Item input1, int sizeIn1, Item input2, int sizeIn2, Item output1, int sizeOut1, Item output2, int sizeOut2, int totalEnergy)
-	{
-		this.input1 = new ItemStack(input1, sizeIn1);
-		this.input2 = new ItemStack(input2, sizeIn2);
-		this.output1 = new ItemStack(output1, sizeOut1);
-		this.output2 = new ItemStack(output2, sizeOut2);
-		this.requieredEnergy = totalEnergy;
-	}
+	private final ResourceLocation id;
+	private final ItemStack input1;
+	private final ItemStack input2;
+	private final ItemStack output1;
+	private final ItemStack output2;
+	private final int requiredEnergy;
 	
-	public ElectrolyzerRecipe(Item input, int sizeIn, Item output1, int sizeOut1, Item output2, int sizeOut2, int totalEnergy)
+	public ElectrolyzerRecipe(ResourceLocation id, ItemStack input1, ItemStack input2, ItemStack output1, ItemStack output2, int requiredEnergy)
 	{
-		this.input1 = new ItemStack(input, sizeIn);
-		this.input2 = ItemStack.EMPTY;
-		this.output1 = new ItemStack(output1, sizeOut1);
-		this.output2 = new ItemStack(output2, sizeOut2);
-		this.requieredEnergy = totalEnergy;
-	}
-
-	public ElectrolyzerRecipe(Item input, int sizeIn, Item output, int sizeOut, int totalEnergy)
-	{
-		this.input1 = new ItemStack(input, sizeIn);
-		this.input2 = ItemStack.EMPTY;
-		this.output1 = new ItemStack(output, sizeOut);
-		this.output2 = ItemStack.EMPTY;
-		this.requieredEnergy = totalEnergy;
-	}
-	
-	public ElectrolyzerRecipe(ItemStack input1, ItemStack input2, ItemStack output1, ItemStack output2, int totalEnergy)
-	{
+		this.id = id;
 		this.input1 = input1;
 		this.input2 = input2;
 		this.output1 = output1;
 		this.output2 = output2;
-		this.requieredEnergy = totalEnergy;
+		this.requiredEnergy = requiredEnergy;
 	}
 	
 	
-	/*public String getCode()
+	@Override
+	public boolean matches(RecipeWrapper inv, World worldIn)
 	{
-		return input1.getUnlocalizedName() + ";" + input2.getUnlocalizedName();
-	}*/
-	
+		/*if( (this.input1.test(inv.getStackInSlot(TileElectrolyzer.inSlot1)) && this.input2.test(inv.getStackInSlot(TileElectrolyzer.inSlot2)))
+				|| (this.input1.test(inv.getStackInSlot(TileElectrolyzer.inSlot2)) && this.input2.test(inv.getStackInSlot(TileElectrolyzer.inSlot1))) )
+		{
+			return true;
+		}*/
+		
+		if (this.input1.getItem().equals(inv.getStackInSlot(TileElectrolyzer.inSlot1).getItem()) && this.input2.getItem().equals(inv.getStackInSlot(TileElectrolyzer.inSlot2).getItem()))
+		{
+			if (this.input1.getCount() <= inv.getStackInSlot(TileElectrolyzer.inSlot1).getCount() && this.input2.getCount() <= inv.getStackInSlot(TileElectrolyzer.inSlot2).getCount())
+			{
+				return true;
+			}
+		}
+		else if (this.input1.getItem().equals(inv.getStackInSlot(TileElectrolyzer.inSlot2).getItem()) && this.input2.getItem().equals(inv.getStackInSlot(TileElectrolyzer.inSlot1).getItem()))
+		{
+			if (this.input1.getCount() <= inv.getStackInSlot(TileElectrolyzer.inSlot2).getCount() && this.input2.getCount() <= inv.getStackInSlot(TileElectrolyzer.inSlot1).getCount())
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public ItemStack getCraftingResult(RecipeWrapper inv) 
+	{
+		return ItemStack.EMPTY;
+	}
+
+	@Override
+	public ResourceLocation getId() 
+	{
+		return this.id;
+	}
+
+	@Override
+	public IRecipeSerializer<?> getSerializer() 
+	{
+		return RecipeSerializerInit.ELECTROLYZER_SERIALIZER.get();
+	}
+
 	public ItemStack getInput1() { return this.input1; }
 	public ItemStack getInput2() { return this.input2; }
+	
 	public ItemStack getOutput1() { return this.output1; }
 	public ItemStack getOutput2() { return this.output2; }
-	public int getBurnTime() { return (this.requieredEnergy / this.energyConsumption); }
-	public int getEnergyRequiered() {return this.requieredEnergy; }
-	public int getEnergyConsumption() { return (int)(this.energyConsumption); }
 	
+	public int getRequiredEnergy() { return this.requiredEnergy; }
 	
-	
-	public boolean hasInput2()
+	@Override
+	public NonNullList<Ingredient> getIngredients()
 	{
-		return !input2.isEmpty();
+		return NonNullList.from(null);
+	}
+
+
+	@Override
+	public ItemStack getRecipeOutput() 
+	{
+		return ItemStack.EMPTY;
 	}
 }

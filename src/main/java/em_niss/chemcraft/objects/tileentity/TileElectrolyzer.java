@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
 import em_niss.chemcraft.Config;
 import em_niss.chemcraft.init.ModTileEntityTypes;
 import em_niss.chemcraft.init.RecipeSerializerInit;
-import em_niss.chemcraft.recipes.ElectrolyzerRecipe;
+import em_niss.chemcraft.recipes.electrolyzer.ElectrolyzerRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.item.ItemStack;
@@ -32,13 +32,6 @@ public class TileElectrolyzer extends TileMachineBase
 	public static final int outSlot1 = 2;
 	public static final int outSlot2 = 3;
 	
-	/*private ItemStack ingredient1;
-	private ItemStack ingredient2;
-	private ItemStack result1;
-	private ItemStack result2;*/
-	
-	ResourceLocation recipeId;
-	
 	
 	public TileElectrolyzer()
 	{
@@ -59,20 +52,21 @@ public class TileElectrolyzer extends TileMachineBase
 				if (this.energyStorage.consumeEnergy(energyToConsume))
 				{
 					requiredEnergyLeft -= energyToConsume;
+					markDirty();
 				}
 			}
 			else if (doOutput()) 
 			{
 				consumeIngredients();
-				
 				clearRecipe();
+				markDirty();
 			}
 		}
 		else
 		{
 			clearRecipe();
+			markDirty();
 		}
-		markDirty();
 	}
 
 	
@@ -106,6 +100,11 @@ public class TileElectrolyzer extends TileMachineBase
 		{	
 			itemHandler.extractItem(inSlot1, recipe.getInput1().getCount(), false);
 			itemHandler.extractItem(inSlot2, recipe.getInput2().getCount(), false);
+		}
+		else
+		{
+			itemHandler.extractItem(inSlot1, recipe.getInput2().getCount(), false);
+			itemHandler.extractItem(inSlot2, recipe.getInput1().getCount(), false);
 		}
 	}
 	
@@ -147,49 +146,7 @@ public class TileElectrolyzer extends TileMachineBase
 		}
 		return null;
 	}
-	
-	
-	public static Set<IRecipe<?>> findRecipesByType(IRecipeType<?> typeIn, World world)
-	{
-		return world != null ? world.getRecipeManager().getRecipes().stream().filter(recipe -> recipe.getType() == typeIn).collect(Collectors.toSet()) : Collections.emptySet();
-	}
-	
-	@OnlyIn(Dist.CLIENT)
-	public static Set<IRecipe<?>> findRecipesByType(IRecipeType<?> typeIn)
-	{
-		@SuppressWarnings("resource")
-		ClientWorld world = Minecraft.getInstance().world;
-		return world != null ? world.getRecipeManager().getRecipes().stream().filter(recipe -> recipe.getType() == typeIn).collect(Collectors.toSet()) : Collections.emptySet();
-	}
-	
-	public static Set<ItemStack> getAllRecipeInputs(IRecipeType<?> typeIn, World world)
-	{
-		Set<ItemStack> inputs = new HashSet<ItemStack>();
-		Set<IRecipe<?>> recipes = findRecipesByType(typeIn, world);
 		
-		for (IRecipe<?> recipe : recipes)
-		{
-			NonNullList<Ingredient> ingredients = recipe.getIngredients();
-			ingredients.forEach(ingredient -> {
-				for (ItemStack stack : ingredient.getMatchingStacks())
-				{
-					inputs.add(stack);
-				}
-			});
-		}
-		return inputs;
-	}
-
-
-	private void clearRecipe()
-	{
-		requiredEnergyLeft = 0;
-		requiredEnergyTotal = 0;
-		recipeId = null;
-		
-		isCooking = false;
-	}
-	
 	private boolean recipeStillValid()
 	{
 		ElectrolyzerRecipe recipe = this.getRecipe(itemHandler.getStackInSlot(inSlot1), itemHandler.getStackInSlot(inSlot2));

@@ -1,9 +1,12 @@
 package em_niss.chemcraft.init;
 
 import em_niss.chemcraft.Chemcraft;
-import em_niss.chemcraft.recipes.ElectrolyzerRecipe;
-import em_niss.chemcraft.recipes.ElectrolyzerRecipeSerializer;
-import em_niss.chemcraft.recipes.IElectrolyzerRecipe;
+import em_niss.chemcraft.recipes.electrolyzer.ElectrolyzerRecipe;
+import em_niss.chemcraft.recipes.electrolyzer.ElectrolyzerRecipeSerializer;
+import em_niss.chemcraft.recipes.electrolyzer.IElectrolyzerRecipe;
+import em_niss.chemcraft.recipes.hydrogenGenerator.HydrogenGeneratorRecipe;
+import em_niss.chemcraft.recipes.hydrogenGenerator.HydrogenGeneratorRecipeSerializer;
+import em_niss.chemcraft.recipes.hydrogenGenerator.IHydrogenGeneratorRecipe;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
@@ -15,13 +18,18 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class RecipeSerializerInit 
 {
-	public static final IRecipeSerializer<ElectrolyzerRecipe> ELECTROLYZER_RECIPE_SERIALIZER = new ElectrolyzerRecipeSerializer();
-	public static final IRecipeType<IElectrolyzerRecipe> ELECTROLYZER_TYPE = registerType(IElectrolyzerRecipe.RECIPE_TYPE_ID);
-	
 	public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = new DeferredRegister<>(
 			ForgeRegistries.RECIPE_SERIALIZERS, Chemcraft.MODID);
 	
+	//Electrolyzer
+	public static final IRecipeSerializer<ElectrolyzerRecipe> ELECTROLYZER_RECIPE_SERIALIZER = new ElectrolyzerRecipeSerializer();
+	public static final IRecipeType<IElectrolyzerRecipe> ELECTROLYZER_TYPE = registerType(IElectrolyzerRecipe.RECIPE_TYPE_ID);
 	public static final RegistryObject<IRecipeSerializer<?>> ELECTROLYZER_SERIALIZER = RECIPE_SERIALIZERS.register("electrolyzer", () -> ELECTROLYZER_RECIPE_SERIALIZER);
+	
+	//HydrogenGenerator
+	public static final IRecipeSerializer<HydrogenGeneratorRecipe> HYDROGEN_GENERATOR_RECIPE_SERIALIZER = new HydrogenGeneratorRecipeSerializer();
+	public static final IRecipeType<IHydrogenGeneratorRecipe> HYDROGEN_GENERATOR_TYPE = registerType(IHydrogenGeneratorRecipe.RECIPE_TYPE_ID);
+	public static final RegistryObject<IRecipeSerializer<?>> HYDROGEN_GENERATOR_SERIALIZER = RECIPE_SERIALIZERS.register("hydrogen_generator", () -> HYDROGEN_GENERATOR_RECIPE_SERIALIZER);
 
 	
 	

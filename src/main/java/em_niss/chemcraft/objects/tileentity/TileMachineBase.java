@@ -1,5 +1,10 @@
 package em_niss.chemcraft.objects.tileentity;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -7,6 +12,12 @@ import com.google.common.util.concurrent.AtomicDouble;
 
 import em_niss.chemcraft.energy.CustomEnergyStorage;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.world.ClientWorld;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.ITickableTileEntity;
@@ -14,6 +25,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IIntArray;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
@@ -41,6 +57,8 @@ public abstract class TileMachineBase extends TileEntity implements ITickableTil
 	protected int requiredEnergyTotal = 0;
 	protected boolean isCooking = false;
 	protected int energyConsumption;
+	
+	protected ResourceLocation recipeId;
 	
 	protected IIntArray machineData = new IIntArray() {
 		public int get(int index) {
@@ -175,6 +193,47 @@ public abstract class TileMachineBase extends TileEntity implements ITickableTil
 			return cast;
 		}
 		return super.getCapability(cap, side);
+	}
+	
+	
+	public static Set<IRecipe<?>> findRecipesByType(IRecipeType<?> typeIn, World world)
+	{
+		return world != null ? world.getRecipeManager().getRecipes().stream().filter(recipe -> recipe.getType() == typeIn).collect(Collectors.toSet()) : Collections.emptySet();
+	}
+	
+	@OnlyIn(Dist.CLIENT)
+	public static Set<IRecipe<?>> findRecipesByType(IRecipeType<?> typeIn)
+	{
+		@SuppressWarnings("resource")
+		ClientWorld world = Minecraft.getInstance().world;
+		return world != null ? world.getRecipeManager().getRecipes().stream().filter(recipe -> recipe.getType() == typeIn).collect(Collectors.toSet()) : Collections.emptySet();
+	}
+	
+	public static Set<ItemStack> getAllRecipeInputs(IRecipeType<?> typeIn, World world)
+	{
+		Set<ItemStack> inputs = new HashSet<ItemStack>();
+		Set<IRecipe<?>> recipes = findRecipesByType(typeIn, world);
+		
+		for (IRecipe<?> recipe : recipes)
+		{
+			NonNullList<Ingredient> ingredients = recipe.getIngredients();
+			ingredients.forEach(ingredient -> {
+				for (ItemStack stack : ingredient.getMatchingStacks())
+				{
+					inputs.add(stack);
+				}
+			});
+		}
+		return inputs;
+	}
+	
+	protected void clearRecipe()
+	{
+		requiredEnergyLeft = 0;
+		requiredEnergyTotal = 0;
+		recipeId = null;
+		
+		isCooking = false;
 	}
 	
 	

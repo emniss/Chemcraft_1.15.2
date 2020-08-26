@@ -64,12 +64,4 @@ public abstract class ScreenMachineBase<C extends ContainerMachineBase> extends 
 		
 		return (maxEnergyStored != 0) ?  (int)(pixels * energyStored / (double)maxEnergyStored) : 0;
 	}
-	
-	/*private int getProgressScaled(int pixels)
-	{
-		int cookTime = this.container.getRequiredEnergyLeft();
-		int totalCookTime = this.container.getRequiredEnergyTotal();
-		
-		return (totalCookTime != 0) ? (int)((pixels - 1) * (1 - cookTime / (double)totalCookTime)) + 1 : 0;
-	}*/
 }
