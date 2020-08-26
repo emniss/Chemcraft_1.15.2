@@ -2,6 +2,7 @@ package em_niss.chemcraft.recipes.electrolyzer;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.items.wrapper.RecipeWrapper;
 
 public class ElectrolyzerRecipe
 {

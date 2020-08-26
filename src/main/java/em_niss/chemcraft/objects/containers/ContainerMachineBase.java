@@ -62,7 +62,7 @@ public abstract class ContainerMachineBase extends Container
 		//trackIntArray(machineData);
 		trackInt(new IntReferenceHolder() {
 			@Override
-			public int get() { return getCookTime(); }
+			public int get() { return getRequiredEnergyLeft(); }
 
 			@Override
 			public void set(int value) {  }
@@ -70,7 +70,7 @@ public abstract class ContainerMachineBase extends Container
 		
 		trackInt(new IntReferenceHolder() {
 			@Override
-			public int get() { return getTotalCookTime(); }
+			public int get() { return getRequiredEnergyTotal(); }
 
 			@Override
 			public void set(int value) {  }
@@ -88,14 +88,14 @@ public abstract class ContainerMachineBase extends Container
 		return tileEntity.getCapability(CapabilityEnergy.ENERGY).map(h -> h.getMaxEnergyStored()).orElse(0);
 	}
 	
-	public int getCookTime()
+	public int getRequiredEnergyLeft()
 	{
-		return ((TileMachineBase)tileEntity).getCookTime();
+		return ((TileMachineBase)tileEntity).getRequiredEnergyLeft();
 	}
 	
-	public int getTotalCookTime()
+	public int getRequiredEnergyTotal()
 	{
-		return ((TileMachineBase)tileEntity).getTotalCookTime();
+		return ((TileMachineBase)tileEntity).getRequiredEnergyTotal();
 	}
 
 	

@@ -67,8 +67,8 @@ public abstract class ScreenMachineBase<C extends ContainerMachineBase> extends 
 	
 	private int getCookTimeArrowWidthScaled(int pixels)
 	{
-		int cookTime = this.container.getCookTime();
-		int totalCookTime = this.container.getTotalCookTime();
+		int cookTime = this.container.getRequiredEnergyLeft();
+		int totalCookTime = this.container.getRequiredEnergyTotal();
 		
 		return (totalCookTime != 0) ? (int)((pixels - 1) * (1 - cookTime / (double)totalCookTime)) + 1 : 0;
 	}

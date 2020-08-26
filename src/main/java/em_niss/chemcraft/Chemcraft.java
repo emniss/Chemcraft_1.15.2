@@ -1,4 +1,4 @@
-package em_niss.chemcraft;
+ package em_niss.chemcraft;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -7,6 +7,7 @@ import em_niss.chemcraft.init.BlockInit;
 import em_niss.chemcraft.init.ItemInit;
 import em_niss.chemcraft.init.ModContainerTypes;
 import em_niss.chemcraft.init.ModTileEntityTypes;
+import em_niss.chemcraft.init.RecipeSerializerInit;
 import em_niss.chemcraft.util.ClientSetup;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -34,6 +35,7 @@ public class Chemcraft
         ItemInit.ITEMS.register(modEventBus);
         BlockInit.BLOCKS.register(modEventBus);
         BlockInit.ITEMS.register(modEventBus);
+        RecipeSerializerInit.RECIPE_SERIALIZERS.register(modEventBus);
         
         ModTileEntityTypes.TILES.register(modEventBus);
         ModContainerTypes.CONTAINERS.register(modEventBus);

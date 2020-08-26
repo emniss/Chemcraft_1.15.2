@@ -22,22 +22,22 @@ public class TileHydrogenGenerator extends TileGeneratorBase
 	
 	protected void doCooking()
 	{
-		if (cookTime > 0)
+		if (requiredEnergyLeft > 0)
 		{
 			if (energyStorage.getEnergyStored() + energyGeneration <= energyStorage.getMaxEnergyStored())
 			{
 				energyStorage.addEnergy(energyGeneration);
-				cookTime--;
+				requiredEnergyLeft--;
 			}
 		}
-		else if (cookTime == 0)
+		else if (requiredEnergyLeft == 0)
 		{
 			if (itemHandler.insertItem(outSlot, result, true).isEmpty())
 			{
 				itemHandler.insertItem(outSlot, result, false);
 				
 				isCooking = false;
-				cookTimeTotal = 0;
+				requiredEnergyTotal = 0;
 			}
 		}
 	}
@@ -60,8 +60,8 @@ public class TileHydrogenGenerator extends TileGeneratorBase
 	
 	private void setRecipe(HydrogenGeneratorRecipe recipe)
 	{
-		cookTime = recipe.getBurnTime();
-		cookTimeTotal = recipe.getBurnTime();
+		requiredEnergyLeft = recipe.getBurnTime();
+		requiredEnergyTotal = recipe.getBurnTime();
 		energyGeneration = recipe.getEnergyGeneration();
 		
 		itemHandler.extractItem(inSlot1, recipe.getInput1().getCount(), false);

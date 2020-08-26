@@ -37,8 +37,10 @@ public abstract class TileMachineBase extends TileEntity implements ITickableTil
 	protected LazyOptional<IItemHandler> handler;
 	protected LazyOptional<IEnergyStorage> energy;
 	
-	protected int cookTime = 0;
-	protected int cookTimeTotal = 0;
+	//protected int cookTime = 0;
+	protected int requiredEnergyLeft = 0;
+	//protected int cookTimeTotal = 0;
+	protected int requiredEnergyTotal = 0;
 	protected boolean isCooking = false;
 	protected int energyConsumption;
 	
@@ -46,9 +48,9 @@ public abstract class TileMachineBase extends TileEntity implements ITickableTil
 		public int get(int index) {
 			switch(index) {
 			case 0: 
-				return TileMachineBase.this.cookTime;
+				return TileMachineBase.this.requiredEnergyLeft;
 			case 1:
-				return TileMachineBase.this.cookTimeTotal;
+				return TileMachineBase.this.requiredEnergyTotal;
 			default:
 				return 0;
 			}
@@ -56,10 +58,10 @@ public abstract class TileMachineBase extends TileEntity implements ITickableTil
 		public void set(int index, int value) {
 			switch(index) {
 			case 0:
-				TileMachineBase.this.cookTime = value;
+				TileMachineBase.this.requiredEnergyLeft = value;
 				break;
 			case 1:
-				TileMachineBase.this.cookTimeTotal = value;
+				TileMachineBase.this.requiredEnergyTotal = value;
 				break;
 			}
 		}
@@ -89,9 +91,15 @@ public abstract class TileMachineBase extends TileEntity implements ITickableTil
 	@Override
 	public void tick()
 	{
-		if (isCooking) { doCooking(); }
-		if (!isCooking) { doRefueling(); }
+		if (this.world != null && !this.world.isRemote)
+		{
+			if (isCooking) { doCooking(); }
+			else { doRefueling(); }
+		}
 		
+		/*if (isCooking) { doCooking(); }
+		if (!isCooking) { doRefueling(); }
+		*/
 		updateBlockState();
 	}
 	
@@ -102,9 +110,9 @@ public abstract class TileMachineBase extends TileEntity implements ITickableTil
 	{		
 		//Indicator on front
 		BlockState blockState = world.getBlockState(pos);
-		if (blockState.get(BlockStateProperties.POWERED) == (cookTime == 0) )
+		if (blockState.get(BlockStateProperties.POWERED) == (requiredEnergyLeft == 0) )
 		{
-			world.setBlockState(pos, blockState.with(BlockStateProperties.POWERED, cookTime != 0), Constants.BlockFlags.NOTIFY_NEIGHBORS + Constants.BlockFlags.BLOCK_UPDATE);
+			world.setBlockState(pos, blockState.with(BlockStateProperties.POWERED, requiredEnergyLeft != 0), Constants.BlockFlags.NOTIFY_NEIGHBORS + Constants.BlockFlags.BLOCK_UPDATE);
 		}
 		
 		//Energy display on front
@@ -175,6 +183,6 @@ public abstract class TileMachineBase extends TileEntity implements ITickableTil
 	}
 	
 	
-	public int getCookTime() { return this.cookTime; }
-	public int getTotalCookTime() { return this.cookTimeTotal; }
+	public int getRequiredEnergyLeft() { return this.requiredEnergyLeft; }
+	public int getRequiredEnergyTotal() { return this.requiredEnergyTotal; }
 }
