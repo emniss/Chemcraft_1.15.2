@@ -1,5 +1,9 @@
 package em_niss.chemcraft.recipes.electrolyzer;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import em_niss.chemcraft.init.RecipeSerializerInit;
 import em_niss.chemcraft.objects.tileentity.TileElectrolyzer;
 import net.minecraft.item.ItemStack;
@@ -76,9 +80,11 @@ public class ElectrolyzerRecipe implements IElectrolyzerRecipe
 
 	public ItemStack getInput1() { return this.input1; }
 	public ItemStack getInput2() { return this.input2; }
-	
+	public List<ItemStack> getInputs() { return new ArrayList<>(Arrays.asList(this.input1, this.input2)); }
+				
 	public ItemStack getOutput1() { return this.output1; }
 	public ItemStack getOutput2() { return this.output2; }
+	public List<ItemStack> getOutputs() { return new ArrayList<>(Arrays.asList(this.output1, this.output2)); }
 	
 	public int getRequiredEnergy() { return this.requiredEnergy; }
 	

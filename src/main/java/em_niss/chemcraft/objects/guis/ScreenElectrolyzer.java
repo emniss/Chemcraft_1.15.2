@@ -11,16 +11,16 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class ScreenElectrolyzer extends ScreenMachineBase<ContainerElectrolyzer>
 {
-	private static final ResourceLocation TEXTURE = new ResourceLocation(Chemcraft.MODID, "textures/gui/electrolyzer.png");
+	public static final ResourceLocation TEXTURE = new ResourceLocation(Chemcraft.MODID, "textures/gui/electrolyzer.png");
 	
 	private static final int[] positions = {
 			115,	//xEnergyText
 			72,		//yEnergyText
 			
 			68,		//xArrowPos
-			35,		//yArrowPos
+			34,		//yArrowPos
 			176,	//xArrowTexture
-			0,		//yArrowTesxture
+			0,		//yArrowTexture
 			23,		//arrowWidth
 			16,		//arrowHeight
 			

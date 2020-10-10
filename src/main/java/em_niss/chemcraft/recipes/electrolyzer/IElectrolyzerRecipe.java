@@ -1,5 +1,7 @@
 package em_niss.chemcraft.recipes.electrolyzer;
 
+import java.util.List;
+
 import javax.annotation.Nonnull;
 
 import em_niss.chemcraft.Chemcraft;
@@ -28,6 +30,8 @@ public interface IElectrolyzerRecipe extends IRecipe<RecipeWrapper>
 	}
 	
 	ItemStack getInput1();
-	
 	ItemStack getInput2();
+	
+	List<ItemStack> getInputs();
+	List<ItemStack> getOutputs();
 }

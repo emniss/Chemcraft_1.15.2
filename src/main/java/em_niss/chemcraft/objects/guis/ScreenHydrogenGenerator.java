@@ -18,7 +18,7 @@ public class ScreenHydrogenGenerator extends ScreenMachineBase<ContainerHydrogen
 			72,		//yEnergyText
 			
 			68,		//xArrowPos
-			35,		//yArrowPos
+			34,		//yArrowPos
 			176,	//xArrowTexture
 			0,		//yArrowTexture
 			23,		//arrowWidth
