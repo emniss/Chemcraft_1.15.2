@@ -39,6 +39,10 @@ public abstract class ScreenMachineBase<C extends ContainerMachineBase> extends 
 		}))
 	}
 	
+	//https://github.com/SleepyTrousers/EnderIO/blob/33bc2b0d8ee3c6ba8a1d0249d34a740b937ba2e0/enderio-machines/src/main/java/crazypants/enderio/machines/machine/enchanter/GuiEnchanter.java
+	//https://github.com/SleepyTrousers/EnderIO/blob/02fc280b0affe6ea097fd09302edf60519eea00b/enderio-base/src/main/java/crazypants/enderio/base/gui/GuiContainerBaseEIO.java
+	//https://github.com/SleepyTrousers/EnderIO/blob/02fc280b0affe6ea097fd09302edf60519eea00b/enderio-base/src/main/java/crazypants/enderio/base/integration/jei/JeiPlugin.java
+	
 	@Override
 	public void render(int mouseX, int mouseY, float partialTicks)
 	{
