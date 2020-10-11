@@ -15,6 +15,7 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.helpers.IJeiHelpers;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -48,11 +49,20 @@ public class ChemcraftJEIPlugin implements IModPlugin
 		registration.addRecipes(generateElectrolyzerRecipes(), ElectrolyzerCategory.Uid);
 	}
 	
+	@Override
+	public void onRuntimeAvailable(IJeiRuntime jeiRuntime)
+	{
+		JeiUtil.jeiRuntimeAvailible = true;
+	}
+	
+	
 	private List<ElectrolyzerRecipeWrapper> generateElectrolyzerRecipes()
 	{
 		List<ElectrolyzerRecipeWrapper> recipes = new ArrayList<>();
 		ArrayList<ItemStack> inputs = new ArrayList<>();
 		ArrayList<ItemStack> outputs = new ArrayList<>();
+		
+		int energy = 10000;
 		
 		inputs.add(new ItemStack(ItemInit.TEST_TUBE_HYDROGEN_CHLORIDE.get()));
 		inputs.add(new ItemStack(ItemInit.TEST_TUBE_EMPTY.get()));
@@ -60,7 +70,7 @@ public class ChemcraftJEIPlugin implements IModPlugin
 		outputs.add(new ItemStack(ItemInit.TEST_TUBE_HYDROGEN.get()));
 		outputs.add(new ItemStack(ItemInit.TEST_TUBE_CHLORINE.get()));
 		
-		recipes.add(new ElectrolyzerRecipeWrapper(inputs, outputs));
+		recipes.add(new ElectrolyzerRecipeWrapper(inputs, outputs, energy));
 		
 		return recipes;
 	}

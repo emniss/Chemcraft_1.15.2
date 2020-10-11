@@ -1,28 +1,43 @@
 package em_niss.chemcraft.objects.guis;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 
+import em_niss.chemcraft.jei.JeiUtil;
 import em_niss.chemcraft.objects.containers.ContainerMachineBase;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.GuiScreenEvent.InitGuiEvent;
 
 @OnlyIn(Dist.CLIENT)
 public abstract class ScreenMachineBase<C extends ContainerMachineBase> extends ContainerScreen<C> 
 {
-	private ResourceLocation TEXTURE;
-	private int[] positions;
+	protected int arrowPosX, arrowPosY, arrowTextureX, arrowTextureY, arrowWidth, arrowHeight;
+	protected int energyTextX, energyTextY, energyPosX, energyPosY, energyTextureX, energyTextureY, energyWidth, energyHeight;
 	
-	public ScreenMachineBase(C container, PlayerInventory inv, ITextComponent name, ResourceLocation texture, int[] positions)
+	private ResourceLocation texture;
+	
+	public ScreenMachineBase(C container, PlayerInventory inv, ITextComponent name, ResourceLocation texture)
 	{
 		super(container, inv, name);
-		this.TEXTURE = texture;
-		this.positions = positions;
+		this.texture = texture;
 	}
 	
+	@Override
+	protected void init()
+	{
+		super.init();
+		this.addButton(new Button(this.guiLeft + arrowPosX, this.getGuiTop() + arrowPosY, arrowWidth - 1, arrowHeight, "", () -> {
+			jeiRuntime.getRecipesGui().showCategories(new List<>(ElectrolyzerCategory.getUi());
+		}))
+	}
 	
 	@Override
 	public void render(int mouseX, int mouseY, float partialTicks)
@@ -37,24 +52,46 @@ public abstract class ScreenMachineBase<C extends ContainerMachineBase> extends 
 	{
 		this.font.drawString(this.title.getFormattedText(), 8.0f, 6.0f, 4210752);
 		this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 8.0f, (float)(this.ySize - 96 + 2), 4210752);
-		this.font.drawString("" + ((C)container).getEnergy(), positions[0], positions[1], 4210752);
+		this.font.drawString("" + ((C)container).getEnergy(), energyTextX, energyTextY, 4210752);
 	}
 	
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) 
 	{
 		RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
-		this.minecraft.getTextureManager().bindTexture(TEXTURE);
+		this.minecraft.getTextureManager().bindTexture(texture);
 		int relX = (this.width - this.xSize) / 2;
 		int relY = (this.height - this.ySize) / 2;
+		
 		this.blit(relX, relY, 0, 0, this.xSize, this.ySize);
 		
 		//Animation
-		int progressArrowWidthScaled = ((ContainerMachineBase)this.container).getProgressScaled(positions[6]);
-		this.blit(this.guiLeft + positions[2], this.guiTop + positions[3], positions[4], positions[5], progressArrowWidthScaled, positions[7]);
+		int progressArrowWidthScaled = ((ContainerMachineBase)this.container).getProgressScaled(arrowWidth);
+		this.blit(this.guiLeft + arrowPosX, this.guiTop + arrowPosY, arrowTextureX, arrowTextureY, progressArrowWidthScaled, arrowHeight);
 		
-		int energyHeightScaled = this.getEnergyScaled(positions[13]);
-		this.blit(this.guiLeft + positions[8], this.guiTop + positions[9] - energyHeightScaled, positions[10], positions[11], positions[12], energyHeightScaled);
+		int energyHeightScaled = this.getEnergyScaled(energyHeight);
+		this.blit(this.guiLeft + energyPosX, this.guiTop + energyPosY - energyHeightScaled, energyTextureX, energyTextureY, energyWidth, energyHeightScaled);
+	}
+	
+	@Override
+	protected void renderHoveredToolTip(int mouseX, int mouseY)
+	{
+		if (mouseX >= this.guiLeft + energyPosX - 1 && mouseX < this.guiLeft + energyPosX + energyWidth + 1 && mouseY >= this.guiTop + energyPosY - energyHeight - 1 && mouseY < this.guiTop + energyPosY + 1)
+		{
+			List<String> tooltip = new ArrayList<>();
+			tooltip.add(this.container.getEnergy() + "/" + this.container.getMaxEnergy() + " FE");
+			
+			this.renderTooltip(tooltip, mouseX, mouseY);
+		}
+		else if (JeiUtil.isJeiRuntimeAvailible() && mouseX >= this.guiLeft + arrowPosX && mouseX < this.guiLeft + arrowPosX + arrowWidth - 1 && mouseY >= this.guiTop + arrowPosY && mouseY < this.guiTop + arrowPosY + arrowHeight)
+		{
+			List<String> tooltip = new ArrayList<>();
+			tooltip.add("Show recipes");
+			
+			this.renderTooltip(tooltip, mouseX, mouseY);
+		}
+		
+		super.renderHoveredToolTip(mouseX, mouseY);
 	}
 	
 	private int getEnergyScaled(int pixels)
