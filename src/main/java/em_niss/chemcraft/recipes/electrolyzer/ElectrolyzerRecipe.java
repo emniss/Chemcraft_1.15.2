@@ -2,7 +2,9 @@ package em_niss.chemcraft.recipes.electrolyzer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import em_niss.chemcraft.init.RecipeSerializerInit;
 import em_niss.chemcraft.objects.tileentity.TileElectrolyzer;

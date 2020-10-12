@@ -5,7 +5,9 @@ import java.util.List;
 
 import em_niss.chemcraft.Chemcraft;
 import em_niss.chemcraft.init.BlockInit;
+import em_niss.chemcraft.init.ItemInit;
 import em_niss.chemcraft.objects.guis.ScreenElectrolyzer;
+import em_niss.chemcraft.recipes.electrolyzer.ElectrolyzerRecipe;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -123,21 +125,23 @@ public class ElectrolyzerCategory implements IRecipeCategory<ElectrolyzerRecipeW
 		return tooltip;
 	}
 	
-	/*	
-	@Override
-	public boolean handleClick(ElectrolyzerRecipeWrapper recipe, double mouseX, double mouseY, int mouseButton)
-	{
-		if (this.theButton)
-		int allRecipesX = 29;
-		int allRecipesY = 32;
-		int allRecipesWidth = 22;
-		int allRecipesHeight = 16;
-		
-		if (mouseX >= allRecipesX && mouseX <= allRecipesX + allRecipesHeight && mouseY >= allRecipesY && mouseY <= allRecipesY + allRecipesHeight)
-		{
-			IRecipeCategoryExtension extension = this.extendableHelper.getRecipeExtension(recipe);
-			return true;
-		}
-	}*/
 	
+	public static List<ElectrolyzerRecipeWrapper> generateRecipes()
+	{
+		List<ElectrolyzerRecipeWrapper> recipes = new ArrayList<>();
+		ArrayList<ItemStack> inputs = new ArrayList<>();
+		ArrayList<ItemStack> outputs = new ArrayList<>();
+		
+		int energy = 10000;
+		
+		inputs.add(new ItemStack(ItemInit.TEST_TUBE_HYDROGEN_CHLORIDE.get()));
+		inputs.add(new ItemStack(ItemInit.TEST_TUBE_EMPTY.get()));
+		
+		outputs.add(new ItemStack(ItemInit.TEST_TUBE_HYDROGEN.get()));
+		outputs.add(new ItemStack(ItemInit.TEST_TUBE_CHLORINE.get()));
+		
+		recipes.add(new ElectrolyzerRecipeWrapper(inputs, outputs, energy));
+		
+		return recipes;
+	}
 }
