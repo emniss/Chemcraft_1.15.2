@@ -7,7 +7,6 @@ import em_niss.chemcraft.Chemcraft;
 import em_niss.chemcraft.init.BlockInit;
 import em_niss.chemcraft.init.ItemInit;
 import em_niss.chemcraft.objects.guis.ScreenElectrolyzer;
-import em_niss.chemcraft.recipes.electrolyzer.ElectrolyzerRecipe;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;

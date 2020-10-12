@@ -6,7 +6,6 @@ import em_niss.chemcraft.Chemcraft;
 import em_niss.chemcraft.init.RecipeSerializerInit;
 import em_niss.chemcraft.jei.electrolyzer.ElectrolyzerCategory;
 import em_niss.chemcraft.objects.guis.ScreenElectrolyzer;
-import em_niss.chemcraft.recipes.electrolyzer.ElectrolyzerRecipe;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -46,12 +45,14 @@ public class ChemcraftJEIPlugin implements IModPlugin
 	@Override
 	public void registerRecipes(IRecipeRegistration registration)
 	{
-		//ChemcraftRecipes chemcraftRecipes = new ChemcraftRecipes();
 		RecipeManager recipeManager = getRecipeManager();
+		if (recipeManager == null)
+		{
+			return;
+		}
 		
-		//registration.addRecipes(recipeManager.getRecipes(RecipeSerializerInit.ELECTROLYZER_TYPE).values(), ElectrolyzerCategory.Uid);
 		registration.addRecipes(recipeManager.getRecipes(RecipeSerializerInit.ELECTROLYZER_TYPE).values(), ElectrolyzerCategory.Uid);
-		//registration.addRecipes(new ArrayList<>(ElectrolyzerRecipe.recipeList.values()), ElectrolyzerCategory.Uid);
+
 	}
 	
 	
