@@ -1,7 +1,6 @@
 package em_niss.chemcraft.util;
 
 import em_niss.chemcraft.init.ModContainerTypes;
-import em_niss.chemcraft.objects.guis.FirstBlockScreen;
 import em_niss.chemcraft.objects.guis.ScreenElectrolyzer;
 import em_niss.chemcraft.objects.guis.ScreenHydrogenGenerator;
 import net.minecraft.client.gui.ScreenManager;
@@ -13,6 +12,5 @@ public class ClientSetup
 	{
 		ScreenManager.registerFactory(ModContainerTypes.CONTAINER_ELECTROLYZER.get(), ScreenElectrolyzer::new);
 		ScreenManager.registerFactory(ModContainerTypes.CONTAINER_HYDROGEN_GENERATOR.get(), ScreenHydrogenGenerator::new);
-		ScreenManager.registerFactory(ModContainerTypes.FIRSTBLOCK_CONTAINER.get(), FirstBlockScreen::new);
 	}
 }

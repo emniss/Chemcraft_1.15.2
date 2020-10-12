@@ -14,11 +14,8 @@ import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import mezz.jei.api.recipe.category.extensions.IRecipeCategoryExtension;
-import mezz.jei.recipes.ExtendableRecipeCategoryHelper;
 import mezz.jei.util.Translator;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 
 
@@ -68,7 +65,6 @@ public class ElectrolyzerCategory implements IRecipeCategory<ElectrolyzerRecipeW
 	public IDrawable getIcon() { return icon; }
 
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public void setIngredients(ElectrolyzerRecipeWrapper recipeWrapper, IIngredients ingredients)
 	{

@@ -1,9 +1,6 @@
 package em_niss.chemcraft.objects.tileentity;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
 
@@ -11,17 +8,8 @@ import em_niss.chemcraft.Config;
 import em_niss.chemcraft.init.ModTileEntityTypes;
 import em_niss.chemcraft.init.RecipeSerializerInit;
 import em_niss.chemcraft.recipes.electrolyzer.ElectrolyzerRecipe;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 
 public class TileElectrolyzer extends TileMachineBase

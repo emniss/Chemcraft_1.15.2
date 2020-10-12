@@ -9,10 +9,12 @@ import em_niss.chemcraft.Chemcraft;
 import em_niss.chemcraft.init.ItemInit;
 import em_niss.chemcraft.jei.electrolyzer.ElectrolyzerCategory;
 import em_niss.chemcraft.jei.electrolyzer.ElectrolyzerRecipeWrapper;
+import em_niss.chemcraft.objects.guis.ScreenElectrolyzer;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.helpers.IJeiHelpers;
+import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.runtime.IJeiRuntime;
@@ -44,9 +46,14 @@ public class ChemcraftJEIPlugin implements IModPlugin
 	@Override
 	public void registerRecipes(IRecipeRegistration registration)
 	{
-		IJeiHelpers jeiHelpers = registration.getJeiHelpers();
-
 		registration.addRecipes(generateElectrolyzerRecipes(), ElectrolyzerCategory.Uid);
+	}
+	
+	
+	@Override
+	public void registerGuiHandlers(IGuiHandlerRegistration registration)
+	{
+		registration.addRecipeClickArea(ScreenElectrolyzer.class, ScreenElectrolyzer.arrowPosX, ScreenElectrolyzer.arrowPosY, ScreenElectrolyzer.arrowWidth, ScreenElectrolyzer.arrowHeight, ElectrolyzerCategory.Uid);
 	}
 	
 	@Override

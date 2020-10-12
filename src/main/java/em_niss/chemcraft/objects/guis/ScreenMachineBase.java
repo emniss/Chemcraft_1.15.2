@@ -8,13 +8,11 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import em_niss.chemcraft.jei.JeiUtil;
 import em_niss.chemcraft.objects.containers.ContainerMachineBase;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.GuiScreenEvent.InitGuiEvent;
 
 @OnlyIn(Dist.CLIENT)
 public abstract class ScreenMachineBase<C extends ContainerMachineBase> extends ContainerScreen<C> 
@@ -24,24 +22,28 @@ public abstract class ScreenMachineBase<C extends ContainerMachineBase> extends 
 	
 	private ResourceLocation texture;
 	
-	public ScreenMachineBase(C container, PlayerInventory inv, ITextComponent name, ResourceLocation texture)
+	public ScreenMachineBase(C container, PlayerInventory inv, ITextComponent name, ResourceLocation texture, int arrowPosX, int arrowPosY, int arrowTextureX, int arrowTextureY, int arrowWidth, int arrowHeight, int energyTextX, int energyTextY, int energyPosX, int energyPosY, int energyTextureX, int energyTextureY, int energyWidth, int energyHeight)
 	{
 		super(container, inv, name);
 		this.texture = texture;
+		
+		this.arrowPosX = arrowPosX;
+		this.arrowPosY = arrowPosY;
+		this.arrowTextureX = arrowTextureX;
+		this.arrowTextureY = arrowTextureY;
+		this.arrowWidth = arrowWidth;
+		this.arrowHeight = arrowHeight;
+		
+		this.energyTextX = energyTextX;
+		this.energyTextY = energyTextY;
+		this.energyPosX = energyPosX;
+		this.energyPosY = energyPosY;
+		this.energyTextureX = energyTextureX;
+		this.energyTextureY = energyTextureY;
+		this.energyWidth = energyWidth;
+		this.energyHeight = energyHeight;
 	}
 	
-	@Override
-	protected void init()
-	{
-		super.init();
-		this.addButton(new Button(this.guiLeft + arrowPosX, this.getGuiTop() + arrowPosY, arrowWidth - 1, arrowHeight, "", () -> {
-			jeiRuntime.getRecipesGui().showCategories(new List<>(ElectrolyzerCategory.getUi());
-		}))
-	}
-	
-	//https://github.com/SleepyTrousers/EnderIO/blob/33bc2b0d8ee3c6ba8a1d0249d34a740b937ba2e0/enderio-machines/src/main/java/crazypants/enderio/machines/machine/enchanter/GuiEnchanter.java
-	//https://github.com/SleepyTrousers/EnderIO/blob/02fc280b0affe6ea097fd09302edf60519eea00b/enderio-base/src/main/java/crazypants/enderio/base/gui/GuiContainerBaseEIO.java
-	//https://github.com/SleepyTrousers/EnderIO/blob/02fc280b0affe6ea097fd09302edf60519eea00b/enderio-base/src/main/java/crazypants/enderio/base/integration/jei/JeiPlugin.java
 	
 	@Override
 	public void render(int mouseX, int mouseY, float partialTicks)

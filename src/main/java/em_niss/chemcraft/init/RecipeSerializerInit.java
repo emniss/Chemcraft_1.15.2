@@ -36,7 +36,7 @@ public class RecipeSerializerInit
 	
 	
 	@SuppressWarnings("unchecked")
-	private static <T extends IRecipeType> T registerType(ResourceLocation recipeTypeId) 
+	private static <T extends IRecipeType<?>> T registerType(ResourceLocation recipeTypeId) 
 	{
 		return (T) Registry.register(Registry.RECIPE_TYPE, recipeTypeId, new RecipeType<>());
 	}
