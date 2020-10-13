@@ -4,7 +4,7 @@ import javax.annotation.Nullable;
 
 import em_niss.chemcraft.Chemcraft;
 import em_niss.chemcraft.init.RecipeSerializerInit;
-import em_niss.chemcraft.jei.electrolyzer.ElectrolyzerCategory;
+import em_niss.chemcraft.jei.machines.ElectrolyzerJEICategory;
 import em_niss.chemcraft.objects.guis.ScreenElectrolyzer;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -23,7 +23,7 @@ import net.minecraft.util.ResourceLocation;
 public class ChemcraftJEIPlugin implements IModPlugin
 {
 	@Nullable
-	private ElectrolyzerCategory electrolyzerCategory;
+	private ElectrolyzerJEICategory electrolyzerCategory;
 	
 	
 	@Override
@@ -38,7 +38,7 @@ public class ChemcraftJEIPlugin implements IModPlugin
 		IJeiHelpers jeiHelpers = registration.getJeiHelpers();
 		IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
 		
-		registration.addRecipeCategories(new ElectrolyzerCategory(guiHelper));
+		registration.addRecipeCategories(new ElectrolyzerJEICategory(guiHelper));
 	}
 	
 	@Override
@@ -51,7 +51,7 @@ public class ChemcraftJEIPlugin implements IModPlugin
 			return;
 		}
 		
-		registration.addRecipes(recipeManager.getRecipes(RecipeSerializerInit.ELECTROLYZER_TYPE).values(), ElectrolyzerCategory.Uid);
+		registration.addRecipes(recipeManager.getRecipes(RecipeSerializerInit.ELECTROLYZER_TYPE).values(), ElectrolyzerJEICategory.Uid);
 	}
 	
 		
@@ -59,7 +59,7 @@ public class ChemcraftJEIPlugin implements IModPlugin
 	@Override
 	public void registerGuiHandlers(IGuiHandlerRegistration registration)
 	{
-		registration.addRecipeClickArea(ScreenElectrolyzer.class, ScreenElectrolyzer.arrowPosX, ScreenElectrolyzer.arrowPosY, ScreenElectrolyzer.arrowWidth, ScreenElectrolyzer.arrowHeight, ElectrolyzerCategory.Uid);
+		registration.addRecipeClickArea(ScreenElectrolyzer.class, ScreenElectrolyzer.arrowPosX, ScreenElectrolyzer.arrowPosY, ScreenElectrolyzer.arrowWidth, ScreenElectrolyzer.arrowHeight, ElectrolyzerJEICategory.Uid);
 	}
 	
 	@Override

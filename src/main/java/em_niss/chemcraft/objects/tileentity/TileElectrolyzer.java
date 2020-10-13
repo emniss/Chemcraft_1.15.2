@@ -61,8 +61,8 @@ public class TileElectrolyzer extends TileMachineBase
 	private boolean doOutput()
 	{
 		ElectrolyzerRecipe recipe = this.getRecipe(itemHandler.getStackInSlot(inSlot1), itemHandler.getStackInSlot(inSlot2));
-		ItemStack output1 = recipe.getOutput1();
-		ItemStack output2 = recipe.getOutput2();
+		ItemStack output1 = recipe.getOutputs().get(0);
+		ItemStack output2 = recipe.getOutputs().get(1);
 		if (itemHandler.insertItem(outSlot1, output1, true).isEmpty() && itemHandler.insertItem(outSlot2, output2, true).isEmpty())
 		{
 			itemHandler.insertItem(outSlot1, output1.copy(), false);
@@ -84,15 +84,15 @@ public class TileElectrolyzer extends TileMachineBase
 	private void consumeIngredients()
 	{
 		ElectrolyzerRecipe recipe = this.getRecipe(itemHandler.getStackInSlot(inSlot1), itemHandler.getStackInSlot(inSlot2));
-		if (recipe.getInput1().getItem().equals(itemHandler.getStackInSlot(inSlot1).getItem()))
+		if (recipe.getInputs().get(0).getItem().equals(itemHandler.getStackInSlot(inSlot1).getItem()))
 		{	
-			itemHandler.extractItem(inSlot1, recipe.getInput1().getCount(), false);
-			itemHandler.extractItem(inSlot2, recipe.getInput2().getCount(), false);
+			itemHandler.extractItem(inSlot1, recipe.getInputs().get(0).getCount(), false);
+			itemHandler.extractItem(inSlot2, recipe.getInputs().get(1).getCount(), false);
 		}
 		else
 		{
-			itemHandler.extractItem(inSlot1, recipe.getInput2().getCount(), false);
-			itemHandler.extractItem(inSlot2, recipe.getInput1().getCount(), false);
+			itemHandler.extractItem(inSlot1, recipe.getInputs().get(1).getCount(), false);
+			itemHandler.extractItem(inSlot2, recipe.getInputs().get(0).getCount(), false);
 		}
 	}
 	

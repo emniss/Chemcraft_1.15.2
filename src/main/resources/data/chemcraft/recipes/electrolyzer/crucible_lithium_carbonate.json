@@ -1,13 +1,8 @@
 {
 	"type": "chemcraft:electrolyzer",
 	
-	"input1": {
+	"input": {
 		"item": "chemcraft:crucible_lithium_carbonate_molten",
-		"count": 1
-	},
-	
-	"input2": {
-		"item": "chemcraft:test_tube_empty",
 		"count": 1
 	},
 	

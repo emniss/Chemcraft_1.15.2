@@ -7,6 +7,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 
 import em_niss.chemcraft.jei.JeiUtil;
 import em_niss.chemcraft.objects.containers.ContainerMachineBase;
+import em_niss.chemcraft.util.NumberUtil;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
@@ -85,7 +86,7 @@ public abstract class ScreenMachineBase<C extends ContainerMachineBase> extends 
 		if (mouseX >= this.guiLeft + energyPosX - 1 && mouseX < this.guiLeft + energyPosX + energyWidth + 1 && mouseY >= this.guiTop + energyPosY - energyHeight - 1 && mouseY < this.guiTop + energyPosY + 1)
 		{
 			List<String> tooltip = new ArrayList<>();
-			tooltip.add(this.container.getEnergy() + "/" + this.container.getMaxEnergy() + " FE");
+			tooltip.add(NumberUtil.CommaSeparateNumber(this.container.getEnergy()) + "/" + NumberUtil.CommaSeparateNumber(this.container.getMaxEnergy()) + " FE");
 			
 			this.renderTooltip(tooltip, mouseX, mouseY);
 		}

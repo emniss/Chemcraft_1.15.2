@@ -1,13 +1,8 @@
 {
 	"type": "chemcraft:electrolyzer",
 	
-	"input1": {
+	"input": {
 		"item": "chemcraft:crucible_boron_trichloride_molten",
-		"count": 1
-	},
-	
-	"input2": {
-		"item": "chemcraft:test_tube_empty",
 		"count": 1
 	},
 	

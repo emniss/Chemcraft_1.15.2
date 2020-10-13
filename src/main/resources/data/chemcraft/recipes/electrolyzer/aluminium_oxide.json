@@ -1,24 +1,14 @@
 {
 	"type": "chemcraft:electrolyzer",
 	
-	"input1": {
+	"input": {
 		"item": "chemcraft:test_tube_aluminium_oxide",
 		"count": 1
 	},
 	
-	"input2": {
-		"item": "chemcraft:test_tube_empty",
-		"count": 1
-	},
-	
-	"output1": {
+	"output": {
 		"item": "chemcraft:powder_aluminium",
 		"count": 2
-	},
-	
-	"output2": {
-		"item": "chemcraft:test_tube_empty",
-		"count": 1
 	},
 	
 	"energy": 168000

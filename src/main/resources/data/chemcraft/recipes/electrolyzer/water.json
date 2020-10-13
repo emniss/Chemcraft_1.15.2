@@ -1,14 +1,9 @@
 {
 	"type": "chemcraft:electrolyzer",
 	
-	"input1": {
+	"input": {
 		"item": "chemcraft:test_tube_water",
 		"count": 2
-	},
-	
-	"input2": {
-		"item": "chemcraft:test_tube_empty",
-		"count": 1
 	},
 	
 	"output1": {
