@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import em_niss.chemcraft.Chemcraft;
+import em_niss.chemcraft.Config;
 import em_niss.chemcraft.init.BlockInit;
-import em_niss.chemcraft.init.ItemInit;
 import em_niss.chemcraft.objects.guis.ScreenElectrolyzer;
+import em_niss.chemcraft.recipes.electrolyzer.ElectrolyzerRecipe;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -20,7 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 
-public class ElectrolyzerCategory implements IRecipeCategory<ElectrolyzerRecipeWrapper>
+public class ElectrolyzerCategory implements IRecipeCategory<ElectrolyzerRecipe>
 {
 	public static ResourceLocation Uid = new ResourceLocation(Chemcraft.MODID, "electrolyzercategory");
 	
@@ -54,7 +55,7 @@ public class ElectrolyzerCategory implements IRecipeCategory<ElectrolyzerRecipeW
 	public ResourceLocation getUid() { return Uid; }
 
 	@Override
-	public Class<? extends ElectrolyzerRecipeWrapper> getRecipeClass() { return ElectrolyzerRecipeWrapper.class; }
+	public Class<? extends ElectrolyzerRecipe> getRecipeClass() { return ElectrolyzerRecipe.class; }
 
 	@Override
 	public String getTitle() {return localizedName; }
@@ -67,14 +68,14 @@ public class ElectrolyzerCategory implements IRecipeCategory<ElectrolyzerRecipeW
 
 	
 	@Override
-	public void setIngredients(ElectrolyzerRecipeWrapper recipeWrapper, IIngredients ingredients)
+	public void setIngredients(ElectrolyzerRecipe Recipe, IIngredients ingredients)
 	{
-		ingredients.setInputs(VanillaTypes.ITEM, recipeWrapper.getInputs());
-		ingredients.setOutputs(VanillaTypes.ITEM, recipeWrapper.getOutputs());
+		ingredients.setInputs(VanillaTypes.ITEM, Recipe.getInputs());
+		ingredients.setOutputs(VanillaTypes.ITEM, Recipe.getOutputs());
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, ElectrolyzerRecipeWrapper recipeWrapper, IIngredients ingredients)
+	public void setRecipe(IRecipeLayout recipeLayout, ElectrolyzerRecipe Recipe, IIngredients ingredients)
 	{
 		IGuiItemStackGroup itemStacks = recipeLayout.getItemStacks();
 		
@@ -83,7 +84,19 @@ public class ElectrolyzerCategory implements IRecipeCategory<ElectrolyzerRecipeW
 		itemStacks.init(output1, false, 58, 19);
 		itemStacks.init(output2, false, 58, 45);
 		
-		//itemStacks.setBackground(output1, slotDrawable);
+		
+		List<List<ItemStack>> inputs = ingredients.getInputs(VanillaTypes.ITEM);
+		List<List<ItemStack>> outputs = ingredients.getOutputs(VanillaTypes.ITEM);
+		
+		for (int i = 0; i < inputs.size(); ++i)
+		{
+			itemStacks.set(i, inputs.get(i));
+		}
+		
+		for (int i = 0; i < outputs.size(); ++i)
+		{
+			itemStacks.set(i + 2, outputs.get(i));
+		}
 		
 		itemStacks.set(input1, ingredients.getInputs(VanillaTypes.ITEM).get(0));
 		itemStacks.set(input2, ingredients.getInputs(VanillaTypes.ITEM).get(1));
@@ -92,7 +105,7 @@ public class ElectrolyzerCategory implements IRecipeCategory<ElectrolyzerRecipeW
 	}
 	
 	@Override
-	public void draw(ElectrolyzerRecipeWrapper recipeWrapper, double mouseX, double mouseY)
+	public void draw(ElectrolyzerRecipe recipe, double mouseX, double mouseY)
 	{
 		arrow.draw(29, 32);
 		energyBar.draw(88, 4);
@@ -100,7 +113,7 @@ public class ElectrolyzerCategory implements IRecipeCategory<ElectrolyzerRecipeW
 	}
 	
 	@Override
-	public List<String> getTooltipStrings(ElectrolyzerRecipeWrapper recipeWrapper, double mouseX, double mouseY)
+	public List<String> getTooltipStrings(ElectrolyzerRecipe recipe, double mouseX, double mouseY)
 	{
 		int energyX = 88;
 		int energyY = 4;
@@ -113,34 +126,34 @@ public class ElectrolyzerCategory implements IRecipeCategory<ElectrolyzerRecipeW
 		
 		if (mouseX >= energyX && mouseX <= energyX + energyWidth && mouseY >= energyY && mouseY <= energyY + energyHeight)
 		{
-			tooltip.add(recipeWrapper.getEnergy() + " FE");
-			tooltip.add(recipeWrapper.getEnergyPerTick() + " FE/t");
+			tooltip.add(recipe.getRequiredEnergy() + " FE");
+			tooltip.add(Config.ELECTROLYZER_ENERGY_CONSUMPTION + " FE/t");
 		}
 		/*else if (mouseX >= allRecipesX && mouseX <= allRecipesX + allRecipesHeight && mouseY >= allRecipesY && mouseY <= allRecipesY + allRecipesHeight)
 		{
-			tooltip.add(recipeWrapper.getallRecipes() + " ticks");
+			tooltip.add(Recipe.getallRecipes() + " ticks");
 		}*/
 		
 		return tooltip;
 	}
 	
-	
-	public static List<ElectrolyzerRecipeWrapper> generateRecipes()
+	/*
+	public static List<ElectrolyzerRecipe> generateRecipes()
 	{
-		List<ElectrolyzerRecipeWrapper> recipes = new ArrayList<>();
+		List<ElectrolyzerRecipe> recipes = new ArrayList<>();
 		ArrayList<ItemStack> inputs = new ArrayList<>();
 		ArrayList<ItemStack> outputs = new ArrayList<>();
 		
 		int energy = 10000;
 		
-		inputs.add(new ItemStack(ItemInit.TEST_TUBE_HYDROGEN_CHLORIDE.get()));
-		inputs.add(new ItemStack(ItemInit.TEST_TUBE_EMPTY.get()));
+		input1 = new ItemStack(ItemInit.TEST_TUBE_HYDROGEN_CHLORIDE.get());
+		input2 = new ItemStack(ItemInit.TEST_TUBE_EMPTY.get()));
 		
-		outputs.add(new ItemStack(ItemInit.TEST_TUBE_HYDROGEN.get()));
-		outputs.add(new ItemStack(ItemInit.TEST_TUBE_CHLORINE.get()));
+		outputs1 = new ItemStack(ItemInit.TEST_TUBE_HYDROGEN.get()));
+		outputs2 = new ItemStack(ItemInit.TEST_TUBE_CHLORINE.get()));
 		
-		recipes.add(new ElectrolyzerRecipeWrapper(inputs, outputs, energy));
+		recipes.add(new ElectrolyzerRecipe(inputs.get(0), inputs.get(1), outputs.get(0), outputs, energy));
 		
 		return recipes;
-	}
+	}*/
 }

@@ -14,7 +14,6 @@ import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.runtime.IJeiRuntime;
-import mezz.jei.util.ErrorUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.item.crafting.RecipeManager;
@@ -45,6 +44,7 @@ public class ChemcraftJEIPlugin implements IModPlugin
 	@Override
 	public void registerRecipes(IRecipeRegistration registration)
 	{
+		//THERMAL
 		RecipeManager recipeManager = getRecipeManager();
 		if (recipeManager == null)
 		{
@@ -52,9 +52,9 @@ public class ChemcraftJEIPlugin implements IModPlugin
 		}
 		
 		registration.addRecipes(recipeManager.getRecipes(RecipeSerializerInit.ELECTROLYZER_TYPE).values(), ElectrolyzerCategory.Uid);
-
 	}
 	
+		
 	
 	@Override
 	public void registerGuiHandlers(IGuiHandlerRegistration registration)
@@ -69,12 +69,15 @@ public class ChemcraftJEIPlugin implements IModPlugin
 	}
 	
 	
+	@SuppressWarnings("resource")
 	private RecipeManager getRecipeManager() {
 
         RecipeManager recipeManager = null;
-        @SuppressWarnings("resource")
 		ClientWorld world = Minecraft.getInstance().world;
-        ErrorUtil.checkNotNull(world, "minecraft world");
+        if (world != null)
+        {
+        	recipeManager = world.getRecipeManager();
+        }
         return recipeManager;
     }
 }
