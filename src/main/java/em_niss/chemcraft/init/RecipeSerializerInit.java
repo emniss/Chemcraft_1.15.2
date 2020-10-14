@@ -16,6 +16,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class RecipeSerializerInit 
 {
+	@SuppressWarnings("deprecation")
 	public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = new DeferredRegister<>(
 			ForgeRegistries.RECIPE_SERIALIZERS, Chemcraft.MODID);
 	

@@ -10,6 +10,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModTileEntityTypes
 {
+	@SuppressWarnings("deprecation")
 	public static final DeferredRegister<TileEntityType<?>> TILES = new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, Chemcraft.MODID);
 	
 	//Types

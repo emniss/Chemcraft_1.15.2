@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import em_niss.chemcraft.init.BlockInit;
+import em_niss.chemcraft.init.ElementInit;
 import em_niss.chemcraft.init.ItemInit;
 import em_niss.chemcraft.init.ModContainerTypes;
 import em_niss.chemcraft.init.ModTileEntityTypes;
@@ -32,6 +33,7 @@ public class Chemcraft
         
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         
+        ElementInit.register();
         ItemInit.ITEMS.register(modEventBus);
         BlockInit.BLOCKS.register(modEventBus);
         BlockInit.ITEMS.register(modEventBus);

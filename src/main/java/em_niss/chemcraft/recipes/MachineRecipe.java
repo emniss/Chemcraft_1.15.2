@@ -19,19 +19,25 @@ public abstract class MachineRecipe implements IRecipe<RecipeWrapper>
 {
 	protected final ResourceLocation id;
 	protected final int requiredEnergy;
+	protected final int energyPerTick;
+	
+	protected List<ItemStack> inputs;
+	protected List<ItemStack> outputs;
 	
 	private final ResourceLocation recipeTypeId;
 	private final IRecipeSerializer<?> recipeSerializer;
 	
-	public MachineRecipe(ResourceLocation id, ResourceLocation recipeTypeId, int requiredEnergy, IRecipeSerializer<?> recipeSerializer)
+	public MachineRecipe(ResourceLocation id, ResourceLocation recipeTypeId, int requiredEnergy, int energyPerTick, IRecipeSerializer<?> recipeSerializer)
 	{
 		this.id = id;
 		this.requiredEnergy = requiredEnergy;
+		this.energyPerTick = energyPerTick;
 		this.recipeTypeId = recipeTypeId;
 		this.recipeSerializer = recipeSerializer;
 	}
 	
 	public int getRequiredEnergy() { return this.requiredEnergy; }
+	public int getEnergyPerTick() { return this.energyPerTick; }
 	
 	public abstract List<ItemStack> getInputs();
 	public abstract List<ItemStack> getOutputs();

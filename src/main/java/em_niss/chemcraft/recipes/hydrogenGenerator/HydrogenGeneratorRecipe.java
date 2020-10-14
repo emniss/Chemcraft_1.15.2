@@ -1,7 +1,5 @@
 package em_niss.chemcraft.recipes.hydrogenGenerator;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import em_niss.chemcraft.Chemcraft;
@@ -17,35 +15,28 @@ public class HydrogenGeneratorRecipe extends MachineRecipe
 {
 	public static final ResourceLocation RECIPE_TYPE_ID = new ResourceLocation(Chemcraft.MODID, "hydrogen_generator");
 	
-	private final ItemStack input1;
-	private final ItemStack input2;
-	private final ItemStack output;
-	
-	private final int energyGenerationPerTick;
-	
-	public HydrogenGeneratorRecipe(ResourceLocation id, ItemStack input1, ItemStack input2, ItemStack output, int requiredEnergy, int energyGenerationPerTick)
+	public HydrogenGeneratorRecipe(ResourceLocation id, List<ItemStack> inputs, List<ItemStack> outputs, int requiredEnergy, int energyPerTick)
 	{
-		super(id, RECIPE_TYPE_ID, requiredEnergy, RecipeSerializerInit.HYDROGEN_GENERATOR_SERIALIZER.get());
-		this.input1 = input1;
-		this.input2 = input2;
-		this.output = output;
-		this.energyGenerationPerTick = energyGenerationPerTick;
+		super(id, RECIPE_TYPE_ID, requiredEnergy, energyPerTick, RecipeSerializerInit.HYDROGEN_GENERATOR_SERIALIZER.get());
+
+		this.inputs = inputs;
+		this.outputs = outputs;
 	}
 	
 	
 	@Override
 	public boolean matches(RecipeWrapper inv, World worldIn)
 	{
-		if (this.input1.getItem().equals(inv.getStackInSlot(TileHydrogenGenerator.inSlot1).getItem()) && this.input2.getItem().equals(inv.getStackInSlot(TileHydrogenGenerator.inSlot2).getItem()))
+		if (this.inputs.get(0).getItem().equals(inv.getStackInSlot(TileHydrogenGenerator.inSlot1).getItem()) && this.inputs.get(1).getItem().equals(inv.getStackInSlot(TileHydrogenGenerator.inSlot2).getItem()))
 		{
-			if (this.input1.getCount() <= inv.getStackInSlot(TileHydrogenGenerator.inSlot1).getCount() && this.input2.getCount() <= inv.getStackInSlot(TileHydrogenGenerator.inSlot2).getCount())
+			if (this.inputs.get(0).getCount() <= inv.getStackInSlot(TileHydrogenGenerator.inSlot1).getCount() && this.inputs.get(1).getCount() <= inv.getStackInSlot(TileHydrogenGenerator.inSlot2).getCount())
 			{
 				return true;
 			}
 		}
-		else if (this.input1.getItem().equals(inv.getStackInSlot(TileHydrogenGenerator.inSlot2).getItem()) && this.input2.getItem().equals(inv.getStackInSlot(TileHydrogenGenerator.inSlot1).getItem()))
+		else if (this.inputs.get(0).getItem().equals(inv.getStackInSlot(TileHydrogenGenerator.inSlot2).getItem()) && this.inputs.get(1).getItem().equals(inv.getStackInSlot(TileHydrogenGenerator.inSlot1).getItem()))
 		{
-			if (this.input1.getCount() <= inv.getStackInSlot(TileHydrogenGenerator.inSlot2).getCount() && this.input2.getCount() <= inv.getStackInSlot(TileHydrogenGenerator.inSlot1).getCount())
+			if (this.inputs.get(0).getCount() <= inv.getStackInSlot(TileHydrogenGenerator.inSlot2).getCount() && this.inputs.get(1).getCount() <= inv.getStackInSlot(TileHydrogenGenerator.inSlot1).getCount())
 			{
 				return true;
 			}
@@ -53,15 +44,8 @@ public class HydrogenGeneratorRecipe extends MachineRecipe
 		return false;
 	}
 
-
-
-	public ItemStack getInput1() { return this.input1; }
-	public ItemStack getInput2() { return this.input2; }
-	public List<ItemStack> getInputs() { return new ArrayList<>(Arrays.asList(this.input1, this.input2)); }
+	public List<ItemStack> getInputs() { return inputs; }
 	
-	public ItemStack getOutput() { return this.output; }
-	public List<ItemStack> getOutputs() { return new ArrayList<>(Arrays.asList(this.output)); }
-		
-	public int getEnergyGenerationPerTick() { return this.energyGenerationPerTick; }
+	public List<ItemStack> getOutputs() { return outputs; }
 }
 

@@ -3,6 +3,7 @@ package em_niss.chemcraft.recipes.electrolyzer;
 import java.util.List;
 
 import em_niss.chemcraft.Chemcraft;
+import em_niss.chemcraft.Config;
 import em_niss.chemcraft.init.RecipeSerializerInit;
 import em_niss.chemcraft.objects.tileentity.TileElectrolyzer;
 import em_niss.chemcraft.recipes.MachineRecipe;
@@ -15,13 +16,10 @@ public class ElectrolyzerRecipe extends MachineRecipe
 {
 	public static final ResourceLocation RECIPE_TYPE_ID = new ResourceLocation(Chemcraft.MODID, "electrolyzer");
 	
-	private final List<ItemStack> inputs;
-	private final List<ItemStack> outputs;
-	
 	
 	public ElectrolyzerRecipe(ResourceLocation id, List<ItemStack> inputs, List<ItemStack> outputs, int requiredEnergy)
 	{
-		super(id, RECIPE_TYPE_ID, requiredEnergy, RecipeSerializerInit.ELECTROLYZER_SERIALIZER.get());
+		super(id, RECIPE_TYPE_ID, requiredEnergy, Config.ELECTROLYZER_ENERGY_CONSUMPTION.get(), RecipeSerializerInit.ELECTROLYZER_SERIALIZER.get());
 
 		this.inputs = inputs;
 		this.outputs = outputs;

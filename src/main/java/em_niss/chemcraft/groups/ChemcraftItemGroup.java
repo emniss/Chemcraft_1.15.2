@@ -16,6 +16,6 @@ public class ChemcraftItemGroup extends ItemGroup
 	@Override
 	public ItemStack createIcon()
 	{
-		return new ItemStack(ItemInit.INGOT_ALUMINIUM.get());
+		return new ItemStack(ItemInit.TEST_TUBE_EMPTY.get());
 	}
 }

@@ -1,53 +1,46 @@
 package em_niss.chemcraft.recipes.hydrogenGenerator;
 
+import java.util.Arrays;
+import java.util.List;
+
 import com.google.gson.JsonObject;
 
+import em_niss.chemcraft.recipes.MachineRecipeSerializer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class HydrogenGeneratorRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<HydrogenGeneratorRecipe>
+public class HydrogenGeneratorRecipeSerializer extends MachineRecipeSerializer<HydrogenGeneratorRecipe>
 {
-
+	public static final boolean hasDynamicConsumption = true;
+	
+	
+	public HydrogenGeneratorRecipeSerializer()
+	{
+		super(hasDynamicConsumption);
+	}
+	
 	@Override
 	public HydrogenGeneratorRecipe read(ResourceLocation recipeId, JsonObject json) 
 	{
-		ItemStack input1 = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "input1"), true);
-		ItemStack input2 = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "input2"), true);
-		ItemStack output = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "output"), true);
+		List<ItemStack> inputs = getItemStacks(recipeId, json, "input");
+		List<ItemStack> outputs = getItemStacks(recipeId, json, "output");
 		
-		int energy = JSONUtils.getInt(json, "energy");
-		int energyPerTick = JSONUtils.getInt(json, "energyPerTick");
+		int energy = getEnergy(recipeId, json);
+		int energyPerTick = getEnergyPerTick(recipeId, json);
 		
-		return new HydrogenGeneratorRecipe(recipeId, input1, input2, output, energy, energyPerTick);
+		return new HydrogenGeneratorRecipe(recipeId, inputs, outputs, energy, energyPerTick);
 	}
 
 	@Override
 	public HydrogenGeneratorRecipe read(ResourceLocation recipeId, PacketBuffer buffer) 
 	{
-		ItemStack input1 = buffer.readItemStack();
-		ItemStack input2 = buffer.readItemStack();
-		ItemStack output = buffer.readItemStack();
+		List<ItemStack> inputs = Arrays.asList(buffer.readItemStack(), buffer.readItemStack());
+		List<ItemStack> outputs = Arrays.asList(buffer.readItemStack());
 		
 		int energy = buffer.readInt();
 		int energyPerTick = buffer.readInt();
 		
-		return new HydrogenGeneratorRecipe(recipeId, input1, input2, output, energy, energyPerTick);
-	}
-
-	@Override
-	public void write(PacketBuffer buffer, HydrogenGeneratorRecipe recipe) 
-	{
-		buffer.writeItemStack(recipe.getInput1(), false);
-		buffer.writeItemStack(recipe.getInput2(), false);
-		
-		buffer.writeItemStack(recipe.getOutput(), false);
-		
-		buffer.writeInt(recipe.getRequiredEnergy());
-		buffer.writeInt(recipe.getEnergyGenerationPerTick());
+		return new HydrogenGeneratorRecipe(recipeId, inputs, outputs, energy, energyPerTick);
 	}
 }

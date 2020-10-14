@@ -32,6 +32,6 @@ public class ContainerHydrogenGenerator extends ContainerMachineBase
 	{
 		addSlot(new SlotItemHandler(handler, 0, 44, 22));
 		addSlot(new SlotItemHandler(handler, 1, 44, 48));
-		addSlot(new SlotItemHandler(handler, 2, 104, 35));
+		addSlot(new SlotItemHandler(handler, 2, 98, 35));
 	}
 }

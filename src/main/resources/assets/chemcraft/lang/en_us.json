@@ -135,6 +135,7 @@
 	"screen.chemcraft.hydrogen_generator": "Hydrogen Generator",
 
 	"gui.jei.category.electrolyzer": "Electrolysis",
+	"gui.jei.category.hydrogen_generator": "Hydrogen Combustion",
 
 
 	"fluid.chemcraft.fluid_brine": "Brine",

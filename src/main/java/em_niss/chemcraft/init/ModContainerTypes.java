@@ -13,6 +13,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModContainerTypes
 {
+	@SuppressWarnings("deprecation")
 	public static final DeferredRegister<ContainerType<?>> CONTAINERS = new DeferredRegister<>(ForgeRegistries.CONTAINERS, Chemcraft.MODID);
 	
 	public static final RegistryObject<ContainerType<ContainerElectrolyzer>> CONTAINER_ELECTROLYZER = CONTAINERS.register("electrolyzer", () -> IForgeContainerType.create((windowId, inv, data) -> {

@@ -13,12 +13,14 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class BlockInit 
 {
+	@SuppressWarnings("deprecation")
 	public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, Chemcraft.MODID);
 	
 	public static final RegistryObject<Block> BLOCK_ELECTROLYZER = BLOCKS.register("block_electrolyzer", () -> new BlockElectrolyzer());
 	public static final RegistryObject<Block> BLOCK_HYDROGEN_GENERATOR = BLOCKS.register("block_hydrogen_generator", () -> new BlockHydrogenGenerator());
 	
 	
+	@SuppressWarnings("deprecation")
 	public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, Chemcraft.MODID);
 	
 	public static final RegistryObject<Item> ITEM_ELECTROLYZER = ITEMS.register("block_electrolyzer", () -> new BlockItem(BLOCK_ELECTROLYZER.get(), new Item.Properties().group(ChemcraftItemGroup.instance)));

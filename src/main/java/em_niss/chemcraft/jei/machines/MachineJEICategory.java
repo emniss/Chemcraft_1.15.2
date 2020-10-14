@@ -1,6 +1,5 @@
 package em_niss.chemcraft.jei.machines;
 
-import java.util.Arrays;
 import java.util.List;
 
 import em_niss.chemcraft.recipes.MachineRecipe;
@@ -23,6 +22,9 @@ public abstract class MachineJEICategory<T extends MachineRecipe> implements IRe
 	protected IDrawableAnimated energy;
 	protected IDrawable energyBar;	
 	protected String localizedName;
+	
+	protected List<Integer> itemPositionsX;
+	protected List<Integer> itemPositionsY;
 	
 	private final int numberOfInputs;
 	private final int numberOfOutputs;
@@ -60,17 +62,16 @@ public abstract class MachineJEICategory<T extends MachineRecipe> implements IRe
 	{
 		IGuiItemStackGroup itemStacks = recipeLayout.getItemStacks();
 		
-		List<Integer> xPositions = Arrays.asList(4, 4, 58, 58);
-		List<Integer> yPositions = Arrays.asList(19, 45, 19, 45);
+		
 		
 		for (int i = 0; i < numberOfInputs; i++)
 		{
-			itemStacks.init(i, true, xPositions.get(i), yPositions.get(i));
+			itemStacks.init(i, true, itemPositionsX.get(i), itemPositionsY.get(i));
 		}
 		
 		for (int i = 0; i < numberOfOutputs; i++)
 		{
-			itemStacks.init(i + numberOfInputs, false, xPositions.get(i + numberOfInputs), yPositions.get(i + numberOfInputs));
+			itemStacks.init(i + numberOfInputs, false, itemPositionsX.get(i + numberOfInputs), itemPositionsY.get(i + numberOfInputs));
 		}
 		
 		List<List<ItemStack>> inputs = ingredients.getInputs(VanillaTypes.ITEM);

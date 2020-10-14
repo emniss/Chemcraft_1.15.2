@@ -59,7 +59,7 @@ public abstract class ScreenMachineBase<C extends ContainerMachineBase> extends 
 	{
 		this.font.drawString(this.title.getFormattedText(), 8.0f, 6.0f, 4210752);
 		this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 8.0f, (float)(this.ySize - 96 + 2), 4210752);
-		this.font.drawString("" + ((C)container).getEnergy(), energyTextX, energyTextY, 4210752);
+		//this.font.drawString("" + ((C)container).getEnergy(), energyTextX, energyTextY, 4210752);
 	}
 	
 	@Override

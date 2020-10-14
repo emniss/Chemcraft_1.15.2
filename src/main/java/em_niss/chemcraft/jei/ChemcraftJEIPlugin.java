@@ -2,10 +2,11 @@ package em_niss.chemcraft.jei;
 
 import javax.annotation.Nullable;
 
-import em_niss.chemcraft.Chemcraft;
 import em_niss.chemcraft.init.RecipeSerializerInit;
 import em_niss.chemcraft.jei.machines.ElectrolyzerJEICategory;
+import em_niss.chemcraft.jei.machines.HydrogenGeneratorJEICategory;
 import em_niss.chemcraft.objects.guis.ScreenElectrolyzer;
+import em_niss.chemcraft.objects.guis.ScreenHydrogenGenerator;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -24,12 +25,14 @@ public class ChemcraftJEIPlugin implements IModPlugin
 {
 	@Nullable
 	private ElectrolyzerJEICategory electrolyzerCategory;
+	@Nullable
+	private HydrogenGeneratorJEICategory hydrogenGeneratorCategory;
 	
 	
 	@Override
 	public ResourceLocation getPluginUid()
 	{
-		return new ResourceLocation(Chemcraft.MODID, "chemcraft");
+		return JeiUtil.CHEMCRAFT_PLUGIN_UID;
 	}
 	
 	@Override
@@ -39,6 +42,7 @@ public class ChemcraftJEIPlugin implements IModPlugin
 		IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
 		
 		registration.addRecipeCategories(new ElectrolyzerJEICategory(guiHelper));
+		registration.addRecipeCategories(new HydrogenGeneratorJEICategory(guiHelper));
 	}
 	
 	@Override
@@ -51,7 +55,8 @@ public class ChemcraftJEIPlugin implements IModPlugin
 			return;
 		}
 		
-		registration.addRecipes(recipeManager.getRecipes(RecipeSerializerInit.ELECTROLYZER_TYPE).values(), ElectrolyzerJEICategory.Uid);
+		registration.addRecipes(recipeManager.getRecipes(RecipeSerializerInit.ELECTROLYZER_TYPE).values(), JeiUtil.ELECTROLYZER_CATEGORY_UID);
+		registration.addRecipes(recipeManager.getRecipes(RecipeSerializerInit.HYDROGEN_GENERATOR_TYPE).values(), JeiUtil.HYDROGEN_GENERATOR_CATEGORY_UID);
 	}
 	
 		
@@ -59,7 +64,8 @@ public class ChemcraftJEIPlugin implements IModPlugin
 	@Override
 	public void registerGuiHandlers(IGuiHandlerRegistration registration)
 	{
-		registration.addRecipeClickArea(ScreenElectrolyzer.class, ScreenElectrolyzer.arrowPosX, ScreenElectrolyzer.arrowPosY, ScreenElectrolyzer.arrowWidth, ScreenElectrolyzer.arrowHeight, ElectrolyzerJEICategory.Uid);
+		registration.addRecipeClickArea(ScreenElectrolyzer.class, ScreenElectrolyzer.arrowPosX, ScreenElectrolyzer.arrowPosY, ScreenElectrolyzer.arrowWidth, ScreenElectrolyzer.arrowHeight, JeiUtil.ELECTROLYZER_CATEGORY_UID);
+		registration.addRecipeClickArea(ScreenHydrogenGenerator.class, ScreenHydrogenGenerator.arrowPosX, ScreenHydrogenGenerator.arrowPosY, ScreenHydrogenGenerator.arrowWidth, ScreenHydrogenGenerator.arrowHeight, JeiUtil.HYDROGEN_GENERATOR_CATEGORY_UID);
 	}
 	
 	@Override
