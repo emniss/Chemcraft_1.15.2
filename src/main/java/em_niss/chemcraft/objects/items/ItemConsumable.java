@@ -1,14 +1,14 @@
 package em_niss.chemcraft.objects.items;
 
-import em_niss.chemcraft.groups.ChemcraftElementsItemGroup;
+import em_niss.chemcraft.groups.ChemcraftItemGroup;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class ItemConsumable extends Item
+public class ItemConsumable extends ItemBase
 {
 	public ItemConsumable(int uses)
 	{
-		super(new Item.Properties().group(ChemcraftElementsItemGroup.instance).maxDamage(uses));
+		super(ChemcraftItemGroup.instance, new Item.Properties().maxDamage(uses));
 	}
 	
 	@Override

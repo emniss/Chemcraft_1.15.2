@@ -1,5 +1,6 @@
 package em_niss.chemcraft.objects.blocks;
 
+import em_niss.chemcraft.util.ModBlockStateProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
@@ -24,7 +25,7 @@ public abstract class BlockMachineBase extends Block
 {
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
-	public static final IntegerProperty POWER = BlockStateProperties.POWER_0_15;
+	public static final IntegerProperty POWER = ModBlockStateProperties.POWER_0_10;
 	
 	public BlockMachineBase()
 	{

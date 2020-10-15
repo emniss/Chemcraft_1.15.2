@@ -1,27 +1,17 @@
 package em_niss.chemcraft.objects.items;
 
-import java.util.List;
+import em_niss.chemcraft.groups.ChemcraftMaterialsItemGroup;
+import net.minecraft.item.ItemGroup;
 
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
-
-public class ItemFormulaMaterial extends ItemMaterial
+public class ItemFormulaMaterial extends FormulaItem
 {
-	private final String formula;
-	
 	public ItemFormulaMaterial(String formula)
 	{
-		super();
-		this.formula = formula;
+		super(formula, ChemcraftMaterialsItemGroup.instance);
 	}
 	
-	@Override
-	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn)
+	public ItemFormulaMaterial(String formula, ItemGroup group)
 	{
-		super.addInformation(stack, worldIn, tooltip, flagIn);
-		tooltip.add(new StringTextComponent(formula));
+		super(formula, group);
 	}
 }

@@ -29,12 +29,6 @@ public class ElectrolyzerRecipe extends MachineRecipe
 	@Override
 	public boolean matches(RecipeWrapper inv, World worldIn)
 	{
-		/*if( (this.inputs.get(0).test(inv.getStackInSlot(TileElectrolyzer.inSlot1)) && this.inputs.get(1).test(inv.getStackInSlot(TileElectrolyzer.inSlot2)))
-				|| (this.inputs.get(0).test(inv.getStackInSlot(TileElectrolyzer.inSlot2)) && this.inputs.get(1).test(inv.getStackInSlot(TileElectrolyzer.inSlot1))) )
-		{
-			return true;
-		}*/
-		
 		if (this.inputs.get(0).getItem().equals(inv.getStackInSlot(TileElectrolyzer.inSlot1).getItem()) && this.inputs.get(1).getItem().equals(inv.getStackInSlot(TileElectrolyzer.inSlot2).getItem()))
 		{
 			if (this.inputs.get(0).getCount() <= inv.getStackInSlot(TileElectrolyzer.inSlot1).getCount() && this.inputs.get(1).getCount() <= inv.getStackInSlot(TileElectrolyzer.inSlot2).getCount())

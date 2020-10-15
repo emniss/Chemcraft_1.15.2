@@ -1,147 +1,334 @@
 {
-	"variants": {
-		"facing=north,powered=false,power=0": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_0" },
-		"facing=south,powered=false,power=0": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_0", "y": 180 },
-		"facing=west,powered=false,power=0": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_0", "y": 270 },
-		"facing=east,powered=false,power=0": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_0", "y": 90 },
-		"facing=north,powered=true,power=0": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_0" },
-		"facing=south,powered=true,power=0": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_0", "y": 180 },
-		"facing=west,powered=true,power=0": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_0", "y": 270 },
-		"facing=east,powered=true,power=0": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_0", "y": 90 },
-		
-		"facing=north,powered=false,power=1": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_1" },
-		"facing=south,powered=false,power=1": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_1", "y": 180 },
-		"facing=west,powered=false,power=1": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_1", "y": 270 },
-		"facing=east,powered=false,power=1": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_1", "y": 90 },
-		"facing=north,powered=true,power=1": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_1" },
-		"facing=south,powered=true,power=1": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_1", "y": 180 },
-		"facing=west,powered=true,power=1": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_1", "y": 270 },
-		"facing=east,powered=true,power=1": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_1", "y": 90 },
-		
-		"facing=north,powered=false,power=2": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_2" },
-		"facing=south,powered=false,power=2": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_2", "y": 180 },
-		"facing=west,powered=false,power=2": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_2", "y": 270 },
-		"facing=east,powered=false,power=2": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_2", "y": 90 },
-		"facing=north,powered=true,power=2": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_2" },
-		"facing=south,powered=true,power=2": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_2", "y": 180 },
-		"facing=west,powered=true,power=2": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_2", "y": 270 },
-		"facing=east,powered=true,power=2": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_2", "y": 90 },
-		
-		"facing=north,powered=false,power=3": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_3" },
-		"facing=south,powered=false,power=3": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_3", "y": 180 },
-		"facing=west,powered=false,power=3": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_3", "y": 270 },
-		"facing=east,powered=false,power=3": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_3", "y": 90 },
-		"facing=north,powered=true,power=3": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_3" },
-		"facing=south,powered=true,power=3": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_3", "y": 180 },
-		"facing=west,powered=true,power=3": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_3", "y": 270 },
-		"facing=east,powered=true,power=3": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_3", "y": 90 },
-		
-		"facing=north,powered=false,power=4": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_4" },
-		"facing=south,powered=false,power=4": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_4", "y": 180 },
-		"facing=west,powered=false,power=4": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_4", "y": 270 },
-		"facing=east,powered=false,power=4": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_4", "y": 90 },
-		"facing=north,powered=true,power=4": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_4" },
-		"facing=south,powered=true,power=4": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_4", "y": 180 },
-		"facing=west,powered=true,power=4": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_4", "y": 270 },
-		"facing=east,powered=true,power=4": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_4", "y": 90 },
-		
-		"facing=north,powered=false,power=5": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_5" },
-		"facing=south,powered=false,power=5": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_5", "y": 180 },
-		"facing=west,powered=false,power=5": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_5", "y": 270 },
-		"facing=east,powered=false,power=5": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_5", "y": 90 },
-		"facing=north,powered=true,power=5": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_5" },
-		"facing=south,powered=true,power=5": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_5", "y": 180 },
-		"facing=west,powered=true,power=5": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_5", "y": 270 },
-		"facing=east,powered=true,power=5": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_5", "y": 90 },
-		
-		"facing=north,powered=false,power=6": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_6" },
-		"facing=south,powered=false,power=6": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_6", "y": 180 },
-		"facing=west,powered=false,power=6": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_6", "y": 270 },
-		"facing=east,powered=false,power=6": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_6", "y": 90 },
-		"facing=north,powered=true,power=6": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_6" },
-		"facing=south,powered=true,power=6": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_6", "y": 180 },
-		"facing=west,powered=true,power=6": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_6", "y": 270 },
-		"facing=east,powered=true,power=6": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_6", "y": 90 },
-		
-		"facing=north,powered=false,power=7": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_7" },
-		"facing=south,powered=false,power=7": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_7", "y": 180 },
-		"facing=west,powered=false,power=7": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_7", "y": 270 },
-		"facing=east,powered=false,power=7": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_7", "y": 90 },
-		"facing=north,powered=true,power=7": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_7" },
-		"facing=south,powered=true,power=7": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_7", "y": 180 },
-		"facing=west,powered=true,power=7": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_7", "y": 270 },
-		"facing=east,powered=true,power=7": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_7", "y": 90 },
-		
-		"facing=north,powered=false,power=8": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_8" },
-		"facing=south,powered=false,power=8": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_8", "y": 180 },
-		"facing=west,powered=false,power=8": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_8", "y": 270 },
-		"facing=east,powered=false,power=8": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_8", "y": 90 },
-		"facing=north,powered=true,power=8": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_8" },
-		"facing=south,powered=true,power=8": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_8", "y": 180 },
-		"facing=west,powered=true,power=8": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_8", "y": 270 },
-		"facing=east,powered=true,power=8": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_8", "y": 90 },
-		
-		"facing=north,powered=false,power=9": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_9" },
-		"facing=south,powered=false,power=9": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_9", "y": 180 },
-		"facing=west,powered=false,power=9": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_9", "y": 270 },
-		"facing=east,powered=false,power=9": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_9", "y": 90 },
-		"facing=north,powered=true,power=9": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_9" },
-		"facing=south,powered=true,power=9": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_9", "y": 180 },
-		"facing=west,powered=true,power=9": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_9", "y": 270 },
-		"facing=east,powered=true,power=9": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_9", "y": 90 },
-		
-		"facing=north,powered=false,power=10": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10" },
-		"facing=south,powered=false,power=10": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10", "y": 180 },
-		"facing=west,powered=false,power=10": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10", "y": 270 },
-		"facing=east,powered=false,power=10": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10", "y": 90 },
-		"facing=north,powered=true,power=10": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10" },
-		"facing=south,powered=true,power=10": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10", "y": 180 },
-		"facing=west,powered=true,power=10": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10", "y": 270 },
-		"facing=east,powered=true,power=10": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10", "y": 90 },
-		
-		"facing=north,powered=false,power=11": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10" },
-		"facing=south,powered=false,power=11": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10", "y": 180 },
-		"facing=west,powered=false,power=11": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10", "y": 270 },
-		"facing=east,powered=false,power=11": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10", "y": 90 },
-		"facing=north,powered=true,power=11": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10" },
-		"facing=south,powered=true,power=11": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10", "y": 180 },
-		"facing=west,powered=true,power=11": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10", "y": 270 },
-		"facing=east,powered=true,power=11": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10", "y": 90 },
-		
-		"facing=north,powered=false,power=12": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10" },
-		"facing=south,powered=false,power=12": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10", "y": 180 },
-		"facing=west,powered=false,power=12": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10", "y": 270 },
-		"facing=east,powered=false,power=12": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10", "y": 90 },
-		"facing=north,powered=true,power=12": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10" },
-		"facing=south,powered=true,power=12": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10", "y": 180 },
-		"facing=west,powered=true,power=12": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10", "y": 270 },
-		"facing=east,powered=true,power=12": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10", "y": 90 },
-		
-		"facing=north,powered=false,power=13": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10" },
-		"facing=south,powered=false,power=13": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10", "y": 180 },
-		"facing=west,powered=false,power=13": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10", "y": 270 },
-		"facing=east,powered=false,power=13": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10", "y": 90 },
-		"facing=north,powered=true,power=13": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10" },
-		"facing=south,powered=true,power=13": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10", "y": 180 },
-		"facing=west,powered=true,power=13": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10", "y": 270 },
-		"facing=east,powered=true,power=13": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10", "y": 90 },
-		
-		"facing=north,powered=false,power=14": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10" },
-		"facing=south,powered=false,power=14": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10", "y": 180 },
-		"facing=west,powered=false,power=14": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10", "y": 270 },
-		"facing=east,powered=false,power=14": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10", "y": 90 },
-		"facing=north,powered=true,power=14": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10" },
-		"facing=south,powered=true,power=14": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10", "y": 180 },
-		"facing=west,powered=true,power=14": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10", "y": 270 },
-		"facing=east,powered=true,power=14": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10", "y": 90 },
-		
-		"facing=north,powered=false,power=15": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10" },
-		"facing=south,powered=false,power=15": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10", "y": 180 },
-		"facing=west,powered=false,power=15": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10", "y": 270 },
-		"facing=east,powered=false,power=15": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10", "y": 90 },
-		"facing=north,powered=true,power=15": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10" },
-		"facing=south,powered=true,power=15": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10", "y": 180 },
-		"facing=west,powered=true,power=15": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10", "y": 270 },
-		"facing=east,powered=true,power=15": { "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10", "y": 90 }
-	}
+  "variants": {
+    "facing=north,power=0,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_0"
+    },
+    "facing=south,power=0,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_0",
+      "y": 180
+    },
+    "facing=west,power=0,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_0",
+      "y": 270
+    },
+    "facing=east,power=0,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_0",
+      "y": 90
+    },
+    "facing=north,power=1,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_1"
+    },
+    "facing=south,power=1,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_1",
+      "y": 180
+    },
+    "facing=west,power=1,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_1",
+      "y": 270
+    },
+    "facing=east,power=1,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_1",
+      "y": 90
+    },
+    "facing=north,power=2,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_2"
+    },
+    "facing=south,power=2,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_2",
+      "y": 180
+    },
+    "facing=west,power=2,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_2",
+      "y": 270
+    },
+    "facing=east,power=2,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_2",
+      "y": 90
+    },
+    "facing=north,power=3,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_3"
+    },
+    "facing=south,power=3,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_3",
+      "y": 180
+    },
+    "facing=west,power=3,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_3",
+      "y": 270
+    },
+    "facing=east,power=3,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_3",
+      "y": 90
+    },
+    "facing=north,power=4,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_4"
+    },
+    "facing=south,power=4,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_4",
+      "y": 180
+    },
+    "facing=west,power=4,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_4",
+      "y": 270
+    },
+    "facing=east,power=4,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_4",
+      "y": 90
+    },
+    "facing=north,power=5,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_5"
+    },
+    "facing=south,power=5,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_5",
+      "y": 180
+    },
+    "facing=west,power=5,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_5",
+      "y": 270
+    },
+    "facing=east,power=5,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_5",
+      "y": 90
+    },
+    "facing=north,power=6,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_6"
+    },
+    "facing=south,power=6,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_6",
+      "y": 180
+    },
+    "facing=west,power=6,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_6",
+      "y": 270
+    },
+    "facing=east,power=6,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_6",
+      "y": 90
+    },
+    "facing=north,power=7,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_7"
+    },
+    "facing=south,power=7,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_7",
+      "y": 180
+    },
+    "facing=west,power=7,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_7",
+      "y": 270
+    },
+    "facing=east,power=7,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_7",
+      "y": 90
+    },
+    "facing=north,power=8,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_8"
+    },
+    "facing=south,power=8,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_8",
+      "y": 180
+    },
+    "facing=west,power=8,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_8",
+      "y": 270
+    },
+    "facing=east,power=8,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_8",
+      "y": 90
+    },
+    "facing=north,power=9,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_9"
+    },
+    "facing=south,power=9,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_9",
+      "y": 180
+    },
+    "facing=west,power=9,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_9",
+      "y": 270
+    },
+    "facing=east,power=9,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_9",
+      "y": 90
+    },
+    "facing=north,power=10,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10"
+    },
+    "facing=south,power=10,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10",
+      "y": 180
+    },
+    "facing=west,power=10,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10",
+      "y": 270
+    },
+    "facing=east,power=10,powered=false": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_off_10",
+      "y": 90
+    },
+    "facing=north,power=0,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_0"
+    },
+    "facing=south,power=0,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_0",
+      "y": 180
+    },
+    "facing=west,power=0,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_0",
+      "y": 270
+    },
+    "facing=east,power=0,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_0",
+      "y": 90
+    },
+    "facing=north,power=1,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_1"
+    },
+    "facing=south,power=1,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_1",
+      "y": 180
+    },
+    "facing=west,power=1,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_1",
+      "y": 270
+    },
+    "facing=east,power=1,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_1",
+      "y": 90
+    },
+    "facing=north,power=2,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_2"
+    },
+    "facing=south,power=2,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_2",
+      "y": 180
+    },
+    "facing=west,power=2,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_2",
+      "y": 270
+    },
+    "facing=east,power=2,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_2",
+      "y": 90
+    },
+    "facing=north,power=3,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_3"
+    },
+    "facing=south,power=3,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_3",
+      "y": 180
+    },
+    "facing=west,power=3,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_3",
+      "y": 270
+    },
+    "facing=east,power=3,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_3",
+      "y": 90
+    },
+    "facing=north,power=4,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_4"
+    },
+    "facing=south,power=4,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_4",
+      "y": 180
+    },
+    "facing=west,power=4,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_4",
+      "y": 270
+    },
+    "facing=east,power=4,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_4",
+      "y": 90
+    },
+    "facing=north,power=5,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_5"
+    },
+    "facing=south,power=5,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_5",
+      "y": 180
+    },
+    "facing=west,power=5,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_5",
+      "y": 270
+    },
+    "facing=east,power=5,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_5",
+      "y": 90
+    },
+    "facing=north,power=6,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_6"
+    },
+    "facing=south,power=6,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_6",
+      "y": 180
+    },
+    "facing=west,power=6,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_6",
+      "y": 270
+    },
+    "facing=east,power=6,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_6",
+      "y": 90
+    },
+    "facing=north,power=7,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_7"
+    },
+    "facing=south,power=7,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_7",
+      "y": 180
+    },
+    "facing=west,power=7,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_7",
+      "y": 270
+    },
+    "facing=east,power=7,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_7",
+      "y": 90
+    },
+    "facing=north,power=8,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_8"
+    },
+    "facing=south,power=8,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_8",
+      "y": 180
+    },
+    "facing=west,power=8,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_8",
+      "y": 270
+    },
+    "facing=east,power=8,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_8",
+      "y": 90
+    },
+    "facing=north,power=9,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_9"
+    },
+    "facing=south,power=9,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_9",
+      "y": 180
+    },
+    "facing=west,power=9,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_9",
+      "y": 270
+    },
+    "facing=east,power=9,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_9",
+      "y": 90
+    },
+    "facing=north,power=10,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10"
+    },
+    "facing=south,power=10,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10",
+      "y": 180
+    },
+    "facing=west,power=10,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10",
+      "y": 270
+    },
+    "facing=east,power=10,powered=true": {
+      "model": "chemcraft:block/block_electrolyzer/block_electrolyzer_on_10",
+      "y": 90
+    }
+  }
 }

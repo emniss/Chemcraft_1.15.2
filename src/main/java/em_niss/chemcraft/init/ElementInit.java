@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import em_niss.chemcraft.Chemcraft;
-import em_niss.chemcraft.objects.items.ItemFormulaMaterial;
-import em_niss.chemcraft.objects.items.ItemFormulaTestTube;
+import em_niss.chemcraft.objects.items.elements.ItemElementMaterial;
+import em_niss.chemcraft.objects.items.elements.ItemElementTestTube;
 import em_niss.chemcraft.util.Chemicals;
 import em_niss.chemcraft.util.Element;
 
@@ -21,21 +21,21 @@ public class ElementInit
 		{
 			if (element.phase == 's')
 			{
-				ItemInit.ITEMS.register("test_tube_" + element.name, () -> new ItemFormulaTestTube(element.symbol));
-				ItemInit.ITEMS.register("powder_" + element.name, () -> new ItemFormulaMaterial(element.symbol));
-				ItemInit.ITEMS.register("tiny_powder_" + element.name, () -> new ItemFormulaMaterial(element.symbol));
-				ItemInit.ITEMS.register("nugget_" + element.name, () -> new ItemFormulaMaterial(element.symbol));
-				ItemInit.ITEMS.register("ingot_" + element.name, () -> new ItemFormulaMaterial(element.symbol));
+				ItemInit.ITEMS.register("test_tube_" + element.name, () -> new ItemElementTestTube(element.symbol));
+				ItemInit.ITEMS.register("powder_" + element.name, () -> new ItemElementMaterial(element.symbol));
+				ItemInit.ITEMS.register("tiny_powder_" + element.name, () -> new ItemElementMaterial(element.symbol));
+				ItemInit.ITEMS.register("nugget_" + element.name, () -> new ItemElementMaterial(element.symbol));
+				ItemInit.ITEMS.register("ingot_" + element.name, () -> new ItemElementMaterial(element.symbol));
 			}
 			else
 			{
 				if (exceptions.contains(element.name))
 				{
-					ItemInit.ITEMS.register("test_tube_" + element.name, () -> new ItemFormulaTestTube(element.symbol + "\u2082"));
+					ItemInit.ITEMS.register("test_tube_" + element.name, () -> new ItemElementTestTube(element.symbol + "\u2082"));
 				}
 				else
 				{
-					ItemInit.ITEMS.register("test_tube_" + element.name, () -> new ItemFormulaTestTube(element.symbol));
+					ItemInit.ITEMS.register("test_tube_" + element.name, () -> new ItemElementTestTube(element.symbol));
 				}
 				
 			}

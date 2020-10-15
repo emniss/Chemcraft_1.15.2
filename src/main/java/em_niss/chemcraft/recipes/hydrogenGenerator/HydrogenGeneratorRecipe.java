@@ -27,18 +27,31 @@ public class HydrogenGeneratorRecipe extends MachineRecipe
 	@Override
 	public boolean matches(RecipeWrapper inv, World worldIn)
 	{
-		if (this.inputs.get(0).getItem().equals(inv.getStackInSlot(TileHydrogenGenerator.inSlot1).getItem()) && this.inputs.get(1).getItem().equals(inv.getStackInSlot(TileHydrogenGenerator.inSlot2).getItem()))
+		if (this.inputs.size() == 2)
 		{
-			if (this.inputs.get(0).getCount() <= inv.getStackInSlot(TileHydrogenGenerator.inSlot1).getCount() && this.inputs.get(1).getCount() <= inv.getStackInSlot(TileHydrogenGenerator.inSlot2).getCount())
+			if (this.inputs.get(0).getItem().equals(inv.getStackInSlot(TileHydrogenGenerator.inSlot1).getItem()) && this.inputs.get(1).getItem().equals(inv.getStackInSlot(TileHydrogenGenerator.inSlot2).getItem()))
 			{
-				return true;
+				if (this.inputs.get(0).getCount() <= inv.getStackInSlot(TileHydrogenGenerator.inSlot1).getCount() && this.inputs.get(1).getCount() <= inv.getStackInSlot(TileHydrogenGenerator.inSlot2).getCount())
+				{
+					return true;
+				}
+			}
+			else if (this.inputs.get(0).getItem().equals(inv.getStackInSlot(TileHydrogenGenerator.inSlot2).getItem()) && this.inputs.get(1).getItem().equals(inv.getStackInSlot(TileHydrogenGenerator.inSlot1).getItem()))
+			{
+				if (this.inputs.get(0).getCount() <= inv.getStackInSlot(TileHydrogenGenerator.inSlot2).getCount() && this.inputs.get(1).getCount() <= inv.getStackInSlot(TileHydrogenGenerator.inSlot1).getCount())
+				{
+					return true;
+				}
 			}
 		}
-		else if (this.inputs.get(0).getItem().equals(inv.getStackInSlot(TileHydrogenGenerator.inSlot2).getItem()) && this.inputs.get(1).getItem().equals(inv.getStackInSlot(TileHydrogenGenerator.inSlot1).getItem()))
+		else if (this.inputs.size() == 1)
 		{
-			if (this.inputs.get(0).getCount() <= inv.getStackInSlot(TileHydrogenGenerator.inSlot2).getCount() && this.inputs.get(1).getCount() <= inv.getStackInSlot(TileHydrogenGenerator.inSlot1).getCount())
+			if (this.inputs.get(0).getItem().equals(inv.getStackInSlot(TileHydrogenGenerator.inSlot1).getItem()))
 			{
-				return true;
+				if (this.inputs.get(0).getCount() <= inv.getStackInSlot(TileHydrogenGenerator.inSlot1).getCount())
+				{
+					return true;
+				}
 			}
 		}
 		return false;

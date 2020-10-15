@@ -11,6 +11,7 @@ import javax.annotation.Nullable;
 import com.google.common.util.concurrent.AtomicDouble;
 
 import em_niss.chemcraft.energy.CustomEnergyStorage;
+import em_niss.chemcraft.util.ModBlockStateProperties;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.world.ClientWorld;
@@ -134,9 +135,9 @@ public abstract class TileMachineBase extends TileEntity implements ITickableTil
 			energyPercent.set((double)energy.getEnergyStored() / (double)energy.getMaxEnergyStored());
 		});
 		int energyHeight = (int)Math.floor(energyPercent.get() * frontEnergyBarHeight);
-		if (blockState.get(BlockStateProperties.POWER_0_15) != energyHeight)
+		if (blockState.get(ModBlockStateProperties.POWER_0_10) != energyHeight)
 		{
-			world.setBlockState(pos, blockState.with(BlockStateProperties.POWER_0_15, energyHeight), 3);
+			world.setBlockState(pos, blockState.with(ModBlockStateProperties.POWER_0_10, energyHeight), 3);
 		}
 	}
 		

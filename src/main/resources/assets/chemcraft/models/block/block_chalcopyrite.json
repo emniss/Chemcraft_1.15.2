@@ -1,0 +1,11 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "chemcraft:blocks/chalcopyrite",
+    "up": "chemcraft:blocks/chalcopyrite",
+    "north": "chemcraft:blocks/chalcopyrite",
+    "south": "chemcraft:blocks/chalcopyrite",
+    "east": "chemcraft:blocks/chalcopyrite",
+    "west": "chemcraft:blocks/chalcopyrite"
+  }
+}

@@ -9,7 +9,8 @@ import em_niss.chemcraft.init.ItemInit;
 import em_niss.chemcraft.init.ModContainerTypes;
 import em_niss.chemcraft.init.ModTileEntityTypes;
 import em_niss.chemcraft.init.RecipeSerializerInit;
-import em_niss.chemcraft.util.ClientSetup;
+import em_niss.chemcraft.setup.ClientSetup;
+import em_niss.chemcraft.setup.ModSetup;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -28,12 +29,15 @@ public class Chemcraft
     
     public Chemcraft()
     {
+    	
+    	
     	ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT_CONFIG);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
         
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         
         ElementInit.register();
+
         ItemInit.ITEMS.register(modEventBus);
         BlockInit.BLOCKS.register(modEventBus);
         BlockInit.ITEMS.register(modEventBus);
@@ -42,9 +46,16 @@ public class Chemcraft
         ModTileEntityTypes.TILES.register(modEventBus);
         ModContainerTypes.CONTAINERS.register(modEventBus);
         
+        
+        
         instance = this;
-
+        
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(ModSetup::init);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
+        
+        //ONLY USED FOR MOD DEVELOPMENT
+        //JsonElementGenerator.generateLang();
+        //JsonElementGenerator.generateModels();
         
         Config.loadConfig(Config.CLIENT_CONFIG, FMLPaths.CONFIGDIR.get().resolve("chemcraft-client.toml"));
         Config.loadConfig(Config.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve("chemcraft-common.toml"));

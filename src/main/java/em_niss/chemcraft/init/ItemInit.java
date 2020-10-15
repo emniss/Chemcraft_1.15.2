@@ -23,11 +23,6 @@ public class ItemInit
 	//Misc
 	public static final RegistryObject<Item> TEST_TUBE_EMPTY = ITEMS.register("test_tube_empty", () -> new ItemBase());
 	
-	//Elements
-	/*public static final RegistryObject<Item> TEST_TUBE_HYDROGEN = ITEMS.register("test_tube_hydrogen", () -> new ItemTestTubeBase());
-	public static final RegistryObject<Item> TEST_TUBE_OXYGEN = ITEMS.register("test_tube_oxygen", () -> new ItemTestTubeBase());
-	public static final RegistryObject<Item> TEST_TUBE_CHLORINE = ITEMS.register("test_tube_chlorine", () -> new ItemTestTubeBase());
-	*/
 	//2-atomic Molecules
 	public static final RegistryObject<Item> TEST_TUBE_WATER = ITEMS.register("test_tube_water", () -> new ItemFormulaTestTube(Chemicals.WATER));
 	public static final RegistryObject<Item> TEST_TUBE_HYDROGEN_CHLORIDE = ITEMS.register("test_tube_hydrogen_chloride", () -> new ItemFormulaTestTube(Chemicals.HYDROGEN_CHLORIDE));
@@ -70,7 +65,7 @@ public class ItemInit
 	
 	//Salt powders
 	public static final RegistryObject<Item> POWDER_LITHIUM_CARBONATE  = ITEMS.register("powder_lithium_carbonate", () -> new ItemFormulaMaterial(Chemicals.LITHIUM_CARBONATE));
-	public static final RegistryObject<Item> POWDER_BORON_TRICHLORIDE  = ITEMS.register("powder_boron_trichloride", () -> new ItemFormulaMaterial("BCl\u2083"));
+	public static final RegistryObject<Item> POWDER_BORON_TRICHLORIDE  = ITEMS.register("powder_boron_trichloride", () -> new ItemFormulaMaterial(Chemicals.BORON_TRICHLORIDE));
 	
 	//Mineral powders
 	public static final RegistryObject<Item> POWDER_BAUXITE  = ITEMS.register("powder_bauxite", () -> new ItemMaterial());
@@ -78,44 +73,18 @@ public class ItemInit
 	public static final RegistryObject<Item> POWDER_CHALCOPYRITE  = ITEMS.register("powder_chalcopyrite", () -> new ItemMaterial());
 	public static final RegistryObject<Item> POWDER_CHARCOAL  = ITEMS.register("powder_charcoal", () -> new ItemFormulaMaterial(Chemicals.CARBON.symbol));
 	
-	/*//Metal powders
-	public static final RegistryObject<Item> POWDER_ALUMINIUM  = ITEMS.register("powder_aluminium", () -> new ItemFormulaMaterialBase(""));
-	public static final RegistryObject<Item> POWDER_BORON  = ITEMS.register("powder_boron", () -> new ItemFormulaMaterialBase(""));
-	public static final RegistryObject<Item> POWDER_COPPER  = ITEMS.register("powder_copper", () -> new ItemFormulaMaterialBase(""));
-	public static final RegistryObject<Item> POWDER_COBALT  = ITEMS.register("powder_cobalt", () -> new ItemFormulaMaterialBase(""));
-	public static final RegistryObject<Item> POWDER_GOLD  = ITEMS.register("powder_gold", () -> new ItemFormulaMaterialBase(""));
-	public static final RegistryObject<Item> POWDER_LITHIUM  = ITEMS.register("powder_lithium", () -> new ItemFormulaMaterialBase(""));
-	public static final RegistryObject<Item> POWDER_NICKEL  = ITEMS.register("powder_nickel", () -> new ItemFormulaMaterialBase(""));
-	public static final RegistryObject<Item> POWDER_PLATINUM  = ITEMS.register("powder_platinum", () -> new ItemFormulaMaterialBase(""));
-	public static final RegistryObject<Item> POWDER_SILVER  = ITEMS.register("powder_silver", () -> new ItemFormulaMaterialBase(""));
+	//Metal powders
+	
 	
 	//Tiny powders
-	public static final RegistryObject<Item> TINY_POWDER_ALUMINIUM  = ITEMS.register("tiny_powder_aluminium", () -> new ItemFormulaMaterialBase(""));
-	public static final RegistryObject<Item> TINY_POWDER_BORON  = ITEMS.register("tiny_powder_boron", () -> new ItemFormulaMaterialBase(""));
-	public static final RegistryObject<Item> TINY_POWDER_COBALT  = ITEMS.register("tiny_powder_cobalt", () -> new ItemFormulaMaterialBase(""));
-	public static final RegistryObject<Item> TINY_POWDER_COPPER  = ITEMS.register("tiny_powder_copper", () -> new ItemFormulaMaterialBase(""));
-	public static final RegistryObject<Item> TINY_POWDER_GOLD  = ITEMS.register("tiny_powder_gold", () -> new ItemFormulaMaterialBase(""));
-	public static final RegistryObject<Item> TINY_POWDER_NICKEL  = ITEMS.register("tiny_powder_nickel", () -> new ItemFormulaMaterialBase(""));
-	public static final RegistryObject<Item> TINY_POWDER_PLATINUM  = ITEMS.register("tiny_powder_platinum", () -> new ItemFormulaMaterialBase(""));
-	public static final RegistryObject<Item> TINY_POWDER_SILVER  = ITEMS.register("tiny_powder_silver", () -> new ItemFormulaMaterialBase(""));
+	
 	
 	//Nuggets
-	public static final RegistryObject<Item> NUGGET_ALUMINIUM  = ITEMS.register("nugget_aluminium", () -> new ItemFormulaMaterialBase(""));
-	public static final RegistryObject<Item> NUGGET_COBALT  = ITEMS.register("nugget_cobalt", () -> new ItemFormulaMaterialBase(""));
-	public static final RegistryObject<Item> NUGGET_COPPER  = ITEMS.register("nugget_copper", () -> new ItemFormulaMaterialBase(""));
-	public static final RegistryObject<Item> NUGGET_NICKEL  = ITEMS.register("nugget_nickel", () -> new ItemFormulaMaterialBase(""));
-	public static final RegistryObject<Item> NUGGET_PLATINUM  = ITEMS.register("nugget_platinum", () -> new ItemFormulaMaterialBase(""));
-	public static final RegistryObject<Item> NUGGET_SILVER  = ITEMS.register("nugget_silver", () -> new ItemFormulaMaterialBase(""));
+	
 	
 	//Ingots
-	public static final RegistryObject<Item> INGOT_ALUMINIUM  = ITEMS.register("ingot_aluminium", () -> new ItemFormulaMaterialBase(""));
-	public static final RegistryObject<Item> INGOT_COBALT  = ITEMS.register("ingot_cobalt", () -> new ItemFormulaMaterialBase(""));
-	public static final RegistryObject<Item> INGOT_COPPER  = ITEMS.register("ingot_copper", () -> new ItemFormulaMaterialBase(""));
-	public static final RegistryObject<Item> INGOT_LITHIUM  = ITEMS.register("ingot_lithium", () -> new ItemFormulaMaterialBase(""));
-	public static final RegistryObject<Item> INGOT_NICKEL  = ITEMS.register("ingot_nickel", () -> new ItemFormulaMaterialBase(""));
-	public static final RegistryObject<Item> INGOT_PLATINUM  = ITEMS.register("ingot_platinum", () -> new ItemFormulaMaterialBase(""));
-	public static final RegistryObject<Item> INGOT_SILVER  = ITEMS.register("ingot_silver", () -> new ItemFormulaMaterialBase(""));
-	*/
+	
+
 	//Consumables
 	public static final RegistryObject<Item> IGNITER = ITEMS.register("igniter", () -> new ItemConsumable(64));
 	public static final RegistryObject<Item> UVLIGHT = ITEMS.register("uvlight", () -> new ItemConsumable(128));
