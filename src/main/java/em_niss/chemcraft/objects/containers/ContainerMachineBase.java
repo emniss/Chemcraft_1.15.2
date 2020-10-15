@@ -25,7 +25,7 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 
 public abstract class ContainerMachineBase extends Container 
 {
-	private TileMachineBase tileEntity;
+	private TileMachineBase<?> tileEntity;
 	private PlayerEntity playerEntity;
 	private IItemHandler playerInventory;
 	
@@ -43,7 +43,7 @@ public abstract class ContainerMachineBase extends Container
 	public ContainerMachineBase(ContainerType<?> containerType, int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity playerEntity, IIntArray machineData, Block machineBlock)
 	{
 		super(containerType, windowId);
-		tileEntity = (TileMachineBase) world.getTileEntity(pos);
+		tileEntity = (TileMachineBase<?>) world.getTileEntity(pos);
 		this.playerEntity = playerEntity;
 		this.playerInventory = new InvWrapper(playerInventory);
 		this.machineData = machineData;
@@ -94,12 +94,12 @@ public abstract class ContainerMachineBase extends Container
 	
 	public int getRequiredEnergyLeft()
 	{
-		return ((TileMachineBase)tileEntity).getRequiredEnergyLeft();
+		return ((TileMachineBase<?>)tileEntity).getRequiredEnergyLeft();
 	}
 	
 	public int getRequiredEnergyTotal()
 	{
-		return ((TileMachineBase)tileEntity).getRequiredEnergyTotal();
+		return ((TileMachineBase<?>)tileEntity).getRequiredEnergyTotal();
 	}
 
 	

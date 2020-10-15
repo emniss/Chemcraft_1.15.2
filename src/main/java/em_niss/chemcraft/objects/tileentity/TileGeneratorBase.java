@@ -3,12 +3,13 @@ package em_niss.chemcraft.objects.tileentity;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import em_niss.chemcraft.Config;
+import em_niss.chemcraft.recipes.MachineRecipe;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraftforge.energy.CapabilityEnergy;
 
-public abstract class TileGeneratorBase extends TileMachineBase
+public abstract class TileGeneratorBase<R extends MachineRecipe> extends TileMachineBase<R>
 {
 	protected int energyGenerationPerTick;
 	

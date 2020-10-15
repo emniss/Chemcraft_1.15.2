@@ -1,7 +1,9 @@
 package em_niss.chemcraft.objects.tileentity;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -11,6 +13,7 @@ import javax.annotation.Nullable;
 import com.google.common.util.concurrent.AtomicDouble;
 
 import em_niss.chemcraft.energy.CustomEnergyStorage;
+import em_niss.chemcraft.recipes.MachineRecipe;
 import em_niss.chemcraft.util.ModBlockStateProperties;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
@@ -40,7 +43,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public abstract class TileMachineBase extends TileEntity implements ITickableTileEntity
+public abstract class TileMachineBase<R extends MachineRecipe> extends TileEntity implements ITickableTileEntity
 {
 	private final int inventorySize;
 	private int frontEnergyBarHeight;
@@ -48,9 +51,15 @@ public abstract class TileMachineBase extends TileEntity implements ITickableTil
 	private int maxEnergyReceive;
 	private int maxEnergyExtract;
 	
+	protected int numberOfInputSlots;
+	protected int numberOfOutputSlots;
+	
+	protected List<Integer> inSlots;
+	protected List<Integer> outSlots;
+	
 	protected ItemStackHandler itemHandler;
 	protected CustomEnergyStorage energyStorage;
-	
+
 	protected LazyOptional<IItemHandler> handler;
 	protected LazyOptional<IEnergyStorage> energy;
 	
@@ -87,11 +96,11 @@ public abstract class TileMachineBase extends TileEntity implements ITickableTil
 		}
 	};
 	
-
 	
 	public TileMachineBase(TileEntityType<?> tileEntityType, int inventorySize, int maxEnergyStored, int maxEnergyReceive, int maxEnergyExtract, int frontEnergyBarHeight)
 	{
 		super(tileEntityType);
+		
 		this.inventorySize = inventorySize;
 		this.maxEnergyStored = maxEnergyStored;
 		this.maxEnergyReceive = maxEnergyReceive;
@@ -118,8 +127,94 @@ public abstract class TileMachineBase extends TileEntity implements ITickableTil
 	}
 	
 	protected abstract void doCooking();
-	protected abstract void doRefueling();
+	protected abstract R getRecipe(List<ItemStack> inputs);
+	protected abstract void setRecipe(R recipe);
 	
+	
+	
+	protected boolean doOutput()
+	{	
+		R recipe = this.getRecipe(getInputsAsList(itemHandler, inSlots));
+		
+		List<Integer> emptyFound = new ArrayList<>();
+		int notFound = 0;
+		
+		boolean canOutput = true;
+		for (ItemStack output : recipe.getOutputs())
+		{
+			for (int outSlot : outSlots)
+			{
+				if (itemHandler.getStackInSlot(outSlot).isEmpty())
+				{
+					if (!emptyFound.contains(outSlot)) { emptyFound.add(outSlot); }
+					continue;
+				}
+				if (itemHandler.insertItem(outSlot, output, true).isEmpty()) { break; }
+				else { notFound++; }
+				
+				canOutput = false;
+			}
+			if (!canOutput) { break; }
+		}
+		
+		if (notFound > emptyFound.size()) { canOutput = false; }
+		
+		if (canOutput)
+		{
+			for (ItemStack output : recipe.getOutputs())
+			{
+				for (int outSlot : outSlots)
+				{
+					if (itemHandler.insertItem(outSlot, output, true).isEmpty())
+					{ 
+						itemHandler.insertItem(outSlot, output.copy(), false);
+						break;
+					}
+				}
+			}
+		}
+		
+		return canOutput;
+	}
+	
+	protected void consumeIngredients()
+	{
+		R recipe = this.getRecipe(getInputsAsList(itemHandler, inSlots));
+
+		for (ItemStack input : recipe.getInputs())
+		{
+			for (int inSlot : inSlots)
+			{
+				if (input.getItem().equals(itemHandler.getStackInSlot(inSlot).getItem()))
+				{ 
+					itemHandler.extractItem(inSlot, input.getCount(), false);
+					break;
+				}
+			}
+		}		
+	}
+	
+	protected void doRefueling()
+	{
+		R recipe = this.getRecipe(getInputsAsList(itemHandler, inSlots));
+		
+		if (recipe != null)
+		{
+			this.setRecipe(recipe);
+		}
+	}
+			
+	protected boolean recipeStillValid()
+	{
+		R recipe = this.getRecipe(getInputsAsList(itemHandler, inSlots));
+		
+		if (recipe != null && recipe.getId().equals(recipeId))
+		{
+			return true;
+		}
+		return false;
+	}
+
 	private void updateBlockState()
 	{		
 		//Indicator on front
@@ -237,7 +332,17 @@ public abstract class TileMachineBase extends TileEntity implements ITickableTil
 		isCooking = false;
 	}
 	
-	
+	public static List<ItemStack> getInputsAsList(ItemStackHandler itemHandler, List<Integer> inSlots)
+	{
+		List<ItemStack> inputs = new ArrayList<>();
+		for (int i = 0; i < inSlots.size(); i++)
+		{
+			ItemStack stack = itemHandler.getStackInSlot(inSlots.get(i));
+			if (!stack.isEmpty()) { inputs.add(stack); }
+		}
+		return inputs;
+	}
+
 	public int getRequiredEnergyLeft() { return this.requiredEnergyLeft; }
 	public void setRequiredEnergyLeft(int value) { this.requiredEnergyLeft = value; }
 	public int getRequiredEnergyTotal() { return this.requiredEnergyTotal; }

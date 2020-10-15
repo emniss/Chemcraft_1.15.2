@@ -1,5 +1,6 @@
 package em_niss.chemcraft.objects.tileentity;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.annotation.Nullable;
@@ -8,22 +9,18 @@ import em_niss.chemcraft.Config;
 import em_niss.chemcraft.init.ModTileEntityTypes;
 import em_niss.chemcraft.init.RecipeSerializerInit;
 import em_niss.chemcraft.recipes.hydrogenGenerator.HydrogenGeneratorRecipe;
+import em_niss.chemcraft.util.MachineInventorySlots;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 
-public class TileHydrogenGenerator extends TileGeneratorBase
+public class TileHydrogenGenerator extends TileGeneratorBase<HydrogenGeneratorRecipe>
 {
-	public static final int inSlot1 = 0;
-	public static final int inSlot2 = 1;
-	
-	private static final int outSlot = 2;
-
-	//private ItemStack result;
-	
 	public TileHydrogenGenerator()
 	{
 		super(ModTileEntityTypes.TILE_HYDROGEN_GENERATOR.get(), 3, Config.HYDROGEN_GENERATOR_MAXPOWER.get(), 10);
+		this.inSlots = MachineInventorySlots.HYDROGEN_GENERATOR.inSlots;
+		this.outSlots = MachineInventorySlots.HYDROGEN_GENERATOR.outSlots;
 	}
 	
 	protected void doCooking()
@@ -54,63 +51,11 @@ public class TileHydrogenGenerator extends TileGeneratorBase
 			markDirty();
 		}
 	}
-
-	
-	private boolean doOutput()
-	{
-		HydrogenGeneratorRecipe recipe = this.getRecipe(itemHandler.getStackInSlot(inSlot1), itemHandler.getStackInSlot(inSlot2));	
-		ItemStack output = recipe.getOutputs().get(0);
-		
-		if (itemHandler.insertItem(outSlot, output.copy(), true).isEmpty())
-		{
-			itemHandler.insertItem(outSlot, output.copy(), false);
-			
-			return true;
-		}
-		
-		return false;
-	}
-	
-	private void consumeIngredients()
-	{
-		HydrogenGeneratorRecipe recipe = this.getRecipe(itemHandler.getStackInSlot(inSlot1), itemHandler.getStackInSlot(inSlot2));
-		if (recipe.getInputs().get(0).getItem().equals(itemHandler.getStackInSlot(inSlot1).getItem()))
-		{
-			itemHandler.extractItem(inSlot1, recipe.getInputs().get(0).getCount(), false);
-			itemHandler.extractItem(inSlot2, recipe.getInputs().get(1).getCount(), false);
-		}
-		else
-		{
-			itemHandler.extractItem(inSlot1, recipe.getInputs().get(1).getCount(), false);
-			itemHandler.extractItem(inSlot2, recipe.getInputs().get(0).getCount(), false);
-		}
-	}
-	
-	protected void doRefueling()
-	{
-		HydrogenGeneratorRecipe recipe = this.getRecipe(itemHandler.getStackInSlot(inSlot1), itemHandler.getStackInSlot(inSlot2));
-		if (recipe != null)
-		{
-			this.setRecipe(recipe);
-		}
-	}
-	
-	private void setRecipe(HydrogenGeneratorRecipe recipe)
-	{
-		requiredEnergyLeft = recipe.getRequiredEnergy();
-		requiredEnergyTotal = recipe.getRequiredEnergy();
-		
-		energyGenerationPerTick = recipe.getEnergyPerTick();
-		
-		recipeId = recipe.getId();
-		
-		isCooking = true;
-	}
 	
 	@Nullable
-	private HydrogenGeneratorRecipe getRecipe(ItemStack stack1, ItemStack stack2)
+	protected HydrogenGeneratorRecipe getRecipe(List<ItemStack> inputs)
 	{
-		if (stack1 == null || stack2 == null)
+		if (inputs.isEmpty())
 		{
 			return null;
 		}
@@ -127,13 +72,15 @@ public class TileHydrogenGenerator extends TileGeneratorBase
 		return null;
 	}
 	
-	private boolean recipeStillValid()
+	protected void setRecipe(HydrogenGeneratorRecipe recipe)
 	{
-		HydrogenGeneratorRecipe recipe = this.getRecipe(itemHandler.getStackInSlot(inSlot1), itemHandler.getStackInSlot(inSlot2));
-		if (recipe != null && recipe.getId().equals(recipeId))
-		{
-			return true;
-		}
-		return false;
+		requiredEnergyLeft = recipe.getRequiredEnergy();
+		requiredEnergyTotal = recipe.getRequiredEnergy();
+		
+		energyGenerationPerTick = recipe.getEnergyPerTick();
+		
+		recipeId = recipe.getId();
+		
+		isCooking = true;
 	}
 }

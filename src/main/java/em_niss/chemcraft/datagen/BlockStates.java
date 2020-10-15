@@ -2,22 +2,18 @@ package em_niss.chemcraft.datagen;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
 import em_niss.chemcraft.Chemcraft;
 import em_niss.chemcraft.init.BlockInit;
 import em_niss.chemcraft.util.ModBlockStateProperties;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ExistingFileHelper;
-import net.minecraftforge.client.model.generators.ModelFile;
 
 public class BlockStates extends BlockStateProvider
 {
@@ -42,8 +38,6 @@ public class BlockStates extends BlockStateProvider
 		ResourceLocation txtDown = new ResourceLocation(Chemcraft.MODID, "blocks/" + name + "/" + name + "_down");
 		ResourceLocation txtSide = new ResourceLocation(Chemcraft.MODID, "blocks/" + name + "/" + name + "_side");
 		ResourceLocation txtUp = new ResourceLocation(Chemcraft.MODID, "blocks/" + name + "/" + name + "_up");
-		ResourceLocation txtFrontOn = new ResourceLocation(Chemcraft.MODID, "blocks/" + name + "/" + name + "_front_on_0");
-		ResourceLocation txtFrontOff = new ResourceLocation(Chemcraft.MODID, "blocks/" + name + "/" + name + "_front_off_0");
 		
 		List<BlockModelBuilder> modelsBlockMachineOn = new ArrayList<>();
 		List<BlockModelBuilder> modelsBlockMachineOff = new ArrayList<>();
@@ -66,18 +60,6 @@ public class BlockStates extends BlockStateProvider
 			}
 		});
 	}
-	
-	private void orientedBlock(Block block, Function<BlockState, ModelFile> modelFunc) {
-        getVariantBuilder(block)
-                .forAllStates(state -> {
-                    Direction dir = state.get(BlockStateProperties.FACING);
-                    return ConfiguredModel.builder()
-                            .modelFile(modelFunc.apply(state))
-                            .rotationX(dir.getAxis() == Direction.Axis.Y ?  dir.getAxisDirection().getOffset() * -90 : 0)
-                            .rotationY(dir.getAxis() != Direction.Axis.Y ? ((dir.getHorizontalIndex() + 2) % 4) * 90 : 0)
-                            .build();
-                });
-    }
 	
 	
 	

@@ -1,5 +1,6 @@
 package em_niss.chemcraft.objects.tileentity;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.annotation.Nullable;
@@ -8,24 +9,20 @@ import em_niss.chemcraft.Config;
 import em_niss.chemcraft.init.ModTileEntityTypes;
 import em_niss.chemcraft.init.RecipeSerializerInit;
 import em_niss.chemcraft.recipes.electrolyzer.ElectrolyzerRecipe;
+import em_niss.chemcraft.util.MachineInventorySlots;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 
-public class TileElectrolyzer extends TileMachineBase
+public class TileElectrolyzer extends TileMachineBase<ElectrolyzerRecipe>
 {
-	public static final int inSlot1 = 0;
-	public static final int inSlot2 = 1;
-	
-	public static final int outSlot1 = 2;
-	public static final int outSlot2 = 3;
-	
-	
 	public TileElectrolyzer()
 	{
-		
 		super(ModTileEntityTypes.TILE_ELECTROLYZER.get(), 4, Config.ELECTROLYZER_MAXPOWER.get(), Config.MACHINE_RECEIVE.get(), 0, 10);
 		energyConsumption = Config.ELECTROLYZER_ENERGY_CONSUMPTION.get();
+		
+		this.inSlots = MachineInventorySlots.ELECTROLYZER.inSlots;
+		this.outSlots = MachineInventorySlots.ELECTROLYZER.outSlots;
 	}
 	
 	
@@ -56,69 +53,11 @@ public class TileElectrolyzer extends TileMachineBase
 			markDirty();
 		}
 	}
-
-	
-	private boolean doOutput()
-	{
-		ElectrolyzerRecipe recipe = this.getRecipe(itemHandler.getStackInSlot(inSlot1), itemHandler.getStackInSlot(inSlot2));
-		ItemStack output1 = recipe.getOutputs().get(0);
-		ItemStack output2 = recipe.getOutputs().get(1);
-		if (itemHandler.insertItem(outSlot1, output1, true).isEmpty() && itemHandler.insertItem(outSlot2, output2, true).isEmpty())
-		{
-			itemHandler.insertItem(outSlot1, output1.copy(), false);
-			itemHandler.insertItem(outSlot2, output2.copy(), false);
-			
-			return true;
-		}
-		else if (itemHandler.insertItem(outSlot1, output2, true).isEmpty() && itemHandler.insertItem(outSlot2, output1, true).isEmpty())
-		{
-			itemHandler.insertItem(outSlot1, output2.copy(), false);
-			itemHandler.insertItem(outSlot2, output1.copy(), false);
-			
-			return true;
-		}
-		
-		return false;
-	}
-	
-	private void consumeIngredients()
-	{
-		ElectrolyzerRecipe recipe = this.getRecipe(itemHandler.getStackInSlot(inSlot1), itemHandler.getStackInSlot(inSlot2));
-		if (recipe.getInputs().get(0).getItem().equals(itemHandler.getStackInSlot(inSlot1).getItem()))
-		{	
-			itemHandler.extractItem(inSlot1, recipe.getInputs().get(0).getCount(), false);
-			itemHandler.extractItem(inSlot2, recipe.getInputs().get(1).getCount(), false);
-		}
-		else
-		{
-			itemHandler.extractItem(inSlot1, recipe.getInputs().get(1).getCount(), false);
-			itemHandler.extractItem(inSlot2, recipe.getInputs().get(0).getCount(), false);
-		}
-	}
-	
-	protected void doRefueling()
-	{
-		ElectrolyzerRecipe recipe = this.getRecipe(itemHandler.getStackInSlot(inSlot1), itemHandler.getStackInSlot(inSlot2));
-		if (recipe != null)
-		{
-			this.setRecipe(recipe);
-		}
-	}
-	
-	private void setRecipe(ElectrolyzerRecipe recipe)
-	{
-		requiredEnergyLeft = recipe.getRequiredEnergy();
-		requiredEnergyTotal = recipe.getRequiredEnergy();
-		
-		recipeId = recipe.getId();
-		
-		isCooking = true;
-	}
 	
 	@Nullable
-	private ElectrolyzerRecipe getRecipe(ItemStack stack1, ItemStack stack2)
+	protected ElectrolyzerRecipe getRecipe(List<ItemStack> inputs)
 	{
-		if (stack1 == null || stack2 == null)
+		if (inputs.isEmpty())
 		{
 			return null;
 		}
@@ -134,14 +73,14 @@ public class TileElectrolyzer extends TileMachineBase
 		}
 		return null;
 	}
-		
-	private boolean recipeStillValid()
+	
+	protected void setRecipe(ElectrolyzerRecipe recipe)
 	{
-		ElectrolyzerRecipe recipe = this.getRecipe(itemHandler.getStackInSlot(inSlot1), itemHandler.getStackInSlot(inSlot2));
-		if (recipe != null && recipe.getId().equals(recipeId))
-		{
-			return true;
-		}
-		return false;
+		requiredEnergyLeft = recipe.getRequiredEnergy();
+		requiredEnergyTotal = recipe.getRequiredEnergy();
+		
+		recipeId = recipe.getId();
+		
+		isCooking = true;
 	}
 }

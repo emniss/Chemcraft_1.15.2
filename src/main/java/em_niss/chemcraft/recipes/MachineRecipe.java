@@ -27,24 +27,51 @@ public abstract class MachineRecipe implements IRecipe<RecipeWrapper>
 	private final ResourceLocation recipeTypeId;
 	private final IRecipeSerializer<?> recipeSerializer;
 	
-	public MachineRecipe(ResourceLocation id, ResourceLocation recipeTypeId, int requiredEnergy, int energyPerTick, IRecipeSerializer<?> recipeSerializer)
+	public MachineRecipe(ResourceLocation id, List<ItemStack> inputs, List<ItemStack> outputs, ResourceLocation recipeTypeId, int requiredEnergy, int energyPerTick, IRecipeSerializer<?> recipeSerializer)
 	{
 		this.id = id;
 		this.requiredEnergy = requiredEnergy;
 		this.energyPerTick = energyPerTick;
 		this.recipeTypeId = recipeTypeId;
 		this.recipeSerializer = recipeSerializer;
+		
+		this.inputs = inputs;
+		this.outputs = outputs;
 	}
 	
 	public int getRequiredEnergy() { return this.requiredEnergy; }
 	public int getEnergyPerTick() { return this.energyPerTick; }
 	
-	public abstract List<ItemStack> getInputs();
-	public abstract List<ItemStack> getOutputs();
+	public List<ItemStack> getInputs() { return this.inputs; }
+	public List<ItemStack> getOutputs() { return this.outputs; }
 	
 
 	@Override
 	public abstract boolean matches(RecipeWrapper inv, World worldIn);
+	
+	
+	protected boolean findMatches(RecipeWrapper inv, List<Integer> inSlots)
+	{
+		boolean[] foundInputMatches = new boolean[this.inputs.size()];
+		
+		for (int i = 0; i < inSlots.size(); i++)
+		{
+			ItemStack invStack = inv.getStackInSlot(inSlots.get(i));
+			for (int j = 0; j < inputs.size(); j++)
+			{
+				if (invStack.getItem().equals(inputs.get(j).getItem()) && invStack.getCount() >= inputs.get(j).getCount())
+				{
+					foundInputMatches[j] = true;
+				}
+			}
+		}
+		
+		boolean isMatch = true;
+		for (boolean match : foundInputMatches) { if (!match) {isMatch = false; } }
+		
+		return isMatch;
+	}
+	
 	
 	@Override
 	public ItemStack getCraftingResult(RecipeWrapper inv) { return ItemStack.EMPTY; }
