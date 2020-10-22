@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "chemcraft:blocks/bauxite",
+    "particle": "chemcraft:blocks/bauxite"
+  }
+}

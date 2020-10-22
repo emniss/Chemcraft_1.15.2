@@ -29,6 +29,7 @@ public class BlockStates extends BlockStateProvider
 		registerBlockOre(BlockInit.BLOCK_CHALCOPYRITE.get(), "chalcopyrite");
 		
 		registerBlockMachineBase(BlockInit.BLOCK_ELECTROLYZER.get(), "electrolyzer");
+		registerBlockMachineBase(BlockInit.BLOCK_HYDROGEN_GENERATOR.get(), "hydrogen_generator");
 	}
 	
 	
@@ -44,8 +45,8 @@ public class BlockStates extends BlockStateProvider
 		
 		for (int i = 0; i <= 10; i++)
 		{
-			modelsBlockMachineOn.add(models().cube("block/block_" + name + "/block_" + name + "_on_" + i, txtDown, txtUp, new ResourceLocation(Chemcraft.MODID, "blocks/" + name + "/" + name + "_front_on_" + i), txtSide, txtSide, txtSide));
-			modelsBlockMachineOff.add(models().cube("block/block_" + name + "/block_" + name + "_off_" + i, txtDown, txtUp, new ResourceLocation(Chemcraft.MODID, "blocks/" + name + "/" + name + "_front_off_" + i), txtSide, txtSide, txtSide));
+			modelsBlockMachineOn.add(models().cube("block/block_" + name + "/block_" + name + "_on_" + i, txtDown, txtUp, new ResourceLocation(Chemcraft.MODID, "blocks/" + name + "/" + name + "_front_on_" + i), txtSide, txtSide, txtSide).texture("particle", txtSide));
+			modelsBlockMachineOff.add(models().cube("block/block_" + name + "/block_" + name + "_off_" + i, txtDown, txtUp, new ResourceLocation(Chemcraft.MODID, "blocks/" + name + "/" + name + "_front_off_" + i), txtSide, txtSide, txtSide).texture("particle", txtSide));
 		}
 		
 		horizontalFaceBlock(block, state -> {
@@ -66,8 +67,7 @@ public class BlockStates extends BlockStateProvider
 	
 	private void registerBlockOre(Block block, String name)
 	{
-		getVariantBuilder(block).partialState().setModels(new ConfiguredModel(models().cubeAll("block/block_" + name, new ResourceLocation(Chemcraft.MODID, "blocks/" + name))));
-		
-		//simpleBlock(block);
+		ResourceLocation txt = new ResourceLocation(Chemcraft.MODID, "blocks/" + name);
+		getVariantBuilder(block).partialState().setModels(new ConfiguredModel(models().cubeAll("block/block_" + name, txt).texture("particle", txt)));
 	}
 }
