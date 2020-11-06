@@ -29,8 +29,38 @@ public class BlockStates extends BlockStateProvider
 		registerBlockOre(BlockInit.BLOCK_CHALCOPYRITE.get(), "chalcopyrite");
 		
 		registerBlockMachineBase(BlockInit.BLOCK_ELECTROLYZER.get(), "electrolyzer");
-		registerBlockMachineBase(BlockInit.BLOCK_HYDROGEN_GENERATOR.get(), "hydrogen_generator");
+		registerBlockHydrogenGenerator();
 	}
+	
+	
+	
+	private void registerBlockHydrogenGenerator() 
+	{
+		/*MultiPartBlockStateBuilder multiBuilder = getMultipartBuilder(BlockInit.BLOCK_HYDROGEN_GENERATOR.get());
+		
+		for (int i : ModBlockStateProperties.POWER_0_10.getAllowedValues())
+		{		
+			multiBuilder.part().modelFile(HydrogenGenerator.createMainModel(models().getBuilder("block/block_hydrogen_generator/main_on_" + i), "on", i));//.addModel().condition(BlockStateProperties.POWERED, true);
+			multiBuilder.part().modelFile(HydrogenGenerator.createMainModel(models().getBuilder("block/block_hydrogen_generator/main_off_" + i), "off", i));//.addModel().condition(BlockStateProperties.POWERED, false);
+		}
+	
+		multiBuilder.part().modelFile(HydrogenGenerator.createFrameModel(models().getBuilder("block/block_hydrogen_generator/frame")));//.addModel();*/
+		
+		
+		horizontalFaceBlock(BlockInit.BLOCK_HYDROGEN_GENERATOR.get(), state -> {
+			int power = state.get(ModBlockStateProperties.POWER_0_10);
+			if (state.get(BlockStateProperties.POWERED))
+			{
+				return HydrogenGenerator.createModel(models().getBuilder("block/block_hydrogen_generator/on_" + power), "on", power);
+			}
+			else
+			{
+				return HydrogenGenerator.createModel(models().getBuilder("block/block_hydrogen_generator/off_" + power), "off", power);
+			}
+		});
+	}
+
+	
 	
 	
 	

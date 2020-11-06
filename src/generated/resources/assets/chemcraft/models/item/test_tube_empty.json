@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "chemcraft:items/test_tube_empty"
-  }
-}
