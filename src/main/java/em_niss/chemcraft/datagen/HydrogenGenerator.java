@@ -7,12 +7,15 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.ModelBuilder.FaceRotation;
 import net.minecraftforge.client.model.generators.ModelBuilder.Perspective;
+import net.minecraftforge.client.model.generators.ModelFile;
 
 public class HydrogenGenerator 
 {
 	public static BlockModelBuilder createModel(BlockModelBuilder builder, String state, int power)
-	{
-		builder.texture("txtfront", new ResourceLocation(Chemcraft.MODID, "blocks/hydrogen_generator/hydrogen_generator_front_" + state + "_" + power));
+	{		
+		builder.element().
+		
+		builder.texture("txtfront", new ResourceLocation(Chemcraft.MODID, "blocks/hydrogen_generator/hydrogen_generator_front_"));
 		builder.texture("txtback", new ResourceLocation(Chemcraft.MODID, "blocks/hydrogen_generator/hydrogen_generator_back"));
 		builder.texture("txtup", new ResourceLocation(Chemcraft.MODID, "blocks/hydrogen_generator/hydrogen_generator_up"));
 		builder.texture("txtdown", new ResourceLocation(Chemcraft.MODID, "blocks/hydrogen_generator/hydrogen_generator_down"));
@@ -93,6 +96,11 @@ public class HydrogenGenerator
 		builder.transforms().transform(Perspective.FIXED).scale(0.5f).end();
 		
 		return builder;
+	}
+
+	public static ModelFile createMainModel(BlockModelBuilder builder, String string, int i) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
