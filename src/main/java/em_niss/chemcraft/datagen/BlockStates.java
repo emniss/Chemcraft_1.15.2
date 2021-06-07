@@ -28,7 +28,7 @@ public class BlockStates extends BlockStateProvider
 		registerBlockOre(BlockInit.BLOCK_BAUXITE.get(), "bauxite");
 		registerBlockOre(BlockInit.BLOCK_CHALCOPYRITE.get(), "chalcopyrite");
 		
-		registerBlockMachineBase(BlockInit.BLOCK_ELECTROLYZER.get(), "electrolyzer");
+		//registerBlockMachineBase(BlockInit.BLOCK_ELECTROLYZER.get(), "electrolyzer");
 		registerBlockHydrogenGenerator();
 	}
 	
@@ -46,7 +46,7 @@ public class BlockStates extends BlockStateProvider
 	
 		multiBuilder.part().modelFile(HydrogenGenerator.createFrameModel(models().getBuilder("block/block_hydrogen_generator/frame")));//.addModel();*/
 		
-		MultiPartBlockStateBuilder test = 
+		//MultiPartBlockStateBuilder test = ;
 		
 		horizontalFaceBlock(BlockInit.BLOCK_HYDROGEN_GENERATOR.get(), state -> {
 			int power = state.get(ModBlockStateProperties.POWER_0_10);

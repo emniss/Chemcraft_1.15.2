@@ -8,7 +8,7 @@
 modLoader="javafml" #mandatory
 
 # A version range to match for said mod loader - for regular FML @Mod it will be the forge version
-loaderVersion="[31,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+loaderVersion="[36,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
 
 # A URL to refer people to when problems occur with this mod
 issueTrackerURL="http://my.issue.tracker/" #optional
@@ -53,7 +53,7 @@ The aim of this mod is to be as scientiffically correct as possible while still 
     mandatory=true #mandatory
     
 	# The version range of the dependency
-    versionRange="[31,)" #mandatory
+    versionRange="[36,)" #mandatory
     
 	# An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
     ordering="NONE"
@@ -65,6 +65,6 @@ The aim of this mod is to be as scientiffically correct as possible while still 
 [[dependencies.examplemod]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.15.2]"
+    versionRange="[1.16.5]"
     ordering="NONE"
     side="BOTH"

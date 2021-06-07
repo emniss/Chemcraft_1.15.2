@@ -13,9 +13,9 @@ public class HydrogenGenerator
 {
 	public static BlockModelBuilder createModel(BlockModelBuilder builder, String state, int power)
 	{		
-		builder.element().
+		//builder.element().
 		
-		builder.texture("txtfront", new ResourceLocation(Chemcraft.MODID, "blocks/hydrogen_generator/hydrogen_generator_front_"));
+		builder.texture("txtfront", new ResourceLocation(Chemcraft.MODID, "blocks/hydrogen_generator/hydrogen_generator_front_" + state + "_" + power));
 		builder.texture("txtback", new ResourceLocation(Chemcraft.MODID, "blocks/hydrogen_generator/hydrogen_generator_back"));
 		builder.texture("txtup", new ResourceLocation(Chemcraft.MODID, "blocks/hydrogen_generator/hydrogen_generator_up"));
 		builder.texture("txtdown", new ResourceLocation(Chemcraft.MODID, "blocks/hydrogen_generator/hydrogen_generator_down"));
